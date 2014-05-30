@@ -1,6 +1,17 @@
 
 class LeftSideRule:
+    """
+    Classe che rappresenta la parte sinistra di una regola
+    nella quale vi sono le condizioni (sotto forma di fatti
+    della WM o sotto forma di condizioni booleane semplici)
+    che devono essere verificate per poter attivare le azioni
+    associata alla regola
+    """
     def __init__(self, conditions):
+        """
+        Inizializza la parte sinistra adoperando
+        la lista di condizioni specificata in input
+        """
         self.conditions = conditions
         self._string_form = ""
         self._init_string_form()
@@ -25,7 +36,18 @@ class LeftSideRule:
 
 
 class RightSideRule:
+    """
+    Classe che rappresenta la parte destra della regola
+    nella quale vi sono le azioni che il motore deve eseguire
+    in seguito al verificarsi delle condizioni presenti nella parte
+    sinistra
+    """
     def __init__(self, actions):
+        """
+        Provvede ad inizializzare la lista delle azioni
+        che dovranno essere innescate a seguito dell'attivazione
+        della regola prelevandole dalla lista di azioni specificata
+        """
         self.actions = actions
         self.string_form = ""
         self._init_string_form()
@@ -42,6 +64,10 @@ class RightSideRule:
 
 
 class Rule:
+    """
+    Classe composita che permette di rappresenta nella sua interezza
+    una regola
+    """
     def __init__(self, conditions = None, actions = None):
         if conditions:
             self.conditions = LeftSideRule(conditions)
