@@ -1,4 +1,10 @@
 class Utils:
+    """
+    Classe che rappresenta un modulo generico nel quale sono presenti
+    delle funzioni di servizio che vengono invocate per poter portare a
+    termine dei compiti comuni.
+    """
+
     @staticmethod
     def has_variable(fact):
         """
@@ -18,6 +24,13 @@ class Utils:
 
     @staticmethod
     def verify_symbol(attr):
+        """
+        Verifica se il valore passato in input
+        rappresenti un'operazione aritmetica
+
+        @return True se è presente nella stringa un valore operatore aritmetico
+        False altrimenti
+        """
 
         if '+' in attr \
             or '-' in attr \
