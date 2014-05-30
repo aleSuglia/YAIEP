@@ -1,0 +1,20 @@
+A fact is a list of attribute
+an attribute is a pair (field_name, field_value)
+
+
+#fact definition
+fact $fact_name:
+    <attribute>; #first attribute
+    <attribute>; #second attribute
+
+#attribute definition
+attribute := $attribute_name (is $type) = $val
+
+#rule definition
+if <bool_express>: <action>
+
+
+
+
+
+
