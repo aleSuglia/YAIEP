@@ -4,24 +4,60 @@ from yaiep.core.WorkingMemoryException import WorkingMemoryException
 import copy
 
 class WorkingMemory:
+    """
+    Classe che rappresenta l'intera struttura di una Working Memory
+    che viene adoperata per poter rappresentare uno stato dello spazio di ricerca
+
+    Una Working Memory terrà traccia di quelli che sono i fatti presenti e della
+    struttura di quelli che sono i fatti non ordinati presenti all'interno della working memory
+    """
     fact_id_counter = 0
     
     def __init__(self):
+        """
+        Inizializza la lista dei fatti e i riferimenti
+        alla struttura dei template
+        """
         self._fact_list = {}
         self._templates = {}
 
     def add_template(self, template):
+        """
+        Aggiunge il template specificato in input
+        alla lista dei template definiti
+
+        @param template: struttura del fatto non ordinato da aggiungere
+        """
         if not isinstance(template, Template):
             raise WorkingMemoryException
         self._templates[template.name] = template
 
     def get_fact_list(self):
+        """
+        Restituisce la lista dei fatti attualmente definiti
+        sotto forma di dizionario.
+        Il dizionario restituito avrà come chiave l'id internamente
+        associato dalla working memory al fatto nel momento dell'inserimento
+        e come valore la struttura del fatto stessa.
+        """
         return self._fact_list
 
     def get_templates(self):
+        """
+        Restituisce la lista contenente una struttura specifica per
+        ogni fatto non ordinato presente nella Working Memory
+        """
         return self._templates
 
     def fact_already_present(self, fact):
+        """
+        Verifica se il fatto specificato in input risulta
+        essere presente nella Working Memory
+
+        @param fact: fatto da controllare
+        @return True se il fatto risulta essere già presente nella Working Memory
+        False altrimenti
+        """
         if not self._is_template(fact):
             return fact in self._fact_list.values()
         else:
@@ -42,6 +78,15 @@ class WorkingMemory:
 
 
     def modify_fact(self, bind_variable, parameters, var_dict, var_bind):
+        """
+        Modifica il fatto corrente rimpiazzando con i parametri specificati
+        in input, i valori specifici del fatto corrente
+
+        @param bind_variable: variabile che è stata utilizzata per legare il fatto corrente
+        @param parameters: parametri che verranno modificati con associati valori
+        @param var_dict: eventuali variabili con i rispettivi valori ammissibili
+        @param var_bind: dizionario che presenta i fatti legati alle variabili
+        """
         # controlla se i fatti da modificare sono dei template
         mod_facts = var_bind[bind_variable]
 
@@ -81,6 +126,15 @@ class WorkingMemory:
 
 
     def add_fact(self, fact):
+        """
+        Aggiunge il fatto specificato in input alla Working memory corrente
+
+        Nel caso in cui vi sia un qualche tipo di anomalia nell'inserimento
+        dei fatti, il metodo provvede a rilevare l'anomali correttamente e a
+        propagare l'errore all'esterno.
+
+        @param fact: fatto da aggiungere alla Working Memory
+        """
         if not isinstance(fact, Fact):
             raise WorkingMemoryException('WM Exception: Wrong argument type')
         # Se il fatto corrente non è un template allora controlla che non sia già presente
@@ -103,6 +157,13 @@ class WorkingMemory:
         self._fact_list[fact.get_id()] = fact
 
     def match_fact(self, new_fact):
+        """
+        Verifica se il fatto specificato in input
+        corrisponde ad uno dei fatti presente nella Working Memory corrente
+
+        @param new_fact: fatto che si intende controllare
+        @return id del fatto che ha fatto match con quello specificato in input
+        """
         def inner_match_fact(new_fact):
             for fact in self._fact_list.values():
                 if fact == new_fact:
@@ -160,4 +221,11 @@ class WorkingMemory:
         return hash(str(self._fact_list) + str(self._templates))
 
     def copy(self):
+        """
+        Permette di effettuare una copia completa della working memory
+        corrente
+
+        @return una nuova istanza di WorkingMemory che possiede i medesimi
+        elementi di quella corrente
+        """
         return copy.deepcopy(self)
