@@ -1,4 +1,4 @@
-## Modulo che gestisce il motore di inferenza
+# # Modulo che gestisce il motore di inferenza
 import inspect
 import sys
 import types
@@ -13,6 +13,7 @@ from yaiep.graph.SearchGraph import SearchGraph
 from yaiep.ml import KnowledgeAcquisition
 from yaiep.ml.KAException import KAException
 from yaiep.search.SearchMethodFactory import SearchMethodFactory
+
 
 # #
 # Asserisce un nuovo fatto aggiungendolo alla working memory
@@ -67,7 +68,7 @@ def _make_modify(wm, actions, var_dict, var_bind):
     assert isinstance(wm, WorkingMemory)
 
     bind_variable = actions[0]
-    parameters = actions[1] # i parametri da modificare
+    parameters = actions[1]  # i parametri da modificare
 
     for i in range(len(parameters)):
         if isinstance(parameters[i], list):
@@ -89,7 +90,7 @@ def _make_modify(wm, actions, var_dict, var_bind):
         print('Fact not modified: ', wme.value)
 
 
-# #
+##
 # Esegue un'operazione sulla working memory che fa in modo
 # di rimuovere un fatto che è stato precedentemente referenziato
 # in una regola
@@ -102,8 +103,8 @@ def _make_retract(wm, actions, var_bind):
     assert isinstance(wm, WorkingMemory)
 
     bind_variable = actions[0]
-    old_list_fact_id = actions[1:] # indirizzi numerici o con variabili
-    complete_list_fact_id = None # indirizzi numerici
+    old_list_fact_id = actions[1:]  # indirizzi numerici o con variabili
+    complete_list_fact_id = None  # indirizzi numerici
     fact_list = wm.get_fact_list()
 
     # sostituisco alle variabili "matchate" gli indirizzi
@@ -127,7 +128,7 @@ def _make_retract(wm, actions, var_bind):
             raise WorkingMemoryException('WM Exception: Unable to remove fact, wrong fact id used')
 
 
-# #
+##
 # Classe che modella nella sua interezza la logica del motore d'inferenza
 #
 #
@@ -146,25 +147,26 @@ class InferenceEngine:
         sys.path.append(problem_filesystem)
         try:
             import Heuristics
-            heur_module = locals()
-            self._heuristics = {x[0]:x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
-                if isinstance(x[1], types.FunctionType)}
-        except ImportError:
-            pass # modulo per le funzioni euristiche non presente
 
-    # #
+            heur_module = locals()
+            self._heuristics = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
+                                if isinstance(x[1], types.FunctionType)}
+        except ImportError:
+            pass  # modulo per le funzioni euristiche non presente
+
+    ##
     # Provvede ad inizializzare tutti gli elementi presenti all'interno
     # del motore inferenziale
     #
     def __init__(self):
-        self._wm = WorkingMemory() # lo stato iniziale della working memory
+        self._wm = WorkingMemory()  # lo stato iniziale della working memory
         self._list_rules = {}
         self._goal_state = Fact("")
         self._global_vars = {}
         self._agenda = None
         self._heuristics = None
 
-    # #
+    ##
     # Permette il caricamento, dal file di configurazione specificato,
     # di tutte le regole, dei fatti e della definizione di eventuali euristiche
     # per il problema corrente
@@ -182,11 +184,11 @@ class InferenceEngine:
 
     def __str__(self):
         return "{0}\nRULE LIST: {1}\nAGENDA: {2}\nGOAL STATE: {3}".format(str(self._wm),
-                                                         str(self._list_rules),
-                                                         str(self._agenda),
-                                                         str(self._goal_state))
+                                                                          str(self._list_rules),
+                                                                          str(self._agenda),
+                                                                          str(self._goal_state))
 
-    # #
+    ##
     # Verifica se il motore inferenziale è stato inizializzato correttamente
     # ed è pronto per poter avviare la risoluzione del problema
     #
@@ -194,7 +196,7 @@ class InferenceEngine:
     def is_ready(self):
         return not self._agenda is None
 
-    # #
+    ##
     # Restituisce la rappresentazione in forma di stringa
     # dei fatti attualmente definiti nella working memory del motore inferenziale
     #
@@ -202,7 +204,7 @@ class InferenceEngine:
     def fact_list(self):
         return str(self._wm)
 
-    # #
+    ##
     # Restituisce la rappresentazione in forma di stringa
     # delle regole attualmente definite nella working memory
     # del motore inferenziale
@@ -211,39 +213,24 @@ class InferenceEngine:
     def rule_list(self):
         return str(self._list_rules)
 
+    ##
+    #
+    #
+    #
+    def modify_working_mem(self, rule):
+        if isinstance(rule, tuple):
+            for act in rule[0].actions.actions:
+                if act[0] == 'modify' or act[0] == 'retract':
+                    return True
+            return False
+        else:
+            for act in rule.actions.actions:
+                if act[0] == 'modify' or act[0] == 'retract':
+                    return True
+            return False
 
-    # def modify_working_mem(self, rule):
-    # if isinstance(rule, tuple):
-    # for act in rule[0].actions.actions:
-    #             if act[0] == 'modify' or act[0] == 'retract':
-    #                 return True
-    #         return False
-    #     else:
-    #         for act in rule.actions.actions:
-    #             if act[0] == 'modify' or act[0] == 'retract':
-    #                 return True
-    #         return False
-    #
-    # def matched_goal_state(self):
-    #     return self._wm.match_fact(self._goal_state)
-    #
-    #
-    # def start_recognize_act_cycle(self):
-    #     ## Avvia il ciclo di recognize-act del motore per poter procedere nell'attivazione
-    #     #  delle regole immesse dall'utente
-    #     no_more_rule = False
-    #
-    #     while self._agenda.has_activable_rule() and not self.matched_goal_state() and not no_more_rule:
-    #         complete_rule = self._agenda.get_activable_rule(self._wm)
-    #         if complete_rule:
-    #             self.apply_action(self._wm, complete_rule)  # assert, modify, retractx
-    #             fired_rule = complete_rule[0] if isinstance(complete_rule, tuple) else complete_rule
-    #             if self.modify_working_mem(fired_rule):
-    #                 self._agenda.restore_rules(self._wm)  # reinserire regole già attivate nella lista di regole non attivate
-    #
-    #             self._agenda.set_activated_rule(fired_rule)
-    #         else:
-    #             no_more_rule = True
+    def matched_goal_state(self):
+        return self._wm.match_fact(self._goal_state)
 
     def apply_action(self, wm, rule):
         if isinstance(rule, tuple):  # regole aventi nella parte sinistra delle variabili
@@ -267,6 +254,7 @@ class InferenceEngine:
                 elif action[0] == 'retract':
                     InferenceEngine._command_list_wm['retract'](wm, action[1:])
 
+
     # #
     # Avvia la risoluzione del problema caricato a partire dallo stato attuale
     # della working memory e delle regole presenti
@@ -284,6 +272,7 @@ class InferenceEngine:
                 return True
 
             return False
+
 
     # #
     # Invoca il tool di apprendimento automatico (C.5) per poter acquisire da un dataset
