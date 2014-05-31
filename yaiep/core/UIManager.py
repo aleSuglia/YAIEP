@@ -1,6 +1,9 @@
 from yaiep.core.WorkingMemory import WorkingMemory
 
-
+# #
+# Fornisce un modo per poter garantire all'utente un'interazione più amichevole
+# con il motore inferenziale
+#
 class UIManager:
     @staticmethod
     def get_input_from_user(wm, *params):

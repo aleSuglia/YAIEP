@@ -1,63 +1,63 @@
 from yaiep.core.Slot import Slot
 
 
+# #
+# Classe che rappresenta un fatto non ordinato nella
+# sua interezza. Ogni fatto ordinato è paragonabile
+# ad una struttura del C, il quale può prevedere
+# dei campi (chiamati SLOT) ai quali è associato un nome
+# ed eventualmente delle restrizioni sui valori che esso
+# può assumere.
+# Un template può avere un nome il quale, all'interno della
+# WM deve essere univoco.
+# A partire da tale template, più fatti che rispettano la sua
+# struttura potranno essere generati senza generare alcun tipo
+# di conflitto.
 class Template:
-    """
-    Classe che rappresenta un fatto non ordinato nella
-    sua interezza. Ogni fatto ordinato è paragonabile
-    ad una struttura del C, il quale può prevedere
-    dei campi (chiamati SLOT) ai quali è associato un nome
-    ed eventualmente delle restrizioni sui valori che esso
-    può assumere.
-    Un template può avere un nome il quale, all'interno della
-    WM deve essere univoco.
-    A partire da tale template, più fatti che rispettano la sua
-    struttura potranno essere generati senza generare alcun tipo
-    di conflitto.
-    """
     def __init__(self, name):
         self._slots = {}
         self.name = name
 
+    # #
+    # Aggiunge un nuovo slot al template corrente.
+    # Affinchè esso possa essere aggiunto è necessario che il valore
+    # specificato in input sia un'istanza della classe Slot.
+    #
+    # @param slot: nuovo slot da aggiungere al template
     def add_slot(self, slot):
-        """
-        Aggiunge un nuovo slot al template corrente.
-        Affinchè esso possa essere aggiunto è necessario che il valore
-        specificato in input sia un'istanza della classe Slot.
-
-        @param slot: nuovo slot da aggiungere al template
-
-
-        """
         assert isinstance(slot, Slot)
 
         self._slots[slot.name] = slot
 
+
+    # #
+    # Restituisce l'intera lista di slot
+    # presenti all'interno del template corrente
+    #
+    # @return dizionario avente come chiave il nome dello slot e come valore un'istanza
+    # della classe slot
     def get_slot_list(self):
-        """
-        Restituisce l'intera lista di slot
-        presenti all'interno del template corrente
-        """
         return self._slots
 
+    # #
+    # Restituisce lo slot avente come nome
+    # quello specificato in input al metodo
+    #
+    # @param name nome della slot da acquisire
+    # @return istanza della classe Slot
     def get_slot(self, name):
-        """
-        Restituisce lo slot avente come nome
-        quello specificato in input al metodo
-
-        @param name: nome della slot da acquisire
-        """
         return self._slots[name]
 
+    # #
+    # Provvede a modificare la lista di valori
+    # che rappresentano la struttura di base per quello che sarà
+    # un nuovo fatto non ordinato, effettuando opportuni controlli
+    # di consistenza.
+    # Tali controlli vengono effettuati considerando le informazioni
+    # presenti in ogni slot del template.
+    #
+    # @param attributes lista degli attributi da modificare
     def save_attributes(self, attributes):
-        """
-        Provvede a modificare la lista di valori
-        che rappresentano la struttura di base per quello che sarà
-        un nuovo fatto non ordinato, effettuando opportuni controlli
-        di consistenza.
-        Tali controlli vengono effettuati considerando le informazioni
-        presenti in ogni slot del template.
-        """
         examined_attr = []
 
         # controlla la correttezza degli attributi
