@@ -1,3 +1,6 @@
+from genericpath import isfile
+import os
+from os.path import isdir
 from yaiep.core.WorkingMemory import WorkingMemory
 
 # #
@@ -39,3 +42,34 @@ class UIManager:
         else:
             return False
 
+    @staticmethod
+    def select_game():
+        GAMES_DIR = 'games'
+        DEFAULT_CONF_FILE = 'conf_file'
+
+        games = [x for x in os.listdir(GAMES_DIR) if
+                 isdir(GAMES_DIR + "/" + x) and isfile(GAMES_DIR + "/" + x + "/" + DEFAULT_CONF_FILE)]
+
+        if len(games) < 1:
+            print("No games are present in the default directory (Do you have put them in the folder \'games\'?)")
+            return False
+
+        while True:
+
+            print("Available games:")
+            for i, game in enumerate(games):
+                print("\t" + str(i) + ") " + str(game))
+
+            try:
+                choosed = int(input('Select the puzzle that you want to solve: '))
+                print("You have chosen: " + str(games[choosed]))
+                print()
+                print("--------------------------------")
+                try:
+                    return GAMES_DIR + os.sep + games[choosed] + os.sep + DEFAULT_CONF_FILE
+                except Exception as ex:
+                    print('An error occurs :(')
+                print("--------------------------------")
+                print()
+            except ValueError:
+                return None

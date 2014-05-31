@@ -1,6 +1,7 @@
 import os
 from pyparsing import Literal, Word, alphas, ParseException, Optional
 from yaiep.core.InferenceEngine import InferenceEngine
+from yaiep.core.UIManager import UIManager
 from yaiep.interpreter.UnknownCommand import UnknownCommand
 
 
@@ -19,8 +20,11 @@ def _do_rules(engine):
         print(engine.rule_list())
 
 
-def _do_load(engine, param):
-    engine.load_engine(param)
+def _do_load(engine):
+    chosen_game_file = UIManager.select_game()
+    if chosen_game_file:
+        engine.load_engine(chosen_game_file)
+        print('### Insert \'(run)\' if you want to start the game ###')
 
 
 def _do_run(engine):

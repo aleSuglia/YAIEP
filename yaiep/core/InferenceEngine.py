@@ -214,9 +214,13 @@ class InferenceEngine:
         return str(self._list_rules)
 
     ##
+    # Verifica se una determinata regole è in grado di
+    # alterare lo stato della working memory permettendo
+    # la riattivazione di una regola già utilizzata
     #
-    #
-    #
+    # Operazioni come retract e modify sono in grado di alterare la working memory
+    # @param rule regole da verificare
+    # @return True se la regola è in grado di modificare la working memory, False altrimenti
     def modify_working_mem(self, rule):
         if isinstance(rule, tuple):
             for act in rule[0].actions.actions:

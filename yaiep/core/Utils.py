@@ -40,7 +40,7 @@ class Utils:
         return False
 
 
-    # #
+    ##
     # Funzione di supporto per poter effettuare la sostituzione delle variabili
     # con i loro rispettivi valori
     # @param solutions lista di combinazioni corrette generate
@@ -75,7 +75,7 @@ class Utils:
                     Utils._substitute_var_rec(solutions, var_dict, curr_list, missing_var[1:], var_index)
 
 
-    # #
+    ##
     # Funzione di supporto per poter effettuare la sostituzione delle variabili
     # con i loro rispettivi valori
     # @param solutions lista di combinazioni corrette generate
@@ -109,7 +109,7 @@ class Utils:
                         curr_list[var_index[next_var]] = val
                     Utils._substitute_var_rec(solutions, var_dict, curr_list, missing_var[1:], var_index)
 
-    # #
+    ##
     # Sostituisce le variabili con i loro effettivi valori
     # @param fact fatto con le variabili da sostituire
     # @param var_dict mapping tra le variabili ed i loro possibili valori
@@ -187,7 +187,7 @@ class Utils:
 
             return solutions
 
-    # #
+    ##
     # Permette di ottenere gli identificatori di variabile
     # presenti all'interno della stringa passati in input
     #
@@ -211,7 +211,7 @@ class Utils:
             i += 1
         return var_index
 
-    # #
+    ##
     # Provvede a generare tutte le possibili stringhe a partire da un determinato
     # pattern che coinvolge delle variabili, avendo a disposizione i possibili
     # valori associabili alle stesse
@@ -235,7 +235,7 @@ class Utils:
 
         return solutions
 
-    # #
+    ##
     # Provvede a generare tutte le possibili stringhe a partire da un determinato
     # pattern che coinvolge delle variabili, avendo a disposizione i possibili
     # valori associabili alle stesse.
@@ -263,7 +263,7 @@ class Utils:
                 Utils._substitute_variable_string_rec(var_dict, curr_sol_gen, missing_var[1:], solutions)
 
 
-    # #
+    ##
     # Verifica se la stringa passata in input
     # risulta essere un'espressione booleana
     # controllando la presenza di eventuali operatori
