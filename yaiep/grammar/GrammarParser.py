@@ -8,44 +8,40 @@ from yaiep.core.Utils import Utils
 from yaiep.core.WorkingMemoryException import WorkingMemoryException
 from yaiep.grammar.YAIEPGrammar import YAIEPGrammar
 
-
+# #
+# Classe che provvede al caricamento dal file di configurazione degli elementi necessari al motore
+# di inferenza, tra le quali vi sono le regole, i fatti e i template.
+#
 class GrammarParser:
-    """
-    Classe che provvede al caricamento dal file di configurazione degli elementi necessari al motore
-    di inferenza, tra le quali vi sono le regole, i fatti e i template.
-    """
-
+    ##
+    # Effettua il parsing del file di configurazione a partire da quella che è la grammatica specifica del file
+    # e provvedere ad avvalorare i parametri passati al metodo.
+    # @param rules_filename: nome del file di configurazione
+    # @param working_mem: oggetto istanza della classe WorkingMemory
+    # @param list_rules: lista di regole
+    # @param goal_state: oggetto istanza della classe Fact che rappresenta lo stato finale del problema
+    # @param globals_vars: dizionario contenente le variabili globali definite nel file
+    #
     @staticmethod
     def load_grammar(rules_filename, working_mem, list_rules, goal_state, globals_vars):
-        """
-        Effettua il parsing del file di configurazione a partire da quella che è la grammatica specifica del file
-        e provvedere ad avvalorare i parametri passati al metodo.
-        @param rules_filename: nome del file di configurazione
-        @param working_mem: oggetto istanza della classe WorkingMemory
-        @param list_rules: lista di regole
-        @param goal_state: oggetto istanza della classe Fact che rappresenta lo stato finale del problema
-        @param globals_vars: dizionario contenente le variabili globali definite nel file
-        """
         grammar = YAIEPGrammar()
         parser = grammar.get_grammar_definition()
         GrammarParser._interpret_results(rules_filename, parser, working_mem, list_rules, grammar.get_keyword_list(),
                                          goal_state, globals_vars)
 
+    ##
+    # Permette di trasformare gli elementi presenti all'interno del file di configurazione, in oggetti
+    # che verrano adoperati dal motore di inferenza per poter portare a termine i propri compiti.
+    #
+    # @param rules_filename: nome del file di configurazione
+    # @param parser: definisce la grammatica da adoperare per poter effettuare il parsing del file
+    # @param working_mem: La working memory iniziale che accoglierà i fatti letti e i template definiti
+    # @param list_rules: La lista di regole definite
+    # @param keyword_list: La lista di parole chiave della grammatica corrente
+    # @param goal_state: Lo stato finale del problema corrente
+    # @param global_vars: dizionario contenente le variabili globali definite nel file
     @staticmethod
     def _interpret_results(rules_filename, parser, working_mem, list_rules, keyword_list, goal_state, global_vars):
-        """
-        Permette di trasformare gli elementi presenti all'interno del file di configurazione, in oggetti
-        che verrano adoperati dal motore di inferenza per poter portare a termine i propri compiti.
-
-        @param rules_filename: nome del file di configurazione
-        @param parser: definisce la grammatica da adoperare per poter effettuare il parsing del file
-        @param working_mem: La working memory iniziale che accoglierà i fatti letti e i template definiti
-        @param list_rules: La lista di regole definite
-        @param keyword_list: La lista di parole chiave della grammatica corrente
-        @param goal_state: Lo stato finale del problema corrente
-        @param global_vars: dizionario contenente le variabili globali definite nel file
-
-        """
         try:
             result = parser.parseFile(rules_filename, parseAll=True)
             if not result:
@@ -67,21 +63,21 @@ class GrammarParser:
         except ParseException as e:
             raise e
 
+    ##
+    # Permette di acquisire tutte le informazioni in merito alle variabili
+    # globali definite nel file di configurazione
     @staticmethod
     def _interpret_globals(globals_vars, val):
-        globals_vars.update({g[0] : g[1] for g in val })
+        globals_vars.update({g[0]: g[1] for g in val})
 
+    ##
+    # Permette di interpretare i fatti acquisiti, trasformandoli in istanze della classe Fact
+    # a partire dalla loro rappresentazione in stringa.
+    #
+    # @param fact_list: lista di fatti non strutturati (stringhe)
+    # @param working_mem: istanza della classe WorkingMemory
     @staticmethod
     def _interpret_facts(fact_list, working_mem, globals_var):
-        """
-        Permette di interpretare i fatti acquisiti, trasformandoli in istanze della classe Fact
-        a partire dalla loro rappresentazione in stringa.
-
-        @param fact_list: lista di fatti non strutturati (stringhe)
-        @param working_mem: istanza della classe WorkingMemory
-
-        """
-
         for raw_fact in fact_list:
             #curr_fact =Fact(raw_fact[0], attribute_list=[x for x in raw_fact[1:]])
             attribute_list = []
@@ -108,16 +104,14 @@ class GrammarParser:
             except WorkingMemoryException as ex:
                 print('Fact not inserted: ', curr_fact)
 
+    ###
+    # Permette di interpretare le regole acquisite, trasformandole in istanze della classe Rule
+    # a partire dalla loro rappresentazione in stringa.
+    #
+    # @param rules_list: lista di regole in forma testuale
+    # @param list_rules: lista di oggetti istanza delle classe Rule
     @staticmethod
     def _interpret_rules(rules_list, list_rules, globals_var):
-        """
-        Permette di interpretare le regole acquisite, trasformandole in istanze della classe Rule
-        a partire dalla loro rappresentazione in stringa.
-
-        @param rules_list: lista di regole in forma testuale
-        @param list_rules: lista di oggetti istanza delle classe Rule
-
-        """
         def verify_variable_values(left_side_cond, right_side_cond):
             delim_index = 0
             defined_variables = []
@@ -135,12 +129,12 @@ class GrammarParser:
                             if attr[1].startswith('?'):
                                 defined_variables.append(attr[1])
                             elif attr[1].startswith('global.?'):
-                                attr[1] = globals_var[attr[1][attr[1].index('?'):]] # sostituisco la variabile globale
+                                attr[1] = globals_var[attr[1][attr[1].index('?'):]]  # sostituisco la variabile globale
                         else:
                             if attr.startswith('?'):
                                 defined_variables.append(attr)
                             elif attr.startswith('global.?'):
-                                attr = globals_var[attr[attr.index('?'):]] # sostituisco la variabile globale
+                                attr = globals_var[attr[attr.index('?'):]]  # sostituisco la variabile globale
                     delim_index += 1
                 else:
                     if Utils.is_boolean_expr(cond):
@@ -156,7 +150,7 @@ class GrammarParser:
                     var_id = Utils.capture_variables_id(left_side_cond[i])
 
                     if not len([x for x in var_id if x in defined_variables]) == len(var_id):
-                        break # vi è una variabile non definita!!!
+                        break  # vi è una variabile non definita!!!
                     i += 1
 
                 if i == len_leftside:
@@ -180,13 +174,13 @@ class GrammarParser:
                                     for key in globals_var:
                                         if key in elem[1]:
                                             elem[1] = elem[1].replace('global.' + key, globals_var[key])
-                                    #elem[1] = globals_var[elem[1][elem[1].index('?'):]] # sostituisco la variabile globale
+                                            #elem[1] = globals_var[elem[1][elem[1].index('?'):]] # sostituisco la variabile globale
                             else:
                                 if elem.startswith('?'):
                                     defined_variables.append(elem)
                                 elif elem.startswith('global.?'):
-                                    elem = globals_var[elem[elem.index('?'):]] # sostituisco la variabile globale
-                                
+                                    elem = globals_var[elem[elem.index('?'):]]  # sostituisco la variabile globale
+
                     elif attr[0] == 'modify':
                         for elem in attr[2]:
                             if isinstance(elem, list):
@@ -196,12 +190,12 @@ class GrammarParser:
                                     for key in globals_var:
                                         if key in elem[1]:
                                             elem[1] = elem[1].replace('global.' + key, globals_var[key])
-                                    #elem[1] = globals_var[elem[1][elem[1].index('?'):]] # sostituisco la variabile globale
+                                            #elem[1] = globals_var[elem[1][elem[1].index('?'):]] # sostituisco la variabile globale
                             else:
                                 if elem.startswith('?'):
                                     defined_variables.append(elem)
                                 elif elem.startswith('global.?'):
-                                    elem = globals_var[elem[elem.index('?'):]] # sostituisco la variabile globale
+                                    elem = globals_var[elem[elem.index('?'):]]  # sostituisco la variabile globale
 
             return curr_state
 
@@ -214,17 +208,15 @@ class GrammarParser:
             else:
                 raise ValueError('Unbinded variable in LHS')
 
+    ##
+    # Permette di interpretare i template presenti all'interno del file di configurazione,
+    # trasformandoli dalla loro rappresentazione testuale in una forma gestibile del motore di
+    # inferenza.
+    #
+    # @param parsed_value: rappresentazione testuale dei template nel file
+    # @param wm: Working memory che accoglierà i template definiti
     @staticmethod
     def _interpret_template(parsed_value, wm, globals_var):
-        """
-        Permette di interpretare i template presenti all'interno del file di configurazione,
-        trasformandoli dalla loro rappresentazione testuale in una forma gestibile del motore di
-        inferenza.
-
-        @param parsed_value: rappresentazione testuale dei template nel file
-        @param wm: Working memory che accoglierà i template definiti
-
-        """
         for raw_template in parsed_value:
             curr_template = Template(raw_template[0])
 
@@ -239,16 +231,14 @@ class GrammarParser:
                 curr_template.add_slot(Slot(raw_slot))
             wm.add_template(curr_template)
 
+    ##
+    # Permette la corretta acqusizione dello stato finale presente nel file di
+    # configurazione in forma testuale. Una volta acquisito lo stato finale diviene
+    # un elemento del motore di inferenza necessario per la risoluzione del problema
+    # @param goal_state: stato finale correttamente acquisito
+    # @param parsed_goal_state: stato finale in forma testuale
     @staticmethod
     def _interpret_final_state(goal_state, parsed_goal_state, globals_var):
-        """
-        Permette la corretta acqusizione dello stato finale presente nel file di
-        configurazione in forma testuale. Una volta acquisito lo stato finale diviene
-        un elemento del motore di inferenza necessario per la risoluzione del problema
-        @param goal_state: stato finale correttamente acquisito
-        @param parsed_goal_state: stato finale in forma testuale
-
-        """
         goal_state.set_name(parsed_goal_state[0])
         for attr in parsed_goal_state[1:]:
             if isinstance(attr, list):

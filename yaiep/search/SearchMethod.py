@@ -1,22 +1,20 @@
 import networkx
 
-
+# #
+# Rappresenta la struttura di base di un metodo di ricerca adoperato
+# dal motore di inferenza per ispezionare lo spazio delle possibili soluzioni.
+#
+#
 class SearchMethod:
-    """
-    Rappresenta la struttura di base di un metodo di ricerca adoperato
-    dal motore di inferenza per ispezionare lo spazio delle possibili soluzioni.
-
-    """
-
+    # #
+    # Istanzia un metodo di ricerca inizializzando tutti i suoi componenti
+    # principali
+    # @param graph: il grafo che verrà popolato dal metodo di ricerca
+    # @param agenda: adoperata dal metodo di ricerca per gestire le regole attivabili
+    # @param final_state: stato finale del processo solutivo
+    # @param all_solutions: indica se il processo di ricerca dovrà restituire tutte le possibili soluzioni (default: false)
+    #
     def __init__(self, graph, agenda, final_state, all_solutions=False):
-        """
-        Istanzia un metodo di ricerca inizializzando tutti i suoi componenti
-        principali
-        @param graph: il grafo che verrà popolato dal metodo di ricerca
-        @param agenda: adoperata dal metodo di ricerca per gestire le regole attivabili
-        @param final_state: stato finale del processo solutivo
-        @param all_solutions: indica se il processo di ricerca dovrà restituire tutte le possibili soluzioni (default: false)
-        """
         self._graph = graph
         self._agenda = agenda
         self._final_state = final_state
@@ -24,19 +22,19 @@ class SearchMethod:
         self._solution = []
         self._path_solution = []
 
+    # #
+    # Avvia la risoluzione del problema sfruttando il motore di inferenza passato come parametro.
+    # ATTENZIONE: tale metodo deve essere implementato da una opportuna sottoclasse
+    # @param engine: il motore di inferenza che adopera il metodo di ricerca.
+    # @return: True se è stata trovato una soluzione(o soluzioni), False altrimenti
+    #
     def execute(self, engine):
-        """
-        Avvia la risoluzione del problema sfruttando il motore di inferenza passato come parametro.
-        ATTENZIONE: tale metodo deve essere implementato da una opportuna sottoclasse
-        @param engine: il motore di inferenza che adopera il metodo di ricerca.
-        @return: True se è stata trovato una soluzione(o soluzioni), False altrimenti
-        """
         pass
 
+    # #
+    # Ricostruisce il percorso per poter raggiungere la soluzione a partire dallo stato iniziale.
+    #
     def costruct_path_to_solution(self):
-        """
-        Ricostruisce il percorso per poter raggiungere la soluzione a partire dallo stato iniziale.
-        """
         if not self._solution is None:
             curr_path = networkx.DiGraph()
             curr_node = self._solution[-1]
@@ -48,31 +46,24 @@ class SearchMethod:
             self._path_solution.append(curr_path)
 
 
+    # #
+    # Restituisce il percorso necessario per poter raggiungere la soluzione sotto forma di un grafo, avente
+    # come nodi una serie di Working memory e come archi le regole che permettono di transitare da uno stato
+    # ad un altro
+    # @return: il percorso solutivo trovato dal metodo di ricerca
+    #
     def get_path_to_solution(self):
-        """
-        Restituisce il percorso necessario per poter raggiungere la soluzione sotto forma di un grafo, avente
-        come nodi una serie di Working memory e come archi le regole che permettono di transitare da uno stato
-        ad un altro
-        @return: il percorso solutivo trovato dal metodo di ricerca
-        """
         return self._path_solution
 
+    # #
+    # Restituisce la soluzione al problema risolto dal metodo di ricerca ed eventualmente
+    # il percorso necessario per poterla raggiungere.
+    #
+    # E' opportuno controllare la validità della tupla in quanto potrebbe non essere presente alcuna soluzione.
+    # @return: una tupla che ha come primo elemento la soluzione ottenuta e come secondo elemento il percorso
+    #
     def get_solution(self):
-        """
-        Restituisce la soluzione al problema risolto dal metodo di ricerca ed eventualmente
-        il percorso necessario per poterla raggiungere.
-
-        E' opportuno controllare la validità della tupla in quanto potrebbe non essere presente alcuna soluzione.
-        @return: una tupla che ha come primo elemento la soluzione ottenuta e come secondo elemento il percorso
-        """
         return self._solution, self._path_solution
-
-    def continue_search(self):
-        value = input('Are you satisfied with this solution? (y/n): ')
-        if value == 'n':
-            return True
-        else:
-            return False
 
     def print_solution_path(self):
         curr_node = self._graph.get_init_state()

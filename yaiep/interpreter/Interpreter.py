@@ -87,12 +87,15 @@ _console_command = Literal('(').suppress() + valid_command + \
                    Optional(Word(alphas + os.sep + '._')) + Literal(')').suppress()
 
 
+# #
+# Rappresenta la classe principale a partire dalla quale
+# l'utente è in grado di avviare il motore inferenziale e procedere
+# nella risoluzione di un gioco
 class Interpreter:
-
     def __init__(self):
         self.engine = InferenceEngine()
 
-    def execute_command(self, command):
+    def _execute_command(self, command):
         if command[0] == 'exit':
             return True
 
@@ -112,6 +115,10 @@ class Interpreter:
                 executor(self.engine, command[1])
         return False
 
+    # #
+    # Avvia l'interprete dando la possibilità all'utente di inserire
+    # delle istruzioni per poter effettuare il caricamento dei dati
+    # necessari al motore per poter eseguire le proprie operazioni
     def start(self):
         print(banner)
         exit_flag = False
@@ -120,7 +127,7 @@ class Interpreter:
                 line = input('>>> ')
                 try:
                     result = _console_command.parseString(line)
-                    exit_flag = self.execute_command(result)
+                    exit_flag = self._execute_command(result)
                 except (ParseException, UnknownCommand, TypeError):
                     print('Invalid command inserted...')
                 except Exception as ex:

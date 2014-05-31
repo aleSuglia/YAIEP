@@ -7,21 +7,21 @@ from yaiep.ml.KAException import KAException
 
 knowledge_path = "knowledge" + os.sep
 
+
+# #
+# Funzione che provvede ad avviare il processo di apprendimento automatico
+# delle regole a partire da un dataset in formato .arff (http://www.cs.waikato.ac.nz/ml/weka/arff.html)
+# mediante il tool di creazione di alberi di decisione C5 (http://www.rulequest.com/see5-info.html).
+# Tale tool una volta avviato genera un albero di decisione a partire dal quale vengono opportunamente
+# generate delle regole che vengono importate nel motore inferenziale.
+#
+# E' necessario che il file contente il dataset da utilizzare sia presente nella cartella "knowledge"
+# del programma e che sia formattato secondo la sintassi del formato ARFF.
+#
+# @param list_rules: lista di regole da generare
+# @param dataset_filename: nome del dataset in formato .arff
+#
 def knowledge_acquisition(list_rules, dataset_filename):
-    """
-    Funzione che provvede ad avviare il processo di apprendimento automatico
-    delle regole a partire da un dataset in formato .arff (http://www.cs.waikato.ac.nz/ml/weka/arff.html)
-    mediante il tool di creazione di alberi di decisione C5 (http://www.rulequest.com/see5-info.html).
-    Tale tool una volta avviato genera un albero di decisione a partire dal quale vengono opportunamente
-    generate delle regole che vengono importate nel motore inferenziale.
-
-    E' necessario che il file contente il dataset da utilizzare sia presente nella cartella "knowledge"
-    del programma e che sia formattato secondo la sintassi del formato ARFF.
-
-    @param list_rules: lista di regole da generare
-    @param dataset_filename: nome del dataset in formato .arff
-
-    """
     try:
         with open(dataset_filename) as dataset:
             dataset_arff = arff.load(dataset)
@@ -33,20 +33,20 @@ def knowledge_acquisition(list_rules, dataset_filename):
             _print_data_file(dataset_arff['data'], data_file)
             import subprocess
             subprocess.call("cd knowledge; c5.0 -f " + filesystem_name + " -r", shell=True, stdout=DEVNULL)
-            new_rules = C5RuleParser().getRules(rules_file, names_file)
+            new_rules = C5RuleParser().get_rules(rules_file, names_file)
             list_rules.update(new_rules)
     except Exception as ex:
         raise KAException('Unable to read load dataset')
 
 
+# #
+# Genera il file che conterrà i nomi degli attributi presenti all'interno del dataset specificato
+# secondo il formato specificato richiesto dal tool di generazione degli alberi di decisione.
+#
+# @param attribute_list: lista degli attributi presenti nel dataset
+# @param names_filename: nome del file nel quale verranno memorizzati i nomi degli attributi
+#
 def _print_names_file(attribute_list, names_filename):
-    """
-    Genera il file che conterrà i nomi degli attributi presenti all'interno del dataset specificato
-    secondo il formato specificato richiesto dal tool di generazione degli alberi di decisione.
-
-    @param attribute_list: lista degli attributi presenti nel dataset
-    @param names_filename: nome del file nel quale verranno memorizzati i nomi degli attributi
-    """
     with open(names_filename, mode='w') as names_file:
         names_file.write('{0}.\n'.format(attribute_list[-1][0])) # Memorizza il nome dell'attributo di classe
 
@@ -64,13 +64,12 @@ def _print_names_file(attribute_list, names_filename):
             names_file.write(attr_value + "\n")
 
 
+# #
+# Genera il file che conterrà i dati del dataset che verranno adoperato per poter
+# generare l'albero di decisione
+# @param data: tuple del dataset
+# @param data_filename: nome del file nel quale verranno memorizzate le tuple del dataset
 def _print_data_file(data, data_filename):
-    """
-    Genera il file che conterrà i dati del dataset che verranno adoperato per poter
-    generare l'albero di decisione
-    @param data: tuple del dataset
-    @param data_filename: nome del file nel quale verranno memorizzate le tuple del dataset
-    """
     with open(data_filename, mode='w') as data_file:
         writer = csv.writer(data_file)
         for tuple in data:
