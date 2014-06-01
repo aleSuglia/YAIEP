@@ -8,6 +8,7 @@ from yaiep.core.Fact import Fact
 from yaiep.core.Utils import Utils
 from yaiep.core.WorkingMemory import WorkingMemory
 from yaiep.core.WorkingMemoryException import WorkingMemoryException
+from yaiep.grammar.EngineConfigFileParser import EngineConfigFileParser
 from yaiep.grammar.GrammarParser import GrammarParser
 from yaiep.graph.SearchGraph import SearchGraph
 from yaiep.ml import KnowledgeAcquisition
@@ -165,22 +166,40 @@ class InferenceEngine:
         self._global_vars = {}
         self._agenda = None
         self._heuristics = None
+        self._conf_attributes = None
 
     ##
     # Permette il caricamento, dal file di configurazione specificato,
     # di tutte le regole, dei fatti e della definizione di eventuali euristiche
-    # per il problema corrente
+    # per il problema corrente ed inoltre permette di caricare tutte le configurazioni
+    # iniziali per poter scegliere alcune logiche specifiche del motore inferenziali
     #
-    # @param def_filename nome del file di configurazione
-    def load_engine(self, def_filename):
+    # @param conf_filename nome del file di configurazione del motore
+    # @param def_filename nome del file di definizione del problema
+    def load_engine(self, conf_filename, def_filename):
+        # Effettua il caricamento delle informazioni necessarie al motore di inferenza
         try:
-            GrammarParser.load_grammar(def_filename, self._wm, self._list_rules, self._goal_state, self._global_vars)
-            self._agenda = Agenda(self._list_rules.copy())
-        except ParseException as e:
-            msg = str(e)
-            complete_msg = "%s: %s" % (msg, e.line)
-            print(complete_msg)
-            print(" " * (len("%s: " % msg) + e.loc) + "^^^")
+            self._conf_attributes = EngineConfigFileParser.read_configuration_attribute(conf_filename)
+
+            # Effettua il caricamento del file di definizione del problema
+            try:
+                GrammarParser.load_grammar(def_filename, self._wm, self._list_rules, self._goal_state,
+                                           self._global_vars)
+                self._agenda = Agenda(self._list_rules.copy())
+            except ParseException as e:
+                msg = str(e)
+                complete_msg = "%s: %s" % (msg, e.line)
+                print(complete_msg)
+                print(" " * (len("%s: " % msg) + e.loc) + "^^^")
+                raise e
+
+        except ParseException as parse_ex:
+            print('Your engine\'s configuration file seems broken :(')
+            raise parse_ex
+        except ValueError as value_ex:
+            print('{0} -> {1}'.format(value_ex.args[0], value_ex.args[1]))
+            raise value_ex
+
 
     def __str__(self):
         return "{0}\nRULE LIST: {1}\nAGENDA: {2}\nGOAL STATE: {3}".format(str(self._wm),
@@ -258,7 +277,6 @@ class InferenceEngine:
                 elif action[0] == 'retract':
                     InferenceEngine._command_list_wm['retract'](wm, action[1:])
 
-
     # #
     # Avvia la risoluzione del problema caricato a partire dallo stato attuale
     # della working memory e delle regole presenti
@@ -267,9 +285,20 @@ class InferenceEngine:
     # secondo un metodo ben definito di ricerca (informata o non informata)
     # dando la possibilità all'utente di ritrovare tutte le soluzioni o parte di esse
     def solve_problem(self):
-        if self._wm.get_fact_list():
+        # Se sono disponibili tutte le informazioni per poter avviare la procedura
+        # di risoluzione del problema
+        if self._wm.get_fact_list() and self._conf_attributes:
             graph = SearchGraph(self._wm)
-            search_method = SearchMethodFactory.generate_search_method('depth', graph, self._agenda, self._goal_state)
+            search_type = self._conf_attributes['search_type']
+            if search_type == 'depth':
+                search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                           graph, self._agenda, self._goal_state)
+            else:
+                search_method = SearchMethodFactory.generate_search_method(search_type, graph, self._agenda,
+                                                                           self._goal_state,
+                                                                           self._heuristics[
+                                                                               self._conf_attributes['heuristic']])
+
             sol_state = search_method.execute(self)
 
             if sol_state:
@@ -277,8 +306,7 @@ class InferenceEngine:
 
             return False
 
-
-    # #
+    ##
     # Invoca il tool di apprendimento automatico (C.5) per poter acquisire da un dataset
     # in formato arff delle regole nel formato valido per il motore inferenziale
     #

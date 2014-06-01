@@ -3,6 +3,7 @@ import os
 from os.path import isdir
 from yaiep.core.WorkingMemory import WorkingMemory
 
+
 # #
 # Fornisce un modo per poter garantire all'utente un'interazione più amichevole
 # con il motore inferenziale
@@ -66,7 +67,7 @@ class UIManager:
                 print()
                 print("--------------------------------")
                 try:
-                    return GAMES_DIR + os.sep + games[choosed] + os.sep + DEFAULT_CONF_FILE
+                    return GAMES_DIR + os.sep + games[choosed] + os.sep, DEFAULT_CONF_FILE
                 except Exception as ex:
                     print('An error occurs :(')
                 print("--------------------------------")
