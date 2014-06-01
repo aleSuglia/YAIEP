@@ -277,7 +277,7 @@ class InferenceEngine:
                 elif action[0] == 'retract':
                     InferenceEngine._command_list_wm['retract'](wm, action[1:])
 
-    # #
+    ##
     # Avvia la risoluzione del problema caricato a partire dallo stato attuale
     # della working memory e delle regole presenti
     #
