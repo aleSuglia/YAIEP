@@ -137,9 +137,9 @@ class Interpreter:
                 try:
                     result = _console_command.parseString(line)
                     exit_flag = self._execute_command(result)
-                except (ParseException, UnknownCommand, TypeError):
+                except (ParseException, UnknownCommand):
                     print('Invalid command inserted...')
-                except Exception as ex:
+                except (Exception, TypeError) as ex:
                     print('Something goes wrong :(\n< {0} >'.format(ex.args[1]))
         except KeyboardInterrupt:
             pass

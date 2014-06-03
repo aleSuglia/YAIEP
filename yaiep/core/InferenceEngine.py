@@ -65,7 +65,7 @@ def _make_assert(wm, params, var_dict=None):
 # @param var_dict: eventuali variabili associate al fatto corrente
 # @param var_bind: riferimento ai fatti da modificare
 #
-def _make_modify(wm, actions, var_dict, var_bind):
+def _make_modify(wm, actions, var_dict=None, var_bind=None):
     assert isinstance(wm, WorkingMemory)
 
     bind_variable = actions[0]
@@ -100,7 +100,7 @@ def _make_modify(wm, actions, var_dict, var_bind):
 # @param actions: rappresentazione sotto forma di lista dell'operazione da eseguire
 # @param var_bind: riferimento al fatto da rimuovere
 #
-def _make_retract(wm, actions, var_bind):
+def _make_retract(wm, actions, var_bind=None):
     assert isinstance(wm, WorkingMemory)
 
     bind_variable = actions[0]

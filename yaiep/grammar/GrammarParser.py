@@ -210,7 +210,7 @@ class GrammarParser:
             else:
                 if verify_variable_values(rule[1], rule[2]):
                     real_rule = Rule(rule[1], rule[2])
-                    real_rule.set_salience(rule[0][1])
+                    real_rule.set_salience(int(rule[0][1]))
                 else:
                     raise ValueError('Unbinded variable in LHS')
             list_rules[real_rule] = real_rule.actions
