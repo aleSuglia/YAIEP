@@ -59,28 +59,34 @@ class YAIEPGrammar(Grammar):
         cond_attr = fact | function
         condition_attributes = OneOrMore(cond_attr)
 
-        assertAction = Forward()
-        atomAssertAction = Keyword("assert") + OneOrMore(fact) | Group(lpar + assertAction + rpar)
-        assertAction << atomAssertAction + ZeroOrMore(assertAction)
+        assertNew = Group(lpar + Keyword("assert") + OneOrMore(fact) + rpar)
+        modifyNew = Group(lpar + Keyword("modify") + (Word(nums) | variable) + Group(OneOrMore(single_slot)) + rpar)
 
-        modifyAction = Forward()
-        atomModifyAction = Keyword("modify") + (Word(nums) | variable) + Group(OneOrMore(single_slot)) | \
-                           Group(lpar + modifyAction + rpar)
-        modifyAction << atomModifyAction + ZeroOrMore(modifyAction)
+        newAction = assertNew | modifyNew
 
-        action = assertAction | modifyAction
+        # VECCHIA DEFINIZIONE DI ACTION
+        # assertAction = Forward()
+        # atomAssertAction = Keyword("assert") + OneOrMore(fact) | Group(lpar + assertAction + rpar)
+        # assertAction << atomAssertAction + ZeroOrMore(assertAction)
+        #
+        # modifyAction = Forward()
+        # atomModifyAction = Keyword("modify") + (Word(nums) | variable) + Group(OneOrMore(single_slot)) | \
+        # Group(lpar + modifyAction + rpar)
+        # modifyAction << atomModifyAction + ZeroOrMore(modifyAction)
+        #
+        # action = assertAction | modifyAction
 
         salience_param = lpar + Keyword('salience') + Word(nums) + rpar
 
+        # rule = Group(
+        # Group(lpar + Keyword('rule').suppress() + Optional(salience_param) + condition_attributes + ZeroOrMore(
+        #         logicalExpr))
+        #     + Keyword("then").suppress() + Group(OneOrMore(action)) + rpar)
+        #
         rule = Group(
             Group(lpar + Keyword('rule').suppress() + Optional(salience_param) + condition_attributes + ZeroOrMore(
                 logicalExpr))
-            + Keyword("then").suppress() + Group(OneOrMore(action)) + rpar)
-
-        # original rule
-        #rule = Group(
-        #    Group(lpar + Keyword('rule').suppress() + condition_attributes) + Keyword("then").suppress() + Group(
-        #        OneOrMore(action)) + rpar)
+            + Keyword("then").suppress() + Group(OneOrMore(newAction)) + rpar)
 
         rule_list = OneOrMore(rule)
 
