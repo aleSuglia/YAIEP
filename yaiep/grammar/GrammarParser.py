@@ -202,11 +202,18 @@ class GrammarParser:
         for rule in rules_list:
             # nessun errore nella definizione della regola
             # provvedo ad inserirla nel dizionario delle regole
-            if verify_variable_values(rule[0], rule[1]):
-                real_rule = Rule(rule[0], rule[1])
-                list_rules[real_rule] = real_rule.actions
+            if len(rule) == 2: # Regola semplice priva di salience
+                if verify_variable_values(rule[0], rule[1]):
+                    real_rule = Rule(rule[0], rule[1])
+                else:
+                    raise ValueError('Unbinded variable in LHS')
             else:
-                raise ValueError('Unbinded variable in LHS')
+                if verify_variable_values(rule[1], rule[2]):
+                    real_rule = Rule(rule[1], rule[2])
+                    real_rule.set_salience(rule[0][1])
+                else:
+                    raise ValueError('Unbinded variable in LHS')
+            list_rules[real_rule] = real_rule.actions
 
     ##
     # Permette di interpretare i template presenti all'interno del file di configurazione,

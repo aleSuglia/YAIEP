@@ -69,6 +69,7 @@ class RightSideRule:
 #
 class Rule:
     def __init__(self, conditions = None, actions = None):
+        self._salience = 0
         if conditions:
             self.conditions = LeftSideRule(conditions)
         else:
@@ -77,6 +78,12 @@ class Rule:
             self.actions = RightSideRule(actions)
         else:
             self.conditions = []
+
+    def get_salience(self):
+        return self._salience
+
+    def set_salience(self, salience):
+        self._salience = salience
 
     def __str__(self):
         return 'if ' + str(self.conditions) + ' then ' + str(self.actions)
@@ -91,3 +98,15 @@ class Rule:
 
     def __hash__(self):
         return hash(str(self))
+
+    def __lt__(self, other):
+        return self._salience < other.get_salience()
+
+    def __gt__(self, other):
+        return self._salience > other.get_salience()
+
+    def __le__(self, other):
+        return self._salience <= other.get_salience()
+
+    def __ge__(self, other):
+        return self._salience >= other.get_salience()

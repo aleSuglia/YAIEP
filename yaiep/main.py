@@ -7,12 +7,10 @@ from yaiep.ml import KnowledgeAcquisition
 
 
 if __name__ == '__main__':
-    # inter = Interpreter()
-    #    inter.start()
-    grammar = YAIEPGrammar().get_grammar_definition()
-    print(grammar.parseFile('conf_file', parseAll=True))
-    #  engine = InferenceEngine()
-    #  engine.load_engine('games/secchi/settings', 'games/secchi/conf_file')
+    inter = Interpreter()
+    inter.start()
+    #engine = InferenceEngine()
+    #engine.load_engine('games/secchi/settings', 'games/secchi/conf_file')
    #engine.load_engine('rule_file')
 #   engine.solve_problem()
 #    print(engine)

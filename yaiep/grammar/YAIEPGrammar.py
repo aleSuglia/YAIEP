@@ -76,7 +76,7 @@ class YAIEPGrammar(Grammar):
         #
         # action = assertAction | modifyAction
 
-        salience_param = lpar + Keyword('salience') + Word(nums) + rpar
+        salience_param = Group(lpar + Keyword('salience') + Word(nums) + rpar)
 
         # rule = Group(
         # Group(lpar + Keyword('rule').suppress() + Optional(salience_param) + condition_attributes + ZeroOrMore(
@@ -84,7 +84,7 @@ class YAIEPGrammar(Grammar):
         #     + Keyword("then").suppress() + Group(OneOrMore(action)) + rpar)
         #
         rule = Group(
-            Group(lpar + Keyword('rule').suppress() + Optional(salience_param) + condition_attributes + ZeroOrMore(
+            lpar + Keyword('rule').suppress() + Optional(salience_param) + Group(condition_attributes + ZeroOrMore(
                 logicalExpr))
             + Keyword("then").suppress() + Group(OneOrMore(newAction)) + rpar)
 

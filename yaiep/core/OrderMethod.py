@@ -52,4 +52,13 @@ class SalienceAdder(OrderRulesMethod):
         super().__init__()
 
     def add(self, rules, rule):
-        pass
+        x = rule[0] if isinstance(rule, tuple) else rule
+        lo = 0
+        hi = len(rules)
+        while lo < hi:
+            mid = (lo+hi)//2
+            if rules[mid] < x:
+                lo = mid+1
+            else:
+                hi = mid
+        rules.insert(lo, x)
