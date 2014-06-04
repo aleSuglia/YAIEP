@@ -65,20 +65,19 @@ def _do_help():
         @command_list.
 
         ### command_list ###
-
-        'facts' - displays the list of facts contained in the Working Memory
-        'rules' - displays the available rules
-        'run' - solves the loaded problem
-        'load' - grants to the user to load a game which is saved in a specific
+        (facts) - displays the list of facts contained in the Working Memory
+        (rules) - displays the available rules
+        (run) - solves the loaded problem
+        (load) - grants to the user to load a game which is saved in a specific
         folder whose name is 'games'. For each game, there is a dedicated folder
         with all the configuration file needed for the execution of the inference engine
         (See user guide documentation for more information).
-        'learn_rules' - runs a machine learning algorithm on a specified
+        (learn_rules) - runs a machine learning algorithm on a specified
         dataset (in ARFF format) in order to learn some other rules
 
-        'reset' - removes all the data loaded so far
+        (reset) - removes all the data loaded so far
 
-        'exit' - closes the interpreter's session
+        (exit) - closes the interpreter's session
 
         ----------------------------------------------------------------
 
