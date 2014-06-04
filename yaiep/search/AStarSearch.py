@@ -1,3 +1,4 @@
+from yaiep.core.UIManager import UIManager
 from yaiep.graph.InfoNode import InfoNode
 from yaiep.search.SearchMethod import SearchMethod
 
@@ -35,11 +36,18 @@ class AStarSearch(SearchMethod):
         root_node.hn = self._heuristic(root_node.wm)
 
         opened_set.add(root_node) # aggiungo il nodo radice come primo elemento da esplorare
+        num_solution = 1
+        continue_search_flag = True
 
-        while opened_set:
+        while opened_set and continue_search_flag:
             best_node = opened_set.pop()
             if best_node.wm.match_fact(self._final_state):
-                return True # ho raggiunto l'obiettivo SUCCESSO
+                # ho raggiunto l'obiettivo SUCCESSO
+                self._solution.append(best_node)
+                self.costruct_path_to_solution()
+                self.print_solution_path()
+                num_solution += 1
+                continue_search_flag = UIManager.continue_search()
 
             closed_set.append(best_node)
 

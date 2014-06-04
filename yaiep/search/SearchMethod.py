@@ -1,13 +1,11 @@
 import networkx
 
+
 # #
 # Rappresenta la struttura di base di un metodo di ricerca adoperato
 # dal motore di inferenza per ispezionare lo spazio delle possibili soluzioni.
 #
 #
-
-
-
 class SearchMethod:
     # #
     # Istanzia un metodo di ricerca inizializzando tutti i suoi componenti
@@ -37,6 +35,9 @@ class SearchMethod:
     # #
     # Ricostruisce il percorso per poter raggiungere la soluzione a partire dallo stato iniziale.
     #
+
+
+
     def costruct_path_to_solution(self):
         if not self._solution is None:
             curr_path = networkx.DiGraph()

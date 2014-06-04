@@ -15,8 +15,11 @@ class InfoNode(Node):
         self.hn = 0
         self.gn = 0
 
+    def __hash__(self):
+        return hash(self.wm)
+
     def __eq__(self, other):
-        return self.wm == other.wm and self.gn == other.gn
+        return self.wm == other.wm
 
     def __lt__(self, other):
         return (self.gn + self.hn) < (other.gn + other.hn)
@@ -31,5 +34,5 @@ class InfoNode(Node):
         return (self.gn + self.hn) >= (other.gn + other.hn) and self == other
 
     def __ne__(self, other):
-        return (self.gn + self.hn) != (other.gn + other.hn) and not self == other
+        return not self == other
 
