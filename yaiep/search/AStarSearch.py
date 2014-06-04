@@ -24,8 +24,17 @@ class AStarSearch(SearchMethod):
 
         return neighbors
 
-    def execute(self, engine):
+    def update_gn_depth(self, node, curr_gn):
+        sons = self._graph.neighbors(node)
+        if not sons:
+            node.gn = curr_gn
+        else:
+            for son in sons:
+                if son.gn < curr_gn:
+                    son.gn = curr_gn + 1
+                    self.update_gn_depth(son, son.gn)
 
+    def execute(self, engine):
         opened_set = set()
         closed_set = []
 
@@ -41,6 +50,8 @@ class AStarSearch(SearchMethod):
 
         while opened_set and continue_search_flag:
             best_node = opened_set.pop()
+            closed_set.append(best_node)
+
             if best_node.wm.match_fact(self._final_state):
                 # ho raggiunto l'obiettivo SUCCESSO
                 self._solution.append(best_node)
@@ -48,26 +59,50 @@ class AStarSearch(SearchMethod):
                 self.print_solution_path()
                 num_solution += 1
                 continue_search_flag = UIManager.continue_search()
+            else:
+                best_node_neighbors = self.neighbor_nodes(best_node, engine)
 
-            closed_set.append(best_node)
+                # per ogni suo figlio, crea un arco che va dal figlio al padre
+                for i in range(len(best_node_neighbors)):
+                    son = best_node_neighbors[i][0]
+                    rule_tuple = best_node_neighbors[i][1]
+                    son.parent = best_node
+                    son.gn = best_node.gn + 1
 
-            best_node_neighbors = self.neighbor_nodes(best_node, engine)
-            for neighbor_pair in best_node_neighbors:
-                neighbor = neighbor_pair[0]
-                neighbor_rule = neighbor_pair[1]
-                if neighbor in closed_set:
-                    continue
+                    old_node = None
+                    for old in opened_set:
+                        if son == old:
+                            old_node = old
+                            break
 
-                tentative_g_score = best_node.gn + 1
+                    # il nodo corrente è già presente in opened
+                    if old_node:
+                        # old_node più conveniente di son
+                        if old_node.gn < son.gn:
+                            son.gn = old_node.gn
+                            son.parent = old_node.parent
+                    else: # il nodo corrente non è presente in opened
+                        # vedi se il nodo è in closed!!
+                        closed_old_node = None
+                        for old in closed_set:
+                            if son == old:
+                                closed_old_node = old
+                                break
+                        if closed_old_node: # nodo corrente in closed_set
+                            # closed_old_node più conveniente di son
+                            if closed_old_node.gn < son.gn:
+                                son.gn = closed_old_node.gn
+                                son.parent = closed_old_node.parent
+                            else:  # son più conveniente di closed_old_node
+                                self.update_gn_depth(closed_old_node, son.gn)
 
-                if neighbor not in opened_set or tentative_g_score < neighbor.gn:
-                    neighbor.parent = best_node
-                    self._graph.add_edge(best_node, neighbor, {'rule':neighbor_rule})
-                    neighbor.gn = tentative_g_score
-                    neighbor.hn = self._heuristic(neighbor.wm)
-                    if neighbor not in opened_set:
-                        opened_set.add(neighbor)
+                    if not son in opened_set and not son in closed_set:
+                        son.hn = self._heuristic(son.wm)
+                        opened_set.add(son)
+                        self._graph.add_edge(best_node, son, {'rule':rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
 
-        return False
+        if not opened_set and continue_search_flag:
+            print('No more solution found.')
+        return len(self._solution) > 0
 
 

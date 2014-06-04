@@ -35,9 +35,6 @@ class SearchMethod:
     # #
     # Ricostruisce il percorso per poter raggiungere la soluzione a partire dallo stato iniziale.
     #
-
-
-
     def costruct_path_to_solution(self):
         if not self._solution is None:
             curr_path = networkx.DiGraph()
