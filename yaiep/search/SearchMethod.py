@@ -5,6 +5,9 @@ import networkx
 # dal motore di inferenza per ispezionare lo spazio delle possibili soluzioni.
 #
 #
+from yaiep.games.secchi.Graphics import Graphics
+
+
 class SearchMethod:
     # #
     # Istanzia un metodo di ricerca inizializzando tutti i suoi componenti
@@ -74,9 +77,11 @@ class SearchMethod:
             cont_rule = 1
             while curr_node != solution:
                 son = path.neighbors(curr_node)[0]
-                print('{0} - {1}'.format(cont_rule, path.get_edge_data(curr_node, son)['rule']))
+                #print('{0} - {1}'.format(cont_rule, path.get_edge_data(curr_node, son)['rule']))
+                Graphics.graphics(curr_node.wm)
                 cont_rule += 1
                 curr_node = son
+            Graphics.graphics(curr_node.wm)
 
     def match_final_state(self, curr_state):
         '''

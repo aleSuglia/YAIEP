@@ -31,6 +31,7 @@ class WorkingMemory:
             raise WorkingMemoryException
         self._templates[template.name] = template
 
+
     # #
     # Restituisce la lista dei fatti attualmente definiti
     # sotto forma di dizionario.
