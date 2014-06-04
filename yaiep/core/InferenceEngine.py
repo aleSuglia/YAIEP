@@ -235,12 +235,17 @@ class InferenceEngine:
 
     ##
     # Restituisce la rappresentazione in forma di stringa
-    # delle regole attualmente definite nella working memory
-    # del motore inferenziale
+    # delle regole attualmente definite del motore inferenziale
     #
     # @return string-form della lista delle regole
     def rule_list(self):
-        return str(self._list_rules)
+        string_form = ""
+        i = 1
+        for rule in self._list_rules:
+            string_form += "{0} - {1}\n".format(str(i), str(rule))
+            i += 1
+
+        return string_form
 
     ##
     # Verifica se una determinata regole è in grado di
@@ -338,6 +343,9 @@ class InferenceEngine:
 
             sol_state = search_method.execute(self)
 
+            # ripristina l'agenda per poter garantire un nuovo avvio del problema
+            self._agenda = Agenda(self._list_rules)
+
             if sol_state:
                 return True
 
@@ -348,6 +356,7 @@ class InferenceEngine:
         self._list_rules = {}
         self._goal_state = Fact("")
         self._global_vars = {}
+        WorkingMemory.fact_id_counter = 0
         self._agenda = None
         self._heuristics = None
         self._conf_attributes = None

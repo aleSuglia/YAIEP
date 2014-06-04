@@ -86,7 +86,7 @@ class Rule:
         self._salience = salience
 
     def __str__(self):
-        return 'if ' + str(self.conditions) + ' then ' + str(self.actions)
+        return 'IF ' + str(self.conditions) + ' THEN ' + str(self.actions)
 
     def __repr__(self):
         return str(self.conditions) + ' '

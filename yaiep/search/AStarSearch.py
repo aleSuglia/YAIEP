@@ -99,7 +99,7 @@ class AStarSearch(SearchMethod):
                     if not son in opened_set and not son in closed_set:
                         son.hn = self._heuristic(son.wm)
                         opened_set.add(son)
-                        self._graph.add_edge(best_node, son, {'rule':rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
+                        self._graph.add_edge(best_node, son, {'rule': rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
 
         if not opened_set and continue_search_flag:
             print('No more solution found.')

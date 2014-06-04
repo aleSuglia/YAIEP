@@ -46,7 +46,6 @@ class SearchMethod:
 
             self._path_solution.append(curr_path)
 
-
     # #
     # Restituisce il percorso necessario per poter raggiungere la soluzione sotto forma di un grafo, avente
     # come nodi una serie di Working memory e come archi le regole che permettono di transitare da uno stato
