@@ -145,17 +145,6 @@ class InferenceEngine:
     _graphic_module = 'Graphics'
     _configuration_file = 'conf_file'
 
-    # def _load_heuristics(self, problem_filesystem):
-    #     sys.path.append(problem_filesystem)
-    #     try:
-    #         import Heuristics
-    #
-    #         heur_module = locals()
-    #         self._heuristics = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
-    #                             if isinstance(x[1], types.FunctionType)}
-    #     except ImportError:
-    #         pass  # modulo per le funzioni euristiche non presente
-
     def _load_external_function(self, problem_filesystem):
         sys.path.append(problem_filesystem)
         try:
@@ -221,34 +210,6 @@ class InferenceEngine:
         except ValueError as value_ex:
             print('{0} -> {1}'.format(value_ex.args[0], value_ex.args[1]))
             raise value_ex
-
-
-
-    # def load_engine(self, conf_filename, def_filename):
-    #     # Effettua il caricamento delle informazioni necessarie al motore di inferenza
-    #     try:
-    #         self._conf_attributes = EngineConfigFileParser.read_configuration_attribute(conf_filename)
-    #         self._load_external_function()
-    #
-    #         # Effettua il caricamento del file di definizione del problema
-    #         try:
-    #             GrammarParser.load_grammar(def_filename, self._wm, self._list_rules, self._goal_state,
-    #                                        self._global_vars)
-    #             self._agenda = Agenda(self._list_rules.copy())
-    #         except ParseException as e:
-    #             msg = str(e)
-    #             complete_msg = "%s: %s" % (msg, e.line)
-    #             print(complete_msg)
-    #             print(" " * (len("%s: " % msg) + e.loc) + "^^^")
-    #             raise e
-    #
-    #     except ParseException as parse_ex:
-    #         print('Your engine\'s configuration file seems broken :(')
-    #         raise parse_ex
-    #     except ValueError as value_ex:
-    #         print('{0} -> {1}'.format(value_ex.args[0], value_ex.args[1]))
-    #         raise value_ex
-
 
     def __str__(self):
         return "{0}\nRULE LIST: {1}\nAGENDA: {2}\nGOAL STATE: {3}".format(str(self._wm),
@@ -381,6 +342,16 @@ class InferenceEngine:
                 return True
 
             return False
+
+    def reset(self):
+        self._wm = WorkingMemory()  # lo stato iniziale della working memory
+        self._list_rules = {}
+        self._goal_state = Fact("")
+        self._global_vars = {}
+        self._agenda = None
+        self._heuristics = None
+        self._conf_attributes = None
+        self._graphic_functions = None
 
     ##
     # Invoca il tool di apprendimento automatico (C.5) per poter acquisire da un dataset

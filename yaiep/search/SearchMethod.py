@@ -87,16 +87,14 @@ class SearchMethod:
             if self._graphic_func:
                 self._graphic_func(curr_node.wm)
 
-
-
+    ##
+    # Permette al metodo di ricerca di verificare se lo stato corrente
+    # rappresenta uno stato finale per il problema.
+    #
+    # @param curr_state lo stato corrente da verificare
+    # @return True se lo stato corrente è uno stato finale False diversamente
+    #
     def match_final_state(self, curr_state):
-        '''
-        Permette al metodo di ricerca di verificare se lo stato corrente
-        rappresenta uno stato finale per il problema.
-
-        @param curr_state lo stato corrente da verificare
-        @return True se lo stato corrente è uno stato finale False diversamente
-        '''
         # se non è stato definito uno stato finale
         if self._final_state.get_attributes() is None:
             return False

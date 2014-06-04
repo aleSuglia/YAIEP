@@ -22,6 +22,9 @@ def _do_rules(engine):
 
 
 def _do_load(engine):
+    if engine.is_ready:
+        engine.reset()  # rimuove i dati dell'ultima esecuzione
+
     chosen_game_path, conf_file_name = UIManager.select_game()
     if chosen_game_path:
         try:
