@@ -21,8 +21,6 @@ class Graphics:
                     stringa += "#"
                     return stringa
 
-
-
             print("%20s\t%20s\n" % (print_bucket(first_bucket_size), print_bucket(sec_bucket_size)))
 
         fact_list = wm.get_fact_list()
