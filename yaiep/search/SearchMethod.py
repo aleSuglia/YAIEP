@@ -5,7 +5,7 @@ import networkx
 # dal motore di inferenza per ispezionare lo spazio delle possibili soluzioni.
 #
 #
-from yaiep.games.secchi.Graphics import Graphics
+
 
 
 class SearchMethod:
@@ -15,15 +15,15 @@ class SearchMethod:
     # @param graph: il grafo che verrà popolato dal metodo di ricerca
     # @param agenda: adoperata dal metodo di ricerca per gestire le regole attivabili
     # @param final_state: stato finale del processo solutivo
-    # @param all_solutions: indica se il processo di ricerca dovrà restituire tutte le possibili soluzioni (default: false)
+    # @param graphic_func: funzione necessaria per poter formattare le fasi di risoluzione del problema
     #
-    def __init__(self, graph, agenda, final_state, all_solutions=False):
+    def __init__(self, graph, agenda, final_state, graphic_func):
         self._graph = graph
         self._agenda = agenda
         self._final_state = final_state
-        self._all_solutions = all_solutions
         self._solution = []
         self._path_solution = []
+        self._graphic_func = graphic_func
 
     # #
     # Avvia la risoluzione del problema sfruttando il motore di inferenza passato come parametro.
@@ -75,13 +75,21 @@ class SearchMethod:
 
         if not curr_node is None:
             cont_rule = 1
+
             while curr_node != solution:
                 son = path.neighbors(curr_node)[0]
-                #print('{0} - {1}'.format(cont_rule, path.get_edge_data(curr_node, son)['rule']))
-                Graphics.graphics(curr_node.wm)
+                if self._graphic_func:
+                    self._graphic_func(curr_node.wm)
+                else:
+                    print('{0} - {1}'.format(cont_rule, path.get_edge_data(curr_node, son)['rule']))
+
                 cont_rule += 1
                 curr_node = son
-            Graphics.graphics(curr_node.wm)
+
+            if self._graphic_func:
+                self._graphic_func(curr_node.wm)
+
+
 
     def match_final_state(self, curr_state):
         '''

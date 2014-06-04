@@ -3,11 +3,12 @@ from yaiep.search.DepthSearch import DepthSearch
 
 
 def make_depth(factory_data):
-    return DepthSearch(factory_data[0], factory_data[1], factory_data[2])
+    return DepthSearch(factory_data[0], factory_data[1], factory_data[2], factory_data[3])
 
 
 def make_astar(factory_data):
-    return AStarSearch(factory_data[0], factory_data[1], factory_data[2], factory_data[3])
+    return AStarSearch(factory_data[0], factory_data[1], factory_data[2], factory_data[3], factory_data[4])
+
 
 class SearchMethodFactory:
     factory_function = {

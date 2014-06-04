@@ -142,18 +142,35 @@ class InferenceEngine:
     }
 
     _heuristics_module = 'Heuristics'
+    _graphic_module = 'Graphics'
     _configuration_file = 'conf_file'
 
-    def _load_heuristics(self, problem_filesystem):
+    # def _load_heuristics(self, problem_filesystem):
+    #     sys.path.append(problem_filesystem)
+    #     try:
+    #         import Heuristics
+    #
+    #         heur_module = locals()
+    #         self._heuristics = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
+    #                             if isinstance(x[1], types.FunctionType)}
+    #     except ImportError:
+    #         pass  # modulo per le funzioni euristiche non presente
+
+    def _load_external_function(self, problem_filesystem):
         sys.path.append(problem_filesystem)
         try:
             import Heuristics
+            import Graphics
 
             heur_module = locals()
             self._heuristics = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
                                 if isinstance(x[1], types.FunctionType)}
+
+            self._graphic_functions = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._graphic_module])
+                                if isinstance(x[1], types.FunctionType)}
         except ImportError:
             pass  # modulo per le funzioni euristiche non presente
+
 
     ##
     # Provvede ad inizializzare tutti gli elementi presenti all'interno
@@ -167,6 +184,7 @@ class InferenceEngine:
         self._agenda = None
         self._heuristics = None
         self._conf_attributes = None
+        self._graphic_functions = None
 
     ##
     # Permette il caricamento, dal file di configurazione specificato,
@@ -176,10 +194,14 @@ class InferenceEngine:
     #
     # @param conf_filename nome del file di configurazione del motore
     # @param def_filename nome del file di definizione del problema
-    def load_engine(self, conf_filename, def_filename):
+    def load_engine(self, problem_path):
         # Effettua il caricamento delle informazioni necessarie al motore di inferenza
         try:
-            self._conf_attributes = EngineConfigFileParser.read_configuration_attribute(conf_filename)
+            def_filename = problem_path + self._configuration_file
+            settings_filename = problem_path + EngineConfigFileParser.DEFAULT_SETTINGS_FILENAME
+
+            self._conf_attributes = EngineConfigFileParser.read_configuration_attribute(settings_filename)
+            self._load_external_function(problem_path)
 
             # Effettua il caricamento del file di definizione del problema
             try:
@@ -199,6 +221,33 @@ class InferenceEngine:
         except ValueError as value_ex:
             print('{0} -> {1}'.format(value_ex.args[0], value_ex.args[1]))
             raise value_ex
+
+
+
+    # def load_engine(self, conf_filename, def_filename):
+    #     # Effettua il caricamento delle informazioni necessarie al motore di inferenza
+    #     try:
+    #         self._conf_attributes = EngineConfigFileParser.read_configuration_attribute(conf_filename)
+    #         self._load_external_function()
+    #
+    #         # Effettua il caricamento del file di definizione del problema
+    #         try:
+    #             GrammarParser.load_grammar(def_filename, self._wm, self._list_rules, self._goal_state,
+    #                                        self._global_vars)
+    #             self._agenda = Agenda(self._list_rules.copy())
+    #         except ParseException as e:
+    #             msg = str(e)
+    #             complete_msg = "%s: %s" % (msg, e.line)
+    #             print(complete_msg)
+    #             print(" " * (len("%s: " % msg) + e.loc) + "^^^")
+    #             raise e
+    #
+    #     except ParseException as parse_ex:
+    #         print('Your engine\'s configuration file seems broken :(')
+    #         raise parse_ex
+    #     except ValueError as value_ex:
+    #         print('{0} -> {1}'.format(value_ex.args[0], value_ex.args[1]))
+    #         raise value_ex
 
 
     def __str__(self):
@@ -290,14 +339,41 @@ class InferenceEngine:
         if self._wm.get_fact_list() and self._conf_attributes:
             graph = SearchGraph(self._wm)
             search_type = self._conf_attributes['search_type']
+            search_method = None
+
             if search_type == 'depth':
-                search_method = SearchMethodFactory.generate_search_method(search_type,
-                                                                           graph, self._agenda, self._goal_state)
+
+                if 'graphics' in self._conf_attributes:
+                    graphic_func_name = self._conf_attributes['graphics']
+                    if self._graphic_functions and graphic_func_name in self._graphic_functions:
+                        search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                           graph, self._agenda, self._goal_state,
+                                                                           self._graphic_functions[graphic_func_name])
+                    else:
+                        search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                           graph, self._agenda, self._goal_state, None)
+
+                else:
+                    search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                           graph, self._agenda, self._goal_state, None)
             else:
+                ref_heur_function = None
+                ref_graph_function = None
+
+                if 'graphics' in self._conf_attributes:
+                    graphic_func_name = self._conf_attributes['graphics']
+                    if self._graphic_functions and graphic_func_name in self._graphic_functions:
+                        ref_graph_function = self._graphic_functions[graphic_func_name]
+
+                if 'heuristic' in self._conf_attributes:
+                    heur_func_name = self._conf_attributes['heuristic']
+                    if self._heuristics and heur_func_name in self._heuristics:
+                        ref_heur_function = self._heuristics[heur_func_name]
+
                 search_method = SearchMethodFactory.generate_search_method(search_type, graph, self._agenda,
                                                                            self._goal_state,
-                                                                           self._heuristics[
-                                                                               self._conf_attributes['heuristic']])
+                                                                           ref_graph_function,
+                                                                           ref_heur_function)
 
             sol_state = search_method.execute(self)
 

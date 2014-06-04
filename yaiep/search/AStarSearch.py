@@ -4,8 +4,8 @@ from yaiep.search.SearchMethod import SearchMethod
 
 # TODO Documentare classe
 class AStarSearch(SearchMethod):
-    def __init__(self, graph, agenda, final_state, heuristic, all_solutions=False):
-        SearchMethod.__init__(self, graph, agenda, final_state, all_solutions)
+    def __init__(self, graph, agenda, final_state, graph_function, heuristic):
+        SearchMethod.__init__(self, graph, agenda, final_state, graph_function)
         self._heuristic = heuristic
 
     def neighbor_nodes(self, best_node, engine):

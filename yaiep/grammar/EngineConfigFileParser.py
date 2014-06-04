@@ -18,7 +18,7 @@ from pyparsing import alphas, Word, Literal, Keyword, OneOrMore, ParseException,
 class EngineConfigFileParser:
     _config_keyword = Keyword('heuristic') | Keyword('search_type') | Keyword('graphics')
     _configuration_attribute = Group(Literal('(').suppress() + \
-                                     _config_keyword + Word(alphas) + Literal(')').suppress())
+                                     _config_keyword + Word(alphas + "_-") + Literal(')').suppress())
 
     _config_file_definition = OneOrMore(_configuration_attribute)
     DEFAULT_SETTINGS_FILENAME = 'settings'

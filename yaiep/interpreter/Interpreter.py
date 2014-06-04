@@ -26,8 +26,9 @@ def _do_load(engine):
     if chosen_game_path:
         try:
             print('### LOAD ENGINE STATUS ###')
-            engine.load_engine(chosen_game_path + EngineConfigFileParser.DEFAULT_SETTINGS_FILENAME,
-                               chosen_game_path + conf_file_name)
+            #engine.load_engine(chosen_game_path + EngineConfigFileParser.DEFAULT_SETTINGS_FILENAME,
+            #                   chosen_game_path + conf_file_name)
+            engine.load_engine(chosen_game_path)
             print('### Insert \'(run)\' if you want to start the game ###')
         except Exception:
             print('### Please fix the problems found and load again the engine using (load) command ###')
