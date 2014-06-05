@@ -10,13 +10,6 @@ import copy
 # Una Working Memory terrà traccia di quelli che sono i fatti presenti e della
 # struttura di quelli che sono i fatti non ordinati presenti all'interno della working memory
 class WorkingMemory:
-    """
-    Classe che rappresenta l'intera struttura di una Working Memory
-    che viene adoperata per poter rappresentare uno stato dello spazio di ricerca
-
-    Una Working Memory terrà traccia di quelli che sono i fatti presenti e della
-    struttura di quelli che sono i fatti non ordinati presenti all'interno della working memory
-    """
     fact_id_counter = 0
 
     # #
@@ -24,10 +17,6 @@ class WorkingMemory:
     # alla struttura dei template
     #
     def __init__(self):
-        """
-        Inizializza la lista dei fatti e i riferimenti
-        alla struttura dei template
-        """
         self._fact_list = {}
         self._templates = {}
 
@@ -38,12 +27,6 @@ class WorkingMemory:
     # @param template: struttura del fatto non ordinato da aggiungere
     #
     def add_template(self, template):
-        """
-        Aggiunge il template specificato in input
-        alla lista dei template definiti
-
-        @param template: struttura del fatto non ordinato da aggiungere
-        """
         if not isinstance(template, Template):
             raise WorkingMemoryException
         self._templates[template.name] = template
@@ -57,13 +40,6 @@ class WorkingMemory:
     # e come valore la struttura del fatto stessa.
     #
     def get_fact_list(self):
-        """
-        Restituisce la lista dei fatti attualmente definiti
-        sotto forma di dizionario.
-        Il dizionario restituito avrà come chiave l'id internamente
-        associato dalla working memory al fatto nel momento dell'inserimento
-        e come valore la struttura del fatto stessa.
-        """
         return self._fact_list
 
     # #
@@ -71,10 +47,6 @@ class WorkingMemory:
     # ogni fatto non ordinato presente nella Working Memory
     #
     def get_templates(self):
-        """
-        Restituisce la lista contenente una struttura specifica per
-        ogni fatto non ordinato presente nella Working Memory
-        """
         return self._templates
 
     # #
@@ -86,14 +58,6 @@ class WorkingMemory:
     #  False altrimenti
     #
     def fact_already_present(self, fact):
-        """
-        Verifica se il fatto specificato in input risulta
-        essere presente nella Working Memory
-
-        @param fact: fatto da controllare
-        @return True se il fatto risulta essere già presente nella Working Memory
-        False altrimenti
-        """
         if not self._is_template(fact):
             return fact in self._fact_list.values()
         else:
