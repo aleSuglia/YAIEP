@@ -8,7 +8,7 @@ def is_function_name(param):
 
 
 class Agenda:
-    def __init__(self, all_rules, order_method=OrderRulesMethod.RANDOM):
+    def __init__(self, all_rules, order_method=OrderRulesMethod.SALIENCE):
         self._activated_rules = []  # regole ATTIVATE
         self._not_used_rules = all_rules
         self._order_method = None

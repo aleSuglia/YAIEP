@@ -1,24 +1,24 @@
 from pyparsing import alphas, Word, nums, ParseException
 
 
+# #
+# Classe che rappresenta uno slot di un fatto non ordinato (template)
+# Tale slot prevede un nome ed un preciso valore. Tale valore potrebbe essere
+# soggetto a delle restrizioni che possono essere imposte specificando il tipo
+# dello slot (string o integer) oppure specificando un range nel quale può variare
+# il valore nel caso in cui si tratta di un valore intero.
+# E' possibile prevedere un valore di default che verrebbe impostato nel caso
+# in cui non venisse specificato alcun tipo di valore per lo slot corrente nel momento
+# della definizione del template
+#
 class Slot:
-    """
-    Classe che rappresenta uno slot di un fatto non ordinato (template)
-    Tale slot prevede un nome ed un preciso valore. Tale valore potrebbe essere
-    soggetto a delle restrizioni che possono essere imposte specificando il tipo
-    dello slot (string o integer) oppure specificando un range nel quale può variare
-    il valore nel caso in cui si tratta di un valore intero.
-    E' possibile prevedere un valore di default che verrebbe impostato nel caso
-    in cui non venisse specificato alcun tipo di valore per lo slot corrente nel momento
-    della definizione del template
-    """
+    # #
+    # Provvede ad inizializzare lo slot corrente
+    # con le informazioni specificate in input effettuando
+    # opportuni controlli di consistenza dei tipi e di definizione
+    # dei valori.
+    #
     def __init__(self, params):
-        """
-        Provvede ad inizializzare lo slot corrente
-        con le informazioni specificate in input effettuando
-        opportuni controlli di consistenza dei tipi e di definizione
-        dei valori.
-        """
         self.name = ""
         self.type = None
         self.default_value = None
@@ -52,11 +52,11 @@ class Slot:
         else:
             self.name = params
 
+    # #
+    # Effettua un controllo di consistenza sul valore specificato
+    # in input rispetto alle restrizioni fissate per lo slot corrente
+    #
     def check_slot_value(self, slot_value):
-        """
-        Effettua un controllo di consistenza sul valore specificato
-        in input rispetto alle restrizioni fissate per lo slot corrente
-        """
         try:
             if not self.type is None:
                 parser = Word(alphas) if self.type == 'string' else Word(nums)

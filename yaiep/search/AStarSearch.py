@@ -1,42 +1,12 @@
+from yaiep.core.UIManager import UIManager
 from yaiep.graph.InfoNode import InfoNode
 from yaiep.search.SearchMethod import SearchMethod
 
 
-'''
-    function A*(start,goal)
-    closedset := the empty set    // The set of nodes already evaluated.
-    openset := {start}    // The set of tentative nodes to be evaluated, initially containing the start node
-    came_from := the empty map    // The map of navigated nodes.
-
-    g_score[start] := 0    // Cost from start along best known path.
-    // Estimated total cost from start to goal through y.
-    f_score[start] := g_score[start] + heuristic_cost_estimate(start, goal)
-
-    while openset is not empty
-        current := the node in openset having the lowest f_score[] value
-        if current = goal
-            return reconstruct_path(came_from, goal)
-
-        remove current from openset
-        add current to closedset
-        for each neighbor in neighbor_nodes(current)
-            if neighbor in closedset
-                continue
-            tentative_g_score := g_score[current] + dist_between(current,neighbor)
-
-            if neighbor not in openset or tentative_g_score < g_score[neighbor]
-                came_from[neighbor] := current
-                g_score[neighbor] := tentative_g_score
-                f_score[neighbor] := g_score[neighbor] + heuristic_cost_estimate(neighbor, goal)
-                if neighbor not in openset
-                    add neighbor to openset
-
-    return failure
-'''
-
+# TODO Documentare classe
 class AStarSearch(SearchMethod):
-    def __init__(self, graph, agenda, final_state, heuristic, all_solutions=False):
-        SearchMethod.__init__(self, graph, agenda, final_state, all_solutions)
+    def __init__(self, graph, agenda, final_state, graph_function, heuristic):
+        SearchMethod.__init__(self, graph, agenda, final_state, graph_function)
         self._heuristic = heuristic
 
     def neighbor_nodes(self, best_node, engine):
@@ -54,8 +24,17 @@ class AStarSearch(SearchMethod):
 
         return neighbors
 
-    def execute(self, engine):
+    def update_gn_depth(self, node, curr_gn):
+        sons = self._graph.neighbors(node)
+        if not sons:
+            node.gn = curr_gn
+        else:
+            for son in sons:
+                if son.gn < curr_gn:
+                    son.gn = curr_gn + 1
+                    self.update_gn_depth(son, son.gn)
 
+    def execute(self, engine):
         opened_set = set()
         closed_set = []
 
@@ -66,31 +45,64 @@ class AStarSearch(SearchMethod):
         root_node.hn = self._heuristic(root_node.wm)
 
         opened_set.add(root_node) # aggiungo il nodo radice come primo elemento da esplorare
+        num_solution = 1
+        continue_search_flag = True
 
-        while opened_set:
+        while opened_set and continue_search_flag:
             best_node = opened_set.pop()
-            if best_node.wm.match_fact(self._final_state):
-                return True # ho raggiunto l'obiettivo SUCCESSO
-
             closed_set.append(best_node)
 
-            best_node_neighbors = self.neighbor_nodes(best_node, engine)
-            for neighbor_pair in best_node_neighbors:
-                neighbor = neighbor_pair[0]
-                neighbor_rule = neighbor_pair[1]
-                if neighbor in closed_set:
-                    continue
+            if best_node.wm.match_fact(self._final_state):
+                # ho raggiunto l'obiettivo SUCCESSO
+                self._solution.append(best_node)
+                self.costruct_path_to_solution()
+                self.print_solution_path()
+                num_solution += 1
+                continue_search_flag = UIManager.continue_search()
+            else:
+                best_node_neighbors = self.neighbor_nodes(best_node, engine)
 
-                tentative_g_score = best_node.gn + 1
+                # per ogni suo figlio, crea un arco che va dal figlio al padre
+                for i in range(len(best_node_neighbors)):
+                    son = best_node_neighbors[i][0]
+                    rule_tuple = best_node_neighbors[i][1]
+                    son.parent = best_node
+                    son.gn = best_node.gn + 1
 
-                if neighbor not in opened_set or tentative_g_score < neighbor.gn:
-                    neighbor.parent = best_node
-                    self._graph.add_edge(best_node, neighbor, {'rule':neighbor_rule})
-                    neighbor.gn = tentative_g_score
-                    neighbor.hn = self._heuristic(neighbor.wm)
-                    if neighbor not in opened_set:
-                        opened_set.add(neighbor)
+                    old_node = None
+                    for old in opened_set:
+                        if son == old:
+                            old_node = old
+                            break
 
-        return False
+                    # il nodo corrente è già presente in opened
+                    if old_node:
+                        # old_node più conveniente di son
+                        if old_node.gn < son.gn:
+                            son.gn = old_node.gn
+                            son.parent = old_node.parent
+                    else: # il nodo corrente non è presente in opened
+                        # vedi se il nodo è in closed!!
+                        closed_old_node = None
+                        for old in closed_set:
+                            if son == old:
+                                closed_old_node = old
+                                break
+                        if closed_old_node: # nodo corrente in closed_set
+                            # closed_old_node più conveniente di son
+                            if closed_old_node.gn < son.gn:
+                                son.gn = closed_old_node.gn
+                                son.parent = closed_old_node.parent
+                            else:  # son più conveniente di closed_old_node
+                                self.update_gn_depth(closed_old_node, son.gn)
+
+                    if not son in opened_set and not son in closed_set:
+                        son.hn = self._heuristic(son.wm)
+                        opened_set.add(son)
+                        self._graph.add_edge(best_node, son, {'rule': rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
+
+        if not opened_set and continue_search_flag:
+            print('No more solution found.')
+        return len(self._solution) > 0
 
 

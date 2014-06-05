@@ -2,37 +2,35 @@ from pyparsing import Literal, Word, OneOrMore, alphas, Group, QuotedString
 from yaiep.core.Rule import Rule
 
 
+# #
+# Classe che rappresenta un parser per il file che contiene le regole che verrà adoperato
+# dal tool di generazione degli alberi di decisione
+#
 class C5RuleParser:
-    """
-    Classe che rappresenta un parser per il file che contiene le regole che verrà adoperato
-    dal tool di generazione degli alberi di decisione
-    """
     _rule_line = OneOrMore(Group(Word(alphas) + Literal('=').suppress() + QuotedString('"')))
     _rule_file = OneOrMore(_rule_line)
+
+    # #
+    # Inizializza gli elementi che la classe adopererà per poter avviare il processo
+    # di parsing delle regole
+    #
     def __init__(self):
-        """
-        Inizializza gli elementi che la classe adopererà per poter avviare il processo
-        di parsing delle regole
-        """
         self._rule_list = {}
         self._class_name = None
 
+    # #
+    # Acquisisce il nome dell'attributo di classe del dataset corrente
+    # @param filename: nome del file contenente i nomi degli attributi del dataset
     def _read_class_name(self, filename):
-        """
-        Acquisisce il nome dell'attributo di classe del dataset corrente
-        @param filename: nome del file contenente i nomi degli attributi del dataset
-        """
         with open(filename) as names_file:
             first_line = names_file.readline()
             self._class_name = first_line[:first_line.index(".")]
 
-    def getRules(self, rule_filename, names_file):
-
-        """
-            @param rule_filename file contenente le regole
-            @param names_file file contenente il nome dell'attributo di classe (prima linea)
-        """
-
+    # #
+    # @param rule_filename file contenente le regole
+    # @param names_file file contenente il nome dell'attributo di classe (prima linea)
+    #
+    def get_rules(self, rule_filename, names_file):
         curr_rule = None
         curr_conditions = []
         self._read_class_name(names_file)

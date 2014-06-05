@@ -1,17 +1,16 @@
+# #
+# Classe che rappresenta un modulo generico nel quale sono presenti
+# delle funzioni di servizio che vengono invocate per poter portare a
+# termine dei compiti comuni.
+#
 class Utils:
-    """
-    Classe che rappresenta un modulo generico nel quale sono presenti
-    delle funzioni di servizio che vengono invocate per poter portare a
-    termine dei compiti comuni.
-    """
-
+    # #
+    # Controlla se la rappresentazione sotto forma di lista degli attributi un fatto, presenta
+    # delle variabili
+    # @param fact: lista di attributi di un fatto
+    #
     @staticmethod
     def has_variable(fact):
-        """
-        Controlla se la rappresentazione sotto forma di lista degli attributi un fatto, presenta
-        delle variabili
-        @param fact: lista di attributi di un fatto
-        """
         for attr in fact:
             if isinstance(attr, list):
                 for att in attr:
@@ -22,16 +21,15 @@ class Utils:
 
         return False
 
+    # #
+    # Verifica se il valore passato in input
+    # rappresenti un'operazione aritmetica
+    #
+    # @return True se è presente nella stringa un valore operatore aritmetico
+    # False altrimenti
+    #
     @staticmethod
     def verify_symbol(attr):
-        """
-        Verifica se il valore passato in input
-        rappresenti un'operazione aritmetica
-
-        @return True se è presente nella stringa un valore operatore aritmetico
-        False altrimenti
-        """
-
         if '+' in attr \
             or '-' in attr \
             or '*' in attr \
@@ -41,18 +39,18 @@ class Utils:
 
         return False
 
+
+    ##
+    # Funzione di supporto per poter effettuare la sostituzione delle variabili
+    # con i loro rispettivi valori
+    # @param solutions lista di combinazioni corrette generate
+    # @param var_dict valori da associare alle variabili
+    # @param curr_list combinazione che si sta generando
+    # @param missing_var variabili non ancora ispezionate
+    # @param var_index posizione nel pattern delle variabili
+    #
     @staticmethod
     def substitute_var_rec(solutions, var_dict, curr_list, missing_var, var_index):
-        """
-        Funzione di supporto per poter effettuare la sostituzione delle variabili
-        con i loro rispettivi valori
-        @param solutions lista di combinazioni corrette generate
-        @param var_dict valori da associare alle variabili
-        @param curr_list combinazione che si sta generando
-        @param missing_var variabili non ancora ispezionate
-        @param var_index posizione nel pattern delle variabili
-        """
-
         if not Utils.has_variable(curr_list):
             solutions.append(curr_list[:])
         else:
@@ -77,17 +75,17 @@ class Utils:
                     Utils._substitute_var_rec(solutions, var_dict, curr_list, missing_var[1:], var_index)
 
 
+    ##
+    # Funzione di supporto per poter effettuare la sostituzione delle variabili
+    # con i loro rispettivi valori
+    # @param solutions lista di combinazioni corrette generate
+    # @param var_dict valori da associare alle variabili
+    # @param curr_list combinazione che si sta generando
+    # @param missing_var variabili non ancora ispezionate
+    # @param var_index posizione nel pattern delle variabili
+    #
     @staticmethod
     def _substitute_var_rec(solutions, var_dict, curr_list, missing_var, var_index):
-        """
-        Funzione di supporto per poter effettuare la sostituzione delle variabili
-        con i loro rispettivi valori
-        @param solutions lista di combinazioni corrette generate
-        @param var_dict valori da associare alle variabili
-        @param curr_list combinazione che si sta generando
-        @param missing_var variabili non ancora ispezionate
-        @param var_index posizione nel pattern delle variabili
-        """
         if not Utils.has_variable(curr_list):
             solutions.append(curr_list[:])
         else:
@@ -111,15 +109,13 @@ class Utils:
                         curr_list[var_index[next_var]] = val
                     Utils._substitute_var_rec(solutions, var_dict, curr_list, missing_var[1:], var_index)
 
-
+    ##
+    # Sostituisce le variabili con i loro effettivi valori
+    # @param fact fatto con le variabili da sostituire
+    # @param var_dict mapping tra le variabili ed i loro possibili valori
+    #
     @staticmethod
     def substitute_variable(fact, var_dict):
-        """
-        Sostituisce le variabili con i loro effettivi valori
-        @param fact fatto con le variabili da sostituire
-        @param var_dict mapping tra le variabili ed i loro possibili valori
-        """
-
         pattern = fact[1:]
         variables = []
 
@@ -191,6 +187,10 @@ class Utils:
 
             return solutions
 
+    ##
+    # Permette di ottenere gli identificatori di variabile
+    # presenti all'interno della stringa passati in input
+    #
     @staticmethod
     def capture_variables_id(condition):
         """
@@ -215,17 +215,16 @@ class Utils:
             i += 1
         return var_index
 
+    ##
+    # Provvede a generare tutte le possibili stringhe a partire da un determinato
+    # pattern che coinvolge delle variabili, avendo a disposizione i possibili
+    # valori associabili alle stesse
+    # @param original: pattern da utilizzare per la generazioni delle combinazioni
+    # @param var_dict: dizionario avente come chiava l'identificativo di una variabile
+    # e come valore una lista di possibili valori ad essa associati
+    #
     @staticmethod
     def substitute_variable_string(original, var_dict):
-        """
-        Provvede a generare tutte le possibili stringhe a partire da un determinato
-        pattern che coinvolge delle variabili, avendo a disposizione i possibili
-        valori associabili alle stesse
-        @param original: pattern da utilizzare per la generazioni delle combinazioni
-        @param var_dict: dizionario avente come chiava l'identificativo di una variabile
-        e come valore una lista di possibili valori ad essa associati
-        """
-
         solutions = []
         variable_list = Utils.capture_variables_id(original) # salva in ordine di occorrenza tutte le variabili
 
@@ -240,21 +239,20 @@ class Utils:
 
         return solutions
 
+    ##
+    # Provvede a generare tutte le possibili stringhe a partire da un determinato
+    # pattern che coinvolge delle variabili, avendo a disposizione i possibili
+    # valori associabili alle stesse.
+    #
+    # Tale funzione funge da supporto per la generazione delle differenti combinazioni,
+    # in quanto rappresenta il passo ricorsivo nel quale viene fissato il valore della variabile
+    # che precede quella corrente nel pattern.
+    #
+    # @param original: pattern da utilizzare per la generazioni delle combinazioni
+    # @param var_dict: dizionario avente come chiava l'identificativo di una variabile
+    # e come valore una lista di possibili valori ad essa associati
     @staticmethod
     def _substitute_variable_string_rec(var_dict, curr_sol, missing_var, solutions):
-        """
-        Provvede a generare tutte le possibili stringhe a partire da un determinato
-        pattern che coinvolge delle variabili, avendo a disposizione i possibili
-        valori associabili alle stesse.
-
-        Tale funzione funge da supporto per la generazione delle differenti combinazioni,
-        in quanto rappresenta il passo ricorsivo nel quale viene fissato il valore della variabile
-        che precede quella corrente nel pattern.
-
-        @param original: pattern da utilizzare per la generazioni delle combinazioni
-        @param var_dict: dizionario avente come chiava l'identificativo di una variabile
-        e come valore una lista di possibili valori ad essa associati
-        """
         if not missing_var:
             solutions.append(curr_sol)
         else:
@@ -269,6 +267,12 @@ class Utils:
                 Utils._substitute_variable_string_rec(var_dict, curr_sol_gen, missing_var[1:], solutions)
 
 
+    ##
+    # Verifica se la stringa passata in input
+    # risulta essere un'espressione booleana
+    # controllando la presenza di eventuali operatori
+    # booleani
+    #
     @staticmethod
     def is_boolean_expr(cond_list):
         """

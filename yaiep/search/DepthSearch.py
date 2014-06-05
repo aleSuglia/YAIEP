@@ -1,16 +1,17 @@
+from yaiep.core.UIManager import UIManager
 from yaiep.graph.Node import Node
 from yaiep.search.SearchMethod import SearchMethod
 
 
 class DepthSearch(SearchMethod):
+    # #
+    # Esegue una depth-first search (visita in profondità) per poter ritrovare lo stato
+    # che rappresenta lo stato finale del problema da risolvere.
+    # La ricerca ha ugualmente fine nel momento in cui non vi sono più regole da attivare.
+    #
+    # @param engine: motore di inferenza che viene adoperato per poter condurre la ricerca
+    #
     def execute(self, engine):
-        """
-        Esegue una depth-first search (visita in profondità) per poter ritrovare lo stato
-        che rappresenta lo stato finale del problema da risolvere.
-        La ricerca ha ugualmente fine nel momento in cui non vi sono più regole da attivare.
-
-        @param engine: motore di inferenza che viene adoperato per poter condurre la ricerca
-        """
         root_node = self._graph.get_init_state()
 
         opened_nodes = [root_node]
@@ -31,7 +32,7 @@ class DepthSearch(SearchMethod):
                 print('Solution #{0}\n'.format(num_solution))
                 self.print_solution_path()
                 num_solution += 1
-                continue_search_flag = self.continue_search()
+                continue_search_flag = UIManager.continue_search()
             else:
                 applicable_rules = self._agenda.get_activable_rules(curr_node.wm)
                 for rule in applicable_rules:
@@ -46,7 +47,6 @@ class DepthSearch(SearchMethod):
                     if not new_node in closed_nodes and not new_node in opened_nodes:
                         self._graph.add_edge(curr_node, new_node, {'rule':rule[0] if isinstance(rule, tuple) else rule})
                         opened_nodes.append(new_node)
-
 
         if not opened_nodes and continue_search_flag:
             print('No more solution found.')
