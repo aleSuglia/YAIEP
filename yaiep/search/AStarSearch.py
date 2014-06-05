@@ -1,3 +1,4 @@
+import bisect
 from yaiep.core.UIManager import UIManager
 from yaiep.graph.InfoNode import InfoNode
 from yaiep.search.SearchMethod import SearchMethod
@@ -36,7 +37,7 @@ class AStarSearch(SearchMethod):
                     self.update_gn_depth(son, son.gn)
 
     def execute(self, engine):
-        opened_set = set()
+        opened_set = []
         closed_set = []
 
         root_node = InfoNode(self._graph.get_init_state().wm, None)
@@ -47,10 +48,11 @@ class AStarSearch(SearchMethod):
         already_in_open = False
         already_in_closed = False
 
-        opened_set.add(root_node) # aggiungo il nodo radice come primo elemento da esplorare
+        #opened_set.append(root_node) # aggiungo il nodo radice come primo elemento da esplorare
+        bisect.insort(opened_set, root_node)
 
         while opened_set:
-            best_node = opened_set.pop()
+            best_node = opened_set.pop(0)
             if not best_node in closed_set:
                 closed_set.append(best_node)
 
@@ -100,7 +102,7 @@ class AStarSearch(SearchMethod):
                     #if not son in opened_set and not son in closed_set:
                     if not already_in_open and not already_in_closed:
                         son.hn = self._heuristic(son.wm)
-                        opened_set.add(son)
+                        bisect.insort(opened_set, son)
                         self._graph.add_edge(best_node, son, {'rule': rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
 
                     already_in_closed = already_in_open = False

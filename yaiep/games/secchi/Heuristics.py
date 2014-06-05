@@ -12,9 +12,9 @@ def miglior_secchio(wm):
         if fact.get_name() == 'secchio_da_quattro':
             secchio_quattro = fact
 
-    quantita = secchio_quattro.get_attribute_value('quantita')
+    value = int(secchio_quattro.get_attribute_value('quantita'))
 
-    return abs(2-int(quantita))
+    return abs(2-value) if value != 2 else 99
 
 
 
