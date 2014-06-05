@@ -153,7 +153,7 @@ class Interpreter:
                     exit_flag = self._execute_command(result)
                 except (ParseException, UnknownCommand):
                     print('Invalid command inserted...')
-                except (Exception, TypeError) as ex:
-                    print('Something goes wrong :(\n< {0} >'.format(str(ex)))
+                #except (Exception, TypeError) as ex:
+                #    print('Something goes wrong :(\n< {0} >'.format(str(ex)))
         except KeyboardInterrupt:
             pass

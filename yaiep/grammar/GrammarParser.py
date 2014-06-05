@@ -213,7 +213,7 @@ class GrammarParser:
                     real_rule.set_salience(int(rule[0][1]))
                 else:
                     raise ValueError('Unbinded variable in LHS')
-            list_rules[real_rule] = real_rule.actions
+            list_rules.append(real_rule)
 
     ##
     # Permette di interpretare i template presenti all'interno del file di configurazione,

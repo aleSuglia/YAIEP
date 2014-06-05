@@ -1,4 +1,5 @@
 # # Modulo che gestisce il motore di inferenza
+import copy
 import inspect
 import sys
 import types
@@ -69,7 +70,7 @@ def _make_modify(wm, actions, var_dict=None, var_bind=None):
     assert isinstance(wm, WorkingMemory)
 
     bind_variable = actions[0]
-    parameters = actions[1]  # i parametri da modificare
+    parameters = copy.deepcopy(actions[1])  # i parametri da modificare
 
     for i in range(len(parameters)):
         if isinstance(parameters[i], list):
@@ -167,7 +168,7 @@ class InferenceEngine:
     #
     def __init__(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory
-        self._list_rules = {}
+        self._list_rules = []
         self._goal_state = Fact("")
         self._global_vars = {}
         self._agenda = None
@@ -344,7 +345,7 @@ class InferenceEngine:
             sol_state = search_method.execute(self)
 
             # ripristina l'agenda per poter garantire un nuovo avvio del problema
-            self._agenda = Agenda(self._list_rules)
+            self._agenda = Agenda(self._list_rules.copy())
 
             if sol_state:
                 return True
@@ -353,7 +354,7 @@ class InferenceEngine:
 
     def reset(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory
-        self._list_rules = {}
+        self._list_rules = []
         self._goal_state = Fact("")
         self._global_vars = {}
         WorkingMemory.fact_id_counter = 0

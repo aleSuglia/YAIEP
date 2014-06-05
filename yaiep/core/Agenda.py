@@ -23,7 +23,7 @@ class Agenda:
             self._order_method = RandomAdder()
 
     def set_activated_rule(self, rule_fired):
-        self._not_used_rules.pop(rule_fired)
+        self._not_used_rules.remove(rule_fired)
         self._activated_rules.append(rule_fired)
 
     def _contains_expression(self, fact_attributes):
@@ -243,9 +243,11 @@ class Agenda:
         #self._not_used_rules.extend([rule[0] if isinstance(rule, tuple) else rule for rule in restored_rules])
         for rule in restored_rules:
             if isinstance(rule, tuple):
-                self._not_used_rules[rule[0]] = rule[0].actions
+                if not rule[0] in self._not_used_rules:
+                    self._not_used_rules.append(rule[0])
             else:
-                self._not_used_rules[rule] = rule.actions
+                if not rule in self._not_used_rules:
+                    self._not_used_rules.append(rule)
 
     def get_activable_rules(self, wm):
         return self._do_matching(wm, self._not_used_rules)
