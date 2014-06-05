@@ -50,7 +50,8 @@ class AStarSearch(SearchMethod):
 
         while opened_set and continue_search_flag:
             best_node = opened_set.pop()
-            closed_set.append(best_node)
+            if not best_node in closed_set:
+                closed_set.append(best_node)
 
             if best_node.wm.match_fact(self._final_state):
                 # ho raggiunto l'obiettivo SUCCESSO

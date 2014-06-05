@@ -14,7 +14,7 @@ def miglior_secchio(wm):
 
     quantita = secchio_quattro.get_attribute_value('quantita')
 
-    return 4-int(quantita)
+    return abs(2-int(quantita))
 
 
 
