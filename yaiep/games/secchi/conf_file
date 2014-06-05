@@ -4,16 +4,15 @@
 
 (facts (secchio_da_tre (quantita ?x)) (secchio_da_quattro (quantita ?y)))
 
-(rule (secchio_da_tre (quantita 0)) (secchio_da_quattro (quantita 0)) (bind ?y (secchio_da_tre (quantita 0))) then (modify ?y (quantita 1)))
-(rule (secchio_da_tre (quantita 0)) (secchio_da_quattro (quantita 0)) (bind ?y (secchio_da_quattro (quantita 0))) then (modify ?y (quantita 3)))
+(rule (secchio_da_tre (quantita 0)) (bind ?x (secchio_da_tre (quantita 0))) then (modify ?x (quantita global.?max_uno)))
+(rule (secchio_da_quattro (quantita 0)) (bind ?y (secchio_da_quattro (quantita 0))) then (modify ?y (quantita global.?max_due)))
+(rule (secchio_da_tre (quantita global.?max_uno)) (bind ?x (secchio_da_tre (quantita global.?max_uno))) then (modify ?x (quantita 0)))
+(rule (secchio_da_quattro (quantita global.?max_due)) (bind ?y (secchio_da_quattro (quantita global.?max_due))) then (modify ?y (quantita 0)))
+(rule (secchio_da_tre (quantita ?q_tre)) (secchio_da_quattro (quantita ?q_quattro)) (bind ?x (secchio_da_tre (quantita ?q_tre))) (bind ?y (secchio_da_quattro (quantita ?q_quattro))) (?q_tre + ?q_quattro <= global.?max_uno) then (modify ?x (quantita (?q_tre + ?q_quattro))) (modify ?y (quantita 0)))
+(rule (secchio_da_tre (quantita ?q_tre)) (secchio_da_quattro (quantita ?q_quattro)) (bind ?x (secchio_da_tre (quantita ?q_tre))) (bind ?y (secchio_da_quattro (quantita ?q_quattro))) (?q_tre + ?q_quattro > global.?max_uno) then (modify ?x (quantita global.?max_uno)) (modify ?y (quantita abs(global.?max_uno - (?q_quattro + ?q_tre)))))
+(rule (secchio_da_tre (quantita ?q_tre)) (secchio_da_quattro (quantita ?q_quattro)) (bind ?x (secchio_da_tre (quantita ?q_tre))) (bind ?y (secchio_da_quattro (quantita ?q_quattro))) (?q_tre + ?q_quattro <= global.?max_due) then (modify ?x (quantita 0)) (modify ?y (quantita (?q_tre + ?q_quattro))))
+(rule (secchio_da_tre (quantita ?q_tre)) (secchio_da_quattro (quantita ?q_quattro)) (bind ?x (secchio_da_tre (quantita ?q_tre))) (bind ?y (secchio_da_quattro (quantita ?q_quattro))) (?q_tre + ?q_quattro > global.?max_due) then (modify ?x (quantita abs(global.?max_due - (?q_quattro + ?q_tre)))) (modify ?y (quantita global.?max_due)))
 
-
-
-(rule (secchio_da_tre (quantita 3)) (secchio_da_quattro (quantita 0)) (bind ?x (secchio_da_quattro (quantita 0))) (bind ?y (secchio_da_tre (quantita 3))) then (modify ?x (quantita 3)) (modify ?y (quantita 0)))
-(rule (secchio_da_tre (quantita 0)) (secchio_da_quattro (quantita 3)) (bind ?y (secchio_da_tre (quantita 0))) then (modify ?y (quantita 3)))
-(rule (secchio_da_tre (quantita 3)) (secchio_da_quattro (quantita 3)) (bind ?x (secchio_da_quattro (quantita 3))) (bind ?y (secchio_da_tre (quantita 3))) then (modify ?x (quantita 4)) (modify ?y (quantita 2)))
-(rule (secchio_da_quattro (quantita 4)) (secchio_da_tre (quantita 2)) (bind ?x (secchio_da_quattro (quantita 4))) then (modify ?x (quantita 0)))
-(rule (secchio_da_tre (quantita 2)) (secchio_da_quattro (quantita 0)) (bind ?x (secchio_da_quattro (quantita 0))) (bind ?y (secchio_da_tre (quantita 2))) then (modify ?x (quantita 2)) (modify ?y (quantita 0)))
 
 
 (final_state (secchio_da_quattro (quantita global.?sol_val)))
