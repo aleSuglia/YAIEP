@@ -72,8 +72,9 @@ class SearchMethod:
 
         continue_search_flag = True
         i = 0
+        tot_num_solutions = len(self._solution)
 
-        while continue_search_flag and i < len(self._solution):
+        while continue_search_flag and i < tot_num_solutions:
             curr_node = self._graph.get_init_state()
             path = self._path_solution[i]
             solution = self._solution[i]
@@ -95,10 +96,11 @@ class SearchMethod:
                 if self._graphic_func:
                     self._graphic_func(curr_node.wm)
 
-                i+=1
+                i += 1
                 continue_search_flag = UIManager.continue_search()
 
-        print("No more solutions found")
+        if continue_search_flag and i == tot_num_solutions:
+            print("No more solutions found")
 
 
     ##

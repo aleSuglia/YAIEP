@@ -12,26 +12,35 @@ class UIManager:
     @staticmethod
     def get_input_from_user(wm, *params):
         assert isinstance(wm, WorkingMemory)
-        slot_name = params[0]
-        raw_fact = params[1]
+        is_template = params[2]
 
-        templates_dict = wm.get_templates()
+        if is_template:
+            slot_name = params[0]
+            fact = params[1]
 
-        if raw_fact[0] in templates_dict:
-            defined_template = templates_dict[raw_fact[0]]
-            curr_slot = defined_template.get_slot(slot_name)
-            curr_value = input('Insert value for \'{0}\' in {1} \n'
-                               '(be careful to the following constraints - type({2}) / range ({3}) : '.\
-                               format(slot_name, raw_fact,
-                                      curr_slot.type if curr_slot.type else None,
-                                      curr_slot.range if curr_slot.range else None))
-            while not curr_slot.check_slot_value(curr_value):
-                print('Incorrect value specified...')
+            templates_dict = wm.get_templates()
+            fact_name = fact.get_name()
+
+            if fact_name in templates_dict:
+                defined_template = templates_dict[fact_name]
+                curr_slot = defined_template.get_slot(slot_name)
                 curr_value = input('Insert value for \'{0}\' in {1} \n'
                                    '(be careful to the following constraints - type({2}) / range ({3}) : '.\
-                               format(slot_name, raw_fact,
-                                      curr_slot.type if curr_slot.type else None,
-                                      curr_slot.range if curr_slot.range else None))
+                                   format(slot_name, fact,
+                                          curr_slot.type if curr_slot.type else None,
+                                          curr_slot.range if curr_slot.range else None))
+                while not curr_slot.check_slot_value(curr_value):
+                    print('Incorrect value specified...')
+                    curr_value = input('Insert value for \'{0}\' in {1} \n'
+                                       '(be careful to the following constraints - type({2}) / range ({3}) : '.\
+                                   format(slot_name, fact,
+                                          curr_slot.type if curr_slot.type else None,
+                                          curr_slot.range if curr_slot.range else None))
+            else:
+                attr_id = params[0]
+                fact = params[1]
+                curr_value = input('Insert value for \'{0}\' in {1}'.format(slot_name, fact))
+
 
             return curr_value
 

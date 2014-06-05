@@ -6,6 +6,7 @@ import types
 from pyparsing import ParseException
 from yaiep.core.Agenda import Agenda
 from yaiep.core.Fact import Fact
+from yaiep.core.UIManager import UIManager
 from yaiep.core.Utils import Utils
 from yaiep.core.WorkingMemory import WorkingMemory
 from yaiep.core.WorkingMemoryException import WorkingMemoryException
@@ -175,6 +176,7 @@ class InferenceEngine:
         self._heuristics = None
         self._conf_attributes = None
         self._graphic_functions = None
+        self._init_fact_list = []
 
     ##
     # Permette il caricamento, dal file di configurazione specificato,
@@ -196,7 +198,7 @@ class InferenceEngine:
             # Effettua il caricamento del file di definizione del problema
             try:
                 GrammarParser.load_grammar(def_filename, self._wm, self._list_rules, self._goal_state,
-                                           self._global_vars)
+                                           self._global_vars, self._init_fact_list)
                 self._agenda = Agenda(self._list_rules.copy())
             except ParseException as e:
                 msg = str(e)
@@ -303,7 +305,9 @@ class InferenceEngine:
     def solve_problem(self):
         # Se sono disponibili tutte le informazioni per poter avviare la procedura
         # di risoluzione del problema
-        if self._wm.get_fact_list() and self._conf_attributes:
+        if self._init_fact_list and self._conf_attributes:
+            self._wm.clear_facts()
+            self._load_init_configuration()
             graph = SearchGraph(self._wm)
             search_type = self._conf_attributes['search_type']
             search_method = None
@@ -366,6 +370,23 @@ class InferenceEngine:
         self._heuristics = None
         self._conf_attributes = None
         self._graphic_functions = None
+        self._init_fact_list.clear()
+
+    def _load_init_configuration(self):
+        copy_init = copy.deepcopy(self._init_fact_list)
+
+        for fact in copy_init:
+            attributes = fact.get_attributes()
+            for attr in attributes:
+                if isinstance(attr, list):
+                    if attr[1].startswith('?'):
+                        # attr[0] - nome slot
+                        # raw_fact - fatto grezzo
+                        attr[1] = UIManager.get_input_from_user(self._wm, attr[0], fact, True)
+                else:
+                    attr = UIManager.get_input_from_user(self._wm, attr, fact, False)
+            self._wm.add_fact(fact)
+
 
     ##
     # Invoca il tool di apprendimento automatico (C.5) per poter acquisire da un dataset

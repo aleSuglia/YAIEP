@@ -21,13 +21,14 @@ class GrammarParser:
     # @param list_rules: lista di regole
     # @param goal_state: oggetto istanza della classe Fact che rappresenta lo stato finale del problema
     # @param globals_vars: dizionario contenente le variabili globali definite nel file
+    # @param init_fact_list: lista di fatti che verranno adoperati per rappresentare una configurazione iniziale variabile
     #
     @staticmethod
-    def load_grammar(rules_filename, working_mem, list_rules, goal_state, globals_vars):
+    def load_grammar(rules_filename, working_mem, list_rules, goal_state, globals_vars, init_fact_list):
         grammar = YAIEPGrammar()
         parser = grammar.get_grammar_definition()
         GrammarParser._interpret_results(rules_filename, parser, working_mem, list_rules, grammar.get_keyword_list(),
-                                         goal_state, globals_vars)
+                                         goal_state, globals_vars, init_fact_list)
 
     ##
     # Permette di trasformare gli elementi presenti all'interno del file di configurazione, in oggetti
@@ -40,8 +41,9 @@ class GrammarParser:
     # @param keyword_list: La lista di parole chiave della grammatica corrente
     # @param goal_state: Lo stato finale del problema corrente
     # @param global_vars: dizionario contenente le variabili globali definite nel file
+    # @param init_fact_list: configurazione iniziale
     @staticmethod
-    def _interpret_results(rules_filename, parser, working_mem, list_rules, keyword_list, goal_state, global_vars):
+    def _interpret_results(rules_filename, parser, working_mem, list_rules, keyword_list, goal_state, global_vars, init_fact_list):
         try:
             result = parser.parseFile(rules_filename, parseAll=True)
             if not result:
@@ -51,7 +53,7 @@ class GrammarParser:
                 for keyword in keyword_list:
                     val = result.get(keyword, None)
                     if keyword == 'facts' and not val is None:
-                        GrammarParser._interpret_facts(val, working_mem, global_vars)
+                        GrammarParser._interpret_facts(val, init_fact_list, global_vars)
                     elif keyword == 'template' and not val is None:
                         GrammarParser._interpret_template(val, working_mem, global_vars)
                     elif keyword == 'rule' and not val is None:
@@ -77,7 +79,7 @@ class GrammarParser:
     # @param fact_list: lista di fatti non strutturati (stringhe)
     # @param working_mem: istanza della classe WorkingMemory
     @staticmethod
-    def _interpret_facts(fact_list, working_mem, globals_var):
+    def _interpret_facts(fact_list, init_fact_list, globals_var):
         for raw_fact in fact_list:
             #curr_fact =Fact(raw_fact[0], attribute_list=[x for x in raw_fact[1:]])
             attribute_list = []
@@ -86,23 +88,21 @@ class GrammarParser:
                 #if '(' in attr[1] or ')' in attr[1]: # fatti con espressioni
                 #    attr[1] = str(eval(attr[1]))
                 if isinstance(attr, list):
-                    if attr[1].startswith('?'):
+                    #if attr[1].startswith('?'):
                         # attr[0] - nome slot
                         # raw_fact - fatto grezzo
-                        attr[1] = UIManager.get_input_from_user(working_mem, attr[0], raw_fact)
-                    elif attr[1].startswith('global.'):
+                    #    attr[1] = UIManager.get_input_from_user(working_mem, attr[0], raw_fact)
+                    #elif
+                    if attr[1].startswith('global.'):
                         attr[1] = globals_var[attr[1][attr[1].index('?'):]]
                 elif attr.startswith('global.'):
                     attr = globals_var[attr[attr.index('?'):]]
 
                 attribute_list.append(attr)
 
-            curr_fact = Fact(raw_fact[0], attribute_list=attribute_list)
+            init_fact_list.append(Fact(raw_fact[0], attribute_list=attribute_list))
 
-            try:
-                working_mem.add_fact(curr_fact)
-            except WorkingMemoryException as ex:
-                print('Fact not inserted: ', curr_fact)
+
 
     ###
     # Permette di interpretare le regole acquisite, trasformandole in istanze della classe Rule

@@ -31,6 +31,12 @@ class WorkingMemory:
             raise WorkingMemoryException
         self._templates[template.name] = template
 
+    ##
+    # Rimuove i fatti correntemente caricati nella Working Memory
+    #
+    def clear_facts(self):
+        if len(self._fact_list) != 0:
+            self._fact_list.clear()
 
     # #
     # Restituisce la lista dei fatti attualmente definiti
@@ -85,15 +91,6 @@ class WorkingMemory:
     # @param var_bind: dizionario che presenta i fatti legati alle variabili
     #
     def modify_fact(self, bind_variable, parameters, var_dict, var_bind):
-        """
-        Modifica il fatto corrente rimpiazzando con i parametri specificati
-        in input, i valori specifici del fatto corrente
-
-        @param bind_variable: variabile che è stata utilizzata per legare il fatto corrente
-        @param parameters: parametri che verranno modificati con associati valori
-        @param var_dict: eventuali variabili con i rispettivi valori ammissibili
-        @param var_bind: dizionario che presenta i fatti legati alle variabili
-        """
         # controlla se i fatti da modificare sono dei template
         mod_facts = var_bind[bind_variable]
 
@@ -140,15 +137,6 @@ class WorkingMemory:
     # @param fact: fatto da aggiungere alla Working Memory
     #
     def add_fact(self, fact):
-        """
-        Aggiunge il fatto specificato in input alla Working memory corrente
-
-        Nel caso in cui vi sia un qualche tipo di anomalia nell'inserimento
-        dei fatti, il metodo provvede a rilevare l'anomali correttamente e a
-        propagare l'errore all'esterno.
-
-        @param fact: fatto da aggiungere alla Working Memory
-        """
         if not isinstance(fact, Fact):
             raise WorkingMemoryException('WM Exception: Wrong argument type')
         # Se il fatto corrente non è un template allora controlla che non sia già presente
