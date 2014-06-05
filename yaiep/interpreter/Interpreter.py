@@ -1,9 +1,14 @@
+# # Modulo che gestisce l'interprete dei comandi inseriti dall'utente
 import os
 from pyparsing import Literal, Word, alphas, ParseException, Optional
 from yaiep.core.InferenceEngine import InferenceEngine
 from yaiep.core.UIManager import UIManager
 from yaiep.interpreter.UnknownCommand import UnknownCommand
 
+# #
+# Stampa a video l'elenco dei fatti presenti nel motore inferenziale
+# @param engine: motore inferenziale contenente i fatti
+#
 
 def _do_facts(engine):
     if not engine.is_ready():
@@ -11,6 +16,10 @@ def _do_facts(engine):
     else:
         print(engine.fact_list())
 
+# #
+# Stampa a video l'elenco delle regole presenti nel motore inferenziale
+# @param engine: motore inferenziale contenente le regole
+#
 
 def _do_rules(engine):
     if not engine.is_ready():
@@ -18,6 +27,11 @@ def _do_rules(engine):
     else:
         print(engine.rule_list())
 
+# #
+# Permette di scegliere il puzzle da risolvere e predispone il motore inferenziale all'avvio della risoluzione
+# del puzzle
+# @param engine: motore inferenziale che sarà successivamente configurato
+#
 
 def _do_load(engine):
     if engine.is_ready:
@@ -35,6 +49,10 @@ def _do_load(engine):
         except Exception:
             print('### Please fix the problems found and load again the engine using (load) command ###')
 
+# #
+# Risolve il puzzle scelto verificando prima se il motore è stato correttamente configurato
+# @param engine: motore inferenziale con cui si risolverà il puzzle
+#
 
 def _do_run(engine):
     if not engine.is_ready():
@@ -43,6 +61,11 @@ def _do_run(engine):
         if not engine.solve_problem():
              print('No solution found!')
 
+# #
+# Carica le regole presenti in un dataset che soddisfa una determinata configurazione
+# @param engine: motore inferenziale nella quale le regole saranno caricate
+# @param param: dataset dal quale prelevare le regole
+#
 
 def _do_learn(engine, param):
     if not engine.is_ready():
@@ -50,11 +73,19 @@ def _do_learn(engine, param):
     else:
         engine.learn_rules_from_dataset(param)
 
+# #
+# Resetta tutti i campi del motore inferenziale
+# @param engine: motore inferenziale i cui campi verranno resettati
+#
 
 def _do_reset(engine):
     if engine.is_ready():
         engine.reset()
 
+# #
+# Stampa a video un testo nel quale è presente la spiegazione del funzionamento e interfacciamento del motore
+# inferenziale
+#
 
 def _do_help():
     command_list_help = banner + '''
