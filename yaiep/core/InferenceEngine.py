@@ -344,6 +344,10 @@ class InferenceEngine:
 
             sol_state = search_method.execute(self)
 
+            if sol_state:
+                search_method.print_solution_path()
+
+
             # ripristina l'agenda per poter garantire un nuovo avvio del problema
             self._agenda = Agenda(self._list_rules.copy())
 

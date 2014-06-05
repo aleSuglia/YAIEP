@@ -6,6 +6,9 @@ import networkx
 # dal motore di inferenza per ispezionare lo spazio delle possibili soluzioni.
 #
 #
+from yaiep.core.UIManager import UIManager
+
+
 class SearchMethod:
     # #
     # Istanzia un metodo di ricerca inizializzando tutti i suoi componenti
@@ -66,25 +69,37 @@ class SearchMethod:
         return self._solution, self._path_solution
 
     def print_solution_path(self):
-        curr_node = self._graph.get_init_state()
-        path = self._path_solution[-1]  # sceglie l'ultimo percorso generato
-        solution = self._solution[-1]  # sceglie l'ultima soluzione trovata
 
-        if not curr_node is None:
-            cont_rule = 1
+        continue_search_flag = True
+        i = 0
 
-            while curr_node != solution:
-                son = path.neighbors(curr_node)[0]
+        while continue_search_flag and i < len(self._solution):
+            curr_node = self._graph.get_init_state()
+            path = self._path_solution[i]
+            solution = self._solution[i]
+
+            print("Solution #{0}".format(i+1))
+            if not curr_node is None:
+                cont_rule = 1
+
+                while curr_node != solution:
+                    son = path.neighbors(curr_node)[0]
+                    if self._graphic_func:
+                        self._graphic_func(curr_node.wm)
+                    else:
+                        print('{0} - {1}'.format(cont_rule, path.get_edge_data(curr_node, son)['rule']))
+
+                    cont_rule += 1
+                    curr_node = son
+
                 if self._graphic_func:
                     self._graphic_func(curr_node.wm)
-                else:
-                    print('{0} - {1}'.format(cont_rule, path.get_edge_data(curr_node, son)['rule']))
 
-                cont_rule += 1
-                curr_node = son
+                i+=1
+                continue_search_flag = UIManager.continue_search()
 
-            if self._graphic_func:
-                self._graphic_func(curr_node.wm)
+        print("No more solutions found")
+
 
     ##
     # Permette al metodo di ricerca di verificare se lo stato corrente

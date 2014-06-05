@@ -22,16 +22,16 @@ class InfoNode(Node):
         return self.wm == other.wm
 
     def __lt__(self, other):
-        return (self.gn + self.hn) < (other.gn + other.hn)
-
-    def __gt__(self, other):
         return (self.gn + self.hn) > (other.gn + other.hn)
 
+    def __gt__(self, other):
+        return (self.gn + self.hn) < (other.gn + other.hn)
+
     def __le__(self, other):
-        return (self.gn + self.hn) <= (other.gn + other.hn) and self == other
+        return (self.gn + self.hn) >= (other.gn + other.hn) and self == other
 
     def __ge__(self, other):
-        return (self.gn + self.hn) >= (other.gn + other.hn) and self == other
+        return (self.gn + self.hn) <= (other.gn + other.hn) and self == other
 
     def __ne__(self, other):
         return not self == other

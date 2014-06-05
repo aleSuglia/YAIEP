@@ -16,11 +16,9 @@ class DepthSearch(SearchMethod):
 
         opened_nodes = [root_node]
         closed_nodes = []
-        continue_search_flag = True
-        num_solution = 1
 
         # finchè vi sono dei nodi da esplorare
-        while opened_nodes and continue_search_flag:
+        while opened_nodes:
             curr_node = opened_nodes.pop()
             if not curr_node in closed_nodes:
                 closed_nodes.append(curr_node)
@@ -29,10 +27,7 @@ class DepthSearch(SearchMethod):
             if self.match_final_state(curr_node):
                 self._solution.append(curr_node) # salvo il nodo soluzione
                 self.costruct_path_to_solution()
-                print('Solution #{0}\n'.format(num_solution))
-                self.print_solution_path()
-                num_solution += 1
-                continue_search_flag = UIManager.continue_search()
+
             else:
                 applicable_rules = self._agenda.get_activable_rules(curr_node.wm)
                 for rule in applicable_rules:
@@ -48,8 +43,6 @@ class DepthSearch(SearchMethod):
                         self._graph.add_edge(curr_node, new_node, {'rule':rule[0] if isinstance(rule, tuple) else rule})
                         opened_nodes.append(new_node)
 
-        if not opened_nodes and continue_search_flag:
-            print('No more solution found.')
         return len(self._solution) > 0
 
 
