@@ -193,10 +193,6 @@ class Utils:
     #
     @staticmethod
     def capture_variables_id(condition):
-        """
-        Permette di ottenere gli identificatori di variabile
-        presenti all'interno della stringa passati in input
-        """
         var_index = []
         condition_len = len(condition)
         i = 0
@@ -275,12 +271,6 @@ class Utils:
     #
     @staticmethod
     def is_boolean_expr(cond_list):
-        """
-        Verifica se la stringa passata in input
-        risulta essere un'espressione booleana
-        controllando la presenza di eventuali operatori
-        booleani
-        """
         assert isinstance(cond_list, str)
 
         if '<' in cond_list\
