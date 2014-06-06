@@ -1,3 +1,5 @@
+
+
 # #
 # Classe che rappresenta il criterio di ordinamento adottato
 # per poter inserire le regole all'interno del conflict set.
