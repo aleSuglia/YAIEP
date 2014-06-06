@@ -27,12 +27,12 @@ def _do_rules(engine):
     else:
         print(engine.rule_list())
 
+
 # #
 # Permette di scegliere il puzzle da risolvere e predispone il motore inferenziale all'avvio della risoluzione
 # del puzzle
 # @param engine: motore inferenziale che sarà successivamente configurato
 #
-
 def _do_load(engine):
     if engine.is_ready:
         # rimuove i dati dell'ultima esecuzione
@@ -42,18 +42,29 @@ def _do_load(engine):
     if chosen_game_path:
         try:
             print('### LOAD ENGINE STATUS ###')
-            #engine.load_engine(chosen_game_path + EngineConfigFileParser.DEFAULT_SETTINGS_FILENAME,
-            #                   chosen_game_path + conf_file_name)
             engine.load_engine(chosen_game_path)
             print('### Insert \'(run)\' if you want to start the game ###')
         except Exception:
             print('### Please fix the problems found and load again the engine using (load) command ###')
 
+
+def _do_step(engine):
+    assert isinstance(engine, InferenceEngine)
+    step_state = engine.get_step_state()
+
+    if not step_state:
+        is_solution = engine.solve_problem_step(True)
+        if is_solution:
+            engine.print_step_solution()
+    else:
+        if not engine.print_step_solution():
+            is_solution = engine.solve_problem_step(True)
+
+
 # #
 # Risolve il puzzle scelto verificando prima se il motore è stato correttamente configurato
 # @param engine: motore inferenziale con cui si risolverà il puzzle
 #
-
 def _do_run(engine):
     if not engine.is_ready():
         print('No data are present...')
@@ -86,7 +97,6 @@ def _do_reset(engine):
 # Stampa a video un testo nel quale è presente la spiegazione del funzionamento e interfacciamento del motore
 # inferenziale
 #
-
 def _do_help():
     command_list_help = banner + '''
         The symbol '>>>' indicates that the interpreter is waiting
@@ -118,7 +128,7 @@ def _do_help():
 
 valid_command = Literal('load') | Literal('facts') | Literal('rules') | \
                 Literal('help') | Literal('exit') | Literal('learn_rules') | Literal('run') |\
-                Literal('reset')
+                Literal('reset') | Literal('step')
 
 banner = '''
         ----------------------------------------------------------------
@@ -133,7 +143,8 @@ _command_list_interpreter = {
     'learn_rules': _do_learn,
     'help': _do_help,
     'run': _do_run,
-    'reset': _do_reset
+    'reset': _do_reset,
+    'step': _do_step
 }
 
 _console_command = Literal('(').suppress() + valid_command + \
@@ -180,6 +191,7 @@ class Interpreter:
             while not exit_flag:
                 line = input('>>> ')
                 try:
+
                     result = _console_command.parseString(line)
                     exit_flag = self._execute_command(result)
                 except (ParseException, UnknownCommand):

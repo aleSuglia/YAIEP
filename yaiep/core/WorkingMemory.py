@@ -3,6 +3,7 @@ from yaiep.core.Template import Template
 from yaiep.core.WorkingMemoryException import WorkingMemoryException
 import copy
 
+
 # #
 # Classe che rappresenta l'intera struttura di una Working Memory
 # che viene adoperata per poter rappresentare uno stato dello spazio di ricerca
@@ -166,13 +167,6 @@ class WorkingMemory:
     # @return id del fatto che ha fatto match con quello specificato in input
     #
     def match_fact(self, new_fact):
-        """
-        Verifica se il fatto specificato in input
-        corrisponde ad uno dei fatti presente nella Working Memory corrente
-
-        @param new_fact: fatto che si intende controllare
-        @return id del fatto che ha fatto match con quello specificato in input
-        """
         def inner_match_fact(new_fact):
             for fact in self._fact_list.values():
                 if fact == new_fact:
@@ -242,11 +236,4 @@ class WorkingMemory:
     # elementi di quella corrente
     #
     def copy(self):
-        """
-        Permette di effettuare una copia completa della working memory
-        corrente
-
-        @return una nuova istanza di WorkingMemory che possiede i medesimi
-        elementi di quella corrente
-        """
         return copy.deepcopy(self)

@@ -177,12 +177,13 @@ class InferenceEngine:
         self._conf_attributes = None
         self._graphic_functions = None
         self._init_fact_list = []
+        self._step_state = []  # Opened, Closed, Nodo corrente
 
     ##
-    # Permette il caricamento, dal file di configurazione specificato,
+    # Permette il caricamento, dal file di configurazione,
     # di tutte le regole, dei fatti e della definizione di eventuali euristiche
     # per il problema corrente ed inoltre permette di caricare tutte le configurazioni
-    # iniziali per poter scegliere alcune logiche specifiche del motore inferenziali
+    # iniziali per poter scegliere alcune logiche specifiche del motore inferenziale
     #
     # @param conf_filename nome del file di configurazione del motore
     # @param def_filename nome del file di definizione del problema
@@ -348,17 +349,77 @@ class InferenceEngine:
 
             sol_state = search_method.execute(self)
 
+
             if sol_state:
                 search_method.print_solution_path()
-
 
             # ripristina l'agenda per poter garantire un nuovo avvio del problema
             self._agenda = Agenda(self._list_rules.copy())
 
-            if sol_state:
-                return True
+            return sol_state
 
-            return False
+    def solve_problem_step(self, new_solution):
+        if new_solution:
+            if not self._step_state and self._init_fact_list and self._conf_attributes:
+                self._wm.clear_facts()
+                self._load_init_configuration()
+                graph = SearchGraph(self._wm)
+                search_type = self._conf_attributes['search_type']
+                search_method = None
+
+                if search_type == 'depth':
+
+                    if 'graphics' in self._conf_attributes:
+                        graphic_func_name = self._conf_attributes['graphics']
+                        if self._graphic_functions and graphic_func_name in self._graphic_functions:
+                            search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                               graph, self._agenda, self._goal_state,
+                                                                               self._graphic_functions[graphic_func_name])
+                        else:
+                            search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                               graph, self._agenda, self._goal_state, None)
+
+                    else:
+                        search_method = SearchMethodFactory.generate_search_method(search_type,
+                                                                               graph, self._agenda, self._goal_state, None)
+                else:
+                    ref_heur_function = None
+                    ref_graph_function = None
+
+                    if 'graphics' in self._conf_attributes:
+                        graphic_func_name = self._conf_attributes['graphics']
+                        if self._graphic_functions and graphic_func_name in self._graphic_functions:
+                            ref_graph_function = self._graphic_functions[graphic_func_name]
+
+                    if 'heuristic' in self._conf_attributes:
+                        heur_func_name = self._conf_attributes['heuristic']
+                        if self._heuristics and heur_func_name in self._heuristics:
+                            ref_heur_function = self._heuristics[heur_func_name]
+
+                    search_method = SearchMethodFactory.generate_search_method(search_type, graph, self._agenda,
+                                                                               self._goal_state,
+                                                                               ref_graph_function,
+                                                                               ref_heur_function)
+
+                # 0 - opened nodes
+                # 1 - closed nodes
+                # 2 - init state
+                # 3 - search method
+                # 4 - curr_node
+                # 5 - path index
+                self._step_state = [[], [], self._wm, search_method, self._wm, 0]
+
+                return search_method.step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
+        else:
+            pass
+
+
+    def get_step_state(self):
+        return self._step_state
+
+    def print_step_solution(self):
+        if self._step_state:
+             self._step_state[4] = self._step_state[3].print_step_solution(self._step_state[4], self._step_state[5])
 
     def reset(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory

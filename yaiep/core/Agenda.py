@@ -2,21 +2,21 @@ from yaiep.core.Fact import Fact
 from yaiep.core.OrderMethod import OrderRulesMethod, SalienceAdder, DepthAdder, RandomAdder
 from yaiep.core.Utils import Utils
 
+
 # #
 # Verifica se un paramentro e' il nome di una funzione di bind
 # @param param: parametro da verificare
 # @return True se param è uguale a "bind", False altrimenti
 #
-
 def is_function_name(param):
     return param == "bind"
+
 
 # #
 # Classe rappresentante l'agenda nella quale saranno organizzate
 # le regole attivate e non ancora usate e gestisce il metodo d'ordine con cui essere verrano
 # attivate
 #
-
 class Agenda:
 
     # #
@@ -25,7 +25,6 @@ class Agenda:
     # @param all_rules: tutte le regole presenti nel file di configurazione
     # @param order_method: metodo di ordinamento da utilizzare di default è impostata la SALIENCE
     #
-
     def __init__(self, all_rules, order_method=OrderRulesMethod.SALIENCE):
         self._activated_rules = []  # regole ATTIVATE
         self._not_used_rules = all_rules
@@ -36,7 +35,6 @@ class Agenda:
     # Inizializza il metodo di ordinamento
     # @param order_method: metodo di ordinamento
     #
-
     def _init_order(self, order_method):
         if order_method == OrderRulesMethod.SALIENCE:
             self._order_method = SalienceAdder()
@@ -50,7 +48,6 @@ class Agenda:
     # nell'elenco delle regole attivate
     # @param rule_fired: regola da attivare
     #
-
     def set_activated_rule(self, rule_fired):
         self._not_used_rules.remove(rule_fired)
         self._activated_rules.append(rule_fired)
@@ -61,7 +58,6 @@ class Agenda:
     # @return True se l'attributo corrente presenta un simbolo di una espressione, False
     # se nessun attributo dell'elenco contiene simboli
     #
-
     def _contains_expression(self, fact_attributes):
         for attr in fact_attributes:
             for elem in attr:
@@ -75,7 +71,6 @@ class Agenda:
     # @param int_dict: struttura contenente tutte le varibili presenti nell'espressione con
     # annessi valori
     #
-
     def _evaluate_expression(self, int_dict):
         if isinstance(int_dict, dict):
             for key in int_dict.keys():
@@ -95,7 +90,6 @@ class Agenda:
     # @param wm: working memory contenente i fatti
     # @param list_rules: elenco delle regole presenti nel motore inferenziale
     #
-
     def _do_matching(self, wm, list_rules):
         conflict_set = []  # lista delle regole attivabili (ordinate in base al criterio di ordinamento)
         fact_list = wm.get_fact_list()
@@ -171,7 +165,7 @@ class Agenda:
         return conflict_set
 
     # #
-    # DA RIVEDERE
+    #
     # Avvalora tutte le varibili di bind e di espressioni presenti nel
     # file di configurazione salvando i loro nomi in appositi dizionari ed associandogli i loro valori reali
     # e verifica se un fatto è un template
@@ -181,7 +175,6 @@ class Agenda:
     # @param key: chiave di bind il cui valore deve essere avvalorato
     # @return dizionario delle variabile delle espressioni e True se il fatto è un template altrimanti False
     #
-
     @staticmethod
     def _get_variable_values(fact, fact_list, var_bind, key):
         fact_attributes = fact.get_attributes()
@@ -257,7 +250,7 @@ class Agenda:
     # @param fact: fatto con cui effettuare il match dei valori del dizionario delle variabili delle espressioni
     # @param is_template: valore booleano che indica se il fatto è un template
     # @return True se il match va a buon fine, False altrimenti
-
+    #
     def _verify_var_dict(self, var_dict, fact, int_dict, is_template):
         # A questo punto aggiorno il dizionario globale per poter mantenere i valori validi
         if not var_dict:
@@ -281,7 +274,7 @@ class Agenda:
     # #
     # Verifica se ci sono regole attivabili
     # @return True se ci sono regole attivabili, False altrimenti
-
+    #
     def has_activable_rule(self):
         return True if self._not_used_rules else False
 
@@ -292,7 +285,6 @@ class Agenda:
     # @param is_template: True se il fatto è un template, False altrimenti, di default è False
     # @return False se non ci sono variabile da matchare, True altrimenti
     #
-
     def _complete_match(self, curr_fact, var_dict, is_template=False):
         if not var_dict:
             return False  # no matched variables
@@ -319,7 +311,6 @@ class Agenda:
     # @param wm: working memory con cui verrà effettuato il match delle regole
     # @return None se non ci sono regole da attivare, altrimenti la prima attivabile
     #
-
     def get_activable_rule(self, wm):
         conflict_set = self._do_matching(wm, self._not_used_rules)
         return None if not conflict_set else conflict_set[0]
@@ -328,7 +319,6 @@ class Agenda:
     # Ripristina le regole che sono nuovamente attivabile in seguito ad una modifica della working memory
     # @param wm: working memory eventualmente modificata
     #
-
     def restore_rules(self, wm):
         restored_rules = self._do_matching(wm, self._activated_rules)
         #self._not_used_rules.extend([rule[0] if isinstance(rule, tuple) else rule for rule in restored_rules])
@@ -345,7 +335,6 @@ class Agenda:
     # @param wm: working memory con cui verrà effettuato il match delle regole
     # @return None se non ci sono regole da attivare, altrimenti l'elenco delle regole ativabili
     #
-
     def get_activable_rules(self, wm):
         return self._do_matching(wm, self._not_used_rules)
 

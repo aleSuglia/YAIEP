@@ -35,6 +35,9 @@ class SearchMethod:
     def execute(self, engine):
         pass
 
+    def step_execute(self, engine, opened_nodes, closed_nodes, curr_init_node):
+        pass
+
     # #
     # Ricostruisce il percorso per poter raggiungere la soluzione a partire dallo stato iniziale.
     #
@@ -101,6 +104,28 @@ class SearchMethod:
 
         if continue_search_flag and i == tot_num_solutions:
             print("No more solutions found")
+
+    def print_step_solution(self, curr_node, path_index):
+        if curr_node:
+            path = self._path_solution[path_index]
+            root_node = self._graph.get_init_state()
+            is_root = curr_node == root_node.wm
+            if is_root:
+                curr_node = root_node
+
+            if curr_node != self._solution[path_index]:
+                son = path.neighbors(curr_node)[0]
+                if self._graphic_func:
+                    self._graphic_func(curr_node.wm)
+                else:
+                    print('{1}'.format(path.get_edge_data(curr_node, son)['rule']))
+                return son  # il nuovo nodo di riferimento diviene il figlio
+            else:
+                if self._graphic_func:
+                    self._graphic_func(curr_node.wm)
+
+                return None
+
 
 
     ##
