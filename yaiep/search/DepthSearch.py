@@ -49,7 +49,7 @@ class DepthSearch(SearchMethod):
     def step_execute(self, engine, opened_nodes, closed_nodes, curr_init_node):
 
         if not opened_nodes and not closed_nodes:
-            opened_nodes = [self._graph.get_init_state()]
+            opened_nodes.append(self._graph.get_init_state())
 
         # finchè vi sono dei nodi da esplorare
         while opened_nodes:

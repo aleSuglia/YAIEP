@@ -106,7 +106,7 @@ class SearchMethod:
             print("No more solutions found")
 
     def print_step_solution(self, curr_node, path_index):
-        if curr_node:
+        if curr_node and path_index < len(self._path_solution):
             path = self._path_solution[path_index]
             root_node = self._graph.get_init_state()
             is_root = curr_node == root_node.wm

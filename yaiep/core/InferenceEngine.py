@@ -410,16 +410,26 @@ class InferenceEngine:
                 self._step_state = [[], [], self._wm, search_method, self._wm, 0]
 
                 return search_method.step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
-        else:
-            pass
-
+            else:
+                self._step_state[4] = self._wm # inizia di nuovo dalla root nella ricerca
+                return self._step_state[3].step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
 
     def get_step_state(self):
         return self._step_state
 
+    def clear_step(self):
+        self._step_state.clear()
+
     def print_step_solution(self):
         if self._step_state:
-             self._step_state[4] = self._step_state[3].print_step_solution(self._step_state[4], self._step_state[5])
+            self._step_state[4] = self._step_state[3].print_step_solution(self._step_state[4], self._step_state[5])
+            if not self._step_state[4] is None:
+                  return True
+            else:
+                self._step_state[5] += 1
+                return False
+
+        return False
 
     def reset(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory

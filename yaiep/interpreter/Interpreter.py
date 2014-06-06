@@ -56,10 +56,32 @@ def _do_step(engine):
         is_solution = engine.solve_problem_step(True)
         if is_solution:
             engine.print_step_solution()
+            answer = input('Do you want to insert another initial configuration? (y/n): ')
+            if answer == 'y':
+                engine.clear_step()
+                engine.solve_problem_step(True)
+                engine.print_step_solution()
+
     else:
         if not engine.print_step_solution():
             is_solution = engine.solve_problem_step(True)
-
+            if is_solution:
+                print('-----------------------------------------------------------------------------------------------')
+                if step_state[5] != len(step_state[3].get_path_to_solution()):
+                    engine.print_step_solution()
+                    answer = input('Do you want to insert another initial configuration? (y/n): ')
+                    if answer == 'y':
+                        engine.clear_step()
+                        engine.solve_problem_step(True)
+                        engine.print_step_solution()
+                else:
+                    print('No more solutions')
+                    engine.clear_step()
+        else:
+            answer = input('Do you want to insert another initial configuration? (y/n): ')
+            if answer == 'y':
+                engine.clear_step()
+                engine.solve_problem_step(True)
 
 # #
 # Risolve il puzzle scelto verificando prima se il motore è stato correttamente configurato
