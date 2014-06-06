@@ -137,46 +137,49 @@ class SearchMethod:
     #
     def match_final_state(self, curr_state):
         # se non è stato definito uno stato finale
-        if self._final_state.get_attributes() is None:
+        if not self._final_state:
             return False
 
-        # lo stato finale prevede delle variabili
-        if self._final_state.has_variable():
-            curr_fact_list = curr_state.wm.get_fact_list()
-            final_state_attributes = self._final_state.get_attributes()
-            len_final_state_attributes = len(final_state_attributes)
+        all_matched = True
 
-            matched_fact = False
+        for final_state in self._final_state:
+            # lo stato finale prevede delle variabili
+            if final_state.has_variable():
+                curr_fact_list = curr_state.wm.get_fact_list()
+                final_state_attributes = final_state.get_attributes()
+                len_final_state_attributes = len(final_state_attributes)
 
-            for fact in curr_fact_list.values():
-                if fact.get_name() == self._final_state.get_name():
-                    curr_attributes = fact.get_attributes()
-                    if len(curr_attributes) == len_final_state_attributes:
-                        # i fatti in esame sono dei template
-                        if fact.is_template() and self._final_state.is_template():
-                            i = 0
-                            while i < len_final_state_attributes:
-                                if final_state_attributes[i][1].startswith('?'):
-                                    pass
-                                else:
-                                    if final_state_attributes[i] != curr_attributes[i]:
-                                        break
-                                i += 1
-                            matched_fact = True if i == len_final_state_attributes else False
-                            # i fatti in esame sono dei semplici fatti
-                        elif not fact.is_template() and not self._final_state.is_template():
-                            i = 0
-                            while i < len_final_state_attributes:
-                                if final_state_attributes[i].startswith('?'):
-                                    pass
-                                else:
-                                    if final_state_attributes[i] != curr_attributes[i]:
-                                        break
-                                i += 1
-                            matched_fact = True if i == len_final_state_attributes else False
+                matched_fact = False
 
-            return matched_fact
+                for fact in curr_fact_list.values():
+                    if fact.get_name() == final_state.get_name():
+                        curr_attributes = fact.get_attributes()
+                        if len(curr_attributes) == len_final_state_attributes:
+                            # i fatti in esame sono dei template
+                            if fact.is_template() and final_state.is_template():
+                                i = 0
+                                while i < len_final_state_attributes:
+                                    if final_state_attributes[i][1].startswith('?'):
+                                        pass
+                                    else:
+                                        if final_state_attributes[i] != curr_attributes[i]:
+                                            break
+                                    i += 1
+                                matched_fact = True if i == len_final_state_attributes else False
+                                # i fatti in esame sono dei semplici fatti
+                            elif not fact.is_template() and not final_state.is_template():
+                                i = 0
+                                while i < len_final_state_attributes:
+                                    if final_state_attributes[i].startswith('?'):
+                                        pass
+                                    else:
+                                        if final_state_attributes[i] != curr_attributes[i]:
+                                            break
+                                    i += 1
+                                matched_fact = True if i == len_final_state_attributes else False
+                    all_matched = all_matched and matched_fact
+            else:
+                # effettua un match canonico con lo stato finale
+                all_matched = all_matched and curr_state.wm.match_fact(final_state)
 
-        else:
-            # effettua un match canonico con lo stato finale
-            return curr_state.wm.match_fact(self._final_state)
+        return all_matched

@@ -1,0 +1,27 @@
+
+(template lupo (slot posizione))
+(template pecora (slot posizione))
+(template cavolo (slot posizione))
+
+(facts (lupo (posizione sx)) (pecora (posizione sx)) (cavolo (posizione sx)))
+
+(rule (lupo (posizione sx)) (pecora (posizione sx)) (bind ?var_lupo (lupo (posizione sx))) then (modify ?var_lupo (posizione dx)))
+(rule (lupo (posizione sx)) (pecora (posizione ?x)) (cavolo (posizione dx)) (bind ?var_lupo (lupo (posizione sx))) then (modify ?var_lupo (posizione dx)))
+
+(rule (cavolo (posizione sx)) (pecora (posizione sx)) (bind ?var_cavolo (cavolo (posizione sx))) then (modify ?var_cavolo (posizione dx)))
+(rule (cavolo (posizione sx)) (pecora (posizione ?x)) (lupo (posizione dx)) (bind ?var_cavolo (cavolo (posizione sx))) then (modify ?var_cavolo (posizione dx)))
+
+(rule (pecora (posizione sx)) (cavolo (posizione sx)) (lupo (posizione sx)) (bind ?var_pecora (pecora (posizione sx))) then (modify ?var_pecora (posizione dx)))
+(rule (pecora (posizione sx)) (cavolo (posizione dx)) (lupo (posizione dx)) (bind ?var_pecora (pecora (posizione sx))) then (modify ?var_pecora (posizione dx)))
+
+
+(rule (lupo (posizione dx)) (pecora (posizione dx)) (bind ?var_lupo (lupo (posizione dx))) then (modify ?var_lupo (posizione sx)))
+(rule (lupo (posizione dx)) (pecora (posizione ?x)) (cavolo (posizione dx)) (bind ?var_lupo (lupo (posizione dx))) then (modify ?var_lupo (posizione sx)))
+
+(rule (cavolo (posizione dx)) (pecora (posizione dx)) (bind ?var_cavolo (cavolo (posizione dx))) then (modify ?var_cavolo (posizione sx)))
+(rule (cavolo (posizione dx)) (pecora (posizione ?x)) (lupo (posizione dx)) (bind ?var_cavolo (cavolo (posizione dx))) then (modify ?var_cavolo (posizione sx)))
+
+(rule (pecora (posizione dx)) (cavolo (posizione dx)) (lupo (posizione dx)) (bind ?var_pecora (pecora (posizione dx))) then (modify ?var_pecora (posizione sx)))
+(rule (pecora (posizione dx)) (cavolo (posizione dx)) (lupo (posizione dx)) (bind ?var_pecora (pecora (posizione dx))) then (modify ?var_pecora (posizione sx)))
+
+(final_state (lupo (posizione dx)) (pecora (posizione dx)) (cavolo (posizione dx)))

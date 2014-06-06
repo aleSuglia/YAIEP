@@ -59,7 +59,7 @@ class GrammarParser:
                     elif keyword == 'rule' and not val is None:
                         GrammarParser._interpret_rules(val, list_rules, global_vars)
                     elif keyword == 'final_state' and not val is None:
-                        GrammarParser._interpret_final_state(goal_state, val[0], global_vars)
+                        GrammarParser._interpret_final_state(goal_state, val, global_vars)
                     elif keyword == 'globals' and not val is None:
                         GrammarParser._interpret_globals(global_vars, val[1:])
         except ParseException as e:
@@ -246,13 +246,18 @@ class GrammarParser:
     # @param parsed_goal_state: stato finale in forma testuale
     @staticmethod
     def _interpret_final_state(goal_state, parsed_goal_state, globals_var):
-        goal_state.set_name(parsed_goal_state[0])
-        for attr in parsed_goal_state[1:]:
-            if isinstance(attr, list):
-                if attr[1].startswith('global.?'):
-                    attr[1] = globals_var[attr[1][attr[1].index('?'):]]
-            else:
-                if attr.startswith('global.'):
-                    attr = globals_var[attr[attr.index('?'):]]
+        curr_goal_state = Fact("")
 
-            goal_state.add_attribute(attr)
+        for fact in parsed_goal_state:
+            curr_goal_state.set_name(fact[0])
+            for attr in fact[1:]:
+                if isinstance(attr, list):
+                    if attr[1].startswith('global.?'):
+                        attr[1] = globals_var[attr[1][attr[1].index('?'):]]
+                else:
+                    if attr.startswith('global.'):
+                        attr = globals_var[attr[attr.index('?'):]]
+
+                curr_goal_state.add_attribute(attr)
+
+            goal_state.append(curr_goal_state)

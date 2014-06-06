@@ -90,7 +90,7 @@ class YAIEPGrammar(Grammar):
 
         rule_list = OneOrMore(rule)
 
-        final_state = lpar + Keyword('final_state').suppress() + fact + rpar
+        final_state = lpar + Keyword('final_state').suppress() + OneOrMore(fact) + rpar
 
         single_slot_specifier = Group(
             lpar + Keyword('default') + (integer | global_variable_invocation | Word(alphas)) + rpar) | \

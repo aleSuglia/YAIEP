@@ -170,7 +170,7 @@ class InferenceEngine:
     def __init__(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory
         self._list_rules = []
-        self._goal_state = Fact("")
+        self._goal_state = [] # Fact("")
         self._global_vars = {}
         self._agenda = None
         self._heuristics = None
@@ -270,9 +270,6 @@ class InferenceEngine:
                 if act[0] == 'modify' or act[0] == 'retract':
                     return True
             return False
-
-    def matched_goal_state(self):
-        return self._wm.match_fact(self._goal_state)
 
     def apply_action(self, wm, rule):
         if isinstance(rule, tuple):  # regole aventi nella parte sinistra delle variabili
@@ -434,7 +431,7 @@ class InferenceEngine:
     def reset(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory
         self._list_rules = []
-        self._goal_state = Fact("")
+        self._goal_state = []
         self._global_vars = {}
         WorkingMemory.fact_id_counter = 0
         self._agenda = None
