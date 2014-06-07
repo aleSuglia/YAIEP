@@ -44,7 +44,7 @@ class AStarSearch(SearchMethod):
 
         # inizializzo i valori h(n) e g(n) del nodo radice
         root_node.gn = 0
-        root_node.hn = self._heuristic(root_node.wm)
+        root_node.hn = self._heuristic(root_node.wm) if self._heuristic else 0
         already_in_open = False
         already_in_closed = False
 
@@ -102,7 +102,7 @@ class AStarSearch(SearchMethod):
 
                     #if not son in opened_set and not son in closed_set:
                     if not already_in_open and not already_in_closed:
-                        son.hn = self._heuristic(son.wm)
+                        son.hn = self._heuristic(son.wm) if self._heuristic else 0
                         bisect.insort(opened_set, son)
                         self._graph.add_edge(best_node, son, {'rule': rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
 
@@ -115,7 +115,7 @@ class AStarSearch(SearchMethod):
 
             # inizializzo i valori h(n) e g(n) del nodo radice
             root_node.gn = 0
-            root_node.hn = self._heuristic(root_node.wm)
+            root_node.hn = self._heuristic(root_node.wm) if self._heuristic else 0
 
             opened_set.append(root_node) # aggiungo il nodo radice come primo elemento da esplorare
 
@@ -174,7 +174,7 @@ class AStarSearch(SearchMethod):
 
                     #if not son in opened_set and not son in closed_set:
                     if not already_in_open and not already_in_closed:
-                        son.hn = self._heuristic(son.wm)
+                        son.hn = self._heuristic(son.wm) if self._heuristic else 0
                         bisect.insort(opened_set, son)
                         self._graph.add_edge(best_node, son, {'rule': rule_tuple[0] if isinstance(rule_tuple, tuple) else rule_tuple})
 

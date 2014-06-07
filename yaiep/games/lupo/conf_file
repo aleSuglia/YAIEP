@@ -1,6 +1,6 @@
 (template sponda_sx (slot barcaiolo (type integer) (range 0 1)) (slot lupo (type integer) (range 0 1)) (slot pecora (type integer) (range 0 1)) (slot cavolo (type integer) (range 0 1)))
 
-(facts (sponda_sx (barcaiolo 1) (lupo 1) (pecora 1) (cavolo 1)))
+(facts (sponda_sx (barcaiolo ?x) (lupo ?y) (pecora ?z) (cavolo ?k)))
 
 (rule (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?sponda (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c))) (?b == ?l) (?p != ?c) then (modify ?sponda (barcaiolo abs(?b - 1)) (lupo abs(?l - 1))))
 (rule (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?sponda (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c))) (?b == ?c) (?p != ?l) then (modify ?sponda (barcaiolo abs(?b - 1)) (cavolo abs(?c - 1))))
@@ -8,6 +8,8 @@
 
 (rule (sponda_sx (barcaiolo 0) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?x (sponda_sx (barcaiolo 0) (lupo ?l) (pecora ?p) (cavolo ?c))) (?l != ?p) (?l == ?c) then (modify ?x (barcaiolo 1)))
 (rule (sponda_sx (barcaiolo 1) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?x (sponda_sx (barcaiolo 1) (lupo ?l) (pecora ?p) (cavolo ?c))) (?l != ?p) (?l == ?c) then (modify ?x (barcaiolo 0)))
+(rule (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?x (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c))) (?b != ?l) (?b != ?c) (?b != ?p) then (modify ?x (barcaiolo abs(?b - 1))))
+
 
 
 

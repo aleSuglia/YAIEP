@@ -149,15 +149,24 @@ class InferenceEngine:
 
     def _load_external_function(self, problem_filesystem):
         sys.path.append(problem_filesystem)
+
         try:
             import Heuristics
-            import Graphics
 
             heur_module = locals()
             self._heuristics = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
                                 if isinstance(x[1], types.FunctionType)}
 
             self._graphic_functions = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._graphic_module])
+                                if isinstance(x[1], types.FunctionType)}
+        except ImportError:
+            pass  # modulo per le funzioni euristiche non presente
+
+        try:
+            import Graphics
+
+            graphic_module = locals()
+            self._graphic_functions = {x[0]: x[1] for x in inspect.getmembers(graphic_module[InferenceEngine._graphic_module])
                                 if isinstance(x[1], types.FunctionType)}
         except ImportError:
             pass  # modulo per le funzioni euristiche non presente
