@@ -1,27 +1,14 @@
+(template sponda_sx (slot barcaiolo (type integer) (range 0 1)) (slot lupo (type integer) (range 0 1)) (slot pecora (type integer) (range 0 1)) (slot cavolo (type integer) (range 0 1)))
 
-(template lupo (slot posizione))
-(template pecora (slot posizione))
-(template cavolo (slot posizione))
+(facts (sponda_sx (barcaiolo 1) (lupo 1) (pecora 1) (cavolo 1)))
 
-(facts (lupo (posizione sx)) (pecora (posizione sx)) (cavolo (posizione sx)))
+(rule (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?sponda (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c))) (?b == ?l) (?p != ?c) then (modify ?sponda (barcaiolo abs(?b - 1)) (lupo abs(?l - 1))))
+(rule (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?sponda (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c))) (?b == ?c) (?p != ?l) then (modify ?sponda (barcaiolo abs(?b - 1)) (cavolo abs(?c - 1))))
+(rule (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?sponda (sponda_sx (barcaiolo ?b) (lupo ?l) (pecora ?p) (cavolo ?c))) (?b == ?p) then (modify ?sponda (barcaiolo abs(?b - 1)) (pecora abs(?p - 1))))
 
-(rule (lupo (posizione sx)) (pecora (posizione sx)) (bind ?var_lupo (lupo (posizione sx))) then (modify ?var_lupo (posizione dx)))
-(rule (lupo (posizione sx)) (pecora (posizione ?x)) (cavolo (posizione dx)) (bind ?var_lupo (lupo (posizione sx))) then (modify ?var_lupo (posizione dx)))
-
-(rule (cavolo (posizione sx)) (pecora (posizione sx)) (bind ?var_cavolo (cavolo (posizione sx))) then (modify ?var_cavolo (posizione dx)))
-(rule (cavolo (posizione sx)) (pecora (posizione ?x)) (lupo (posizione dx)) (bind ?var_cavolo (cavolo (posizione sx))) then (modify ?var_cavolo (posizione dx)))
-
-(rule (pecora (posizione sx)) (cavolo (posizione sx)) (lupo (posizione sx)) (bind ?var_pecora (pecora (posizione sx))) then (modify ?var_pecora (posizione dx)))
-(rule (pecora (posizione sx)) (cavolo (posizione dx)) (lupo (posizione dx)) (bind ?var_pecora (pecora (posizione sx))) then (modify ?var_pecora (posizione dx)))
+(rule (sponda_sx (barcaiolo 0) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?x (sponda_sx (barcaiolo 0) (lupo ?l) (pecora ?p) (cavolo ?c))) (?l != ?p) (?l == ?c) then (modify ?x (barcaiolo 1)))
+(rule (sponda_sx (barcaiolo 1) (lupo ?l) (pecora ?p) (cavolo ?c)) (bind ?x (sponda_sx (barcaiolo 1) (lupo ?l) (pecora ?p) (cavolo ?c))) (?l != ?p) (?l == ?c) then (modify ?x (barcaiolo 0)))
 
 
-(rule (lupo (posizione dx)) (pecora (posizione dx)) (bind ?var_lupo (lupo (posizione dx))) then (modify ?var_lupo (posizione sx)))
-(rule (lupo (posizione dx)) (pecora (posizione ?x)) (cavolo (posizione dx)) (bind ?var_lupo (lupo (posizione dx))) then (modify ?var_lupo (posizione sx)))
 
-(rule (cavolo (posizione dx)) (pecora (posizione dx)) (bind ?var_cavolo (cavolo (posizione dx))) then (modify ?var_cavolo (posizione sx)))
-(rule (cavolo (posizione dx)) (pecora (posizione ?x)) (lupo (posizione dx)) (bind ?var_cavolo (cavolo (posizione dx))) then (modify ?var_cavolo (posizione sx)))
-
-(rule (pecora (posizione dx)) (cavolo (posizione dx)) (lupo (posizione dx)) (bind ?var_pecora (pecora (posizione dx))) then (modify ?var_pecora (posizione sx)))
-(rule (pecora (posizione dx)) (cavolo (posizione dx)) (lupo (posizione dx)) (bind ?var_pecora (pecora (posizione dx))) then (modify ?var_pecora (posizione sx)))
-
-(final_state (lupo (posizione dx)) (pecora (posizione dx)) (cavolo (posizione dx)))
+(final_state (sponda_sx (lupo 0) (pecora 0) (cavolo 0)))

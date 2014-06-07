@@ -27,8 +27,6 @@ class DepthSearch(SearchMethod):
             if self.match_final_state(curr_node):
                 self._solution.append(curr_node) # salvo il nodo soluzione
                 self.costruct_path_to_solution()
-
-
             else:
                 applicable_rules = self._agenda.get_activable_rules(curr_node.wm)
                 for rule in applicable_rules:

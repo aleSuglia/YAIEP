@@ -19,6 +19,9 @@ class InfoNode(Node):
         return hash(self.wm)
 
     def __eq__(self, other):
+        if not isinstance(other, Node):
+            return False
+
         return self.wm == other.wm
 
     def __lt__(self, other):

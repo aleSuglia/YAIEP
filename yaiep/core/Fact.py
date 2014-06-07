@@ -126,5 +126,17 @@ class Fact:
         if not isinstance(other, Fact):
             return False
 
-        return self._attribute_list == other.get_attributes() \
-            and self._fact_name == other.get_name()
+        res = self.is_template() + other.is_template()
+
+        if res == 1:
+            return False
+
+        equal_attributes = True
+        other_attributes = other.get_attributes()
+
+        for fact in self._attribute_list:
+            if not fact in other_attributes:
+                equal_attributes = False
+                break
+
+        return equal_attributes and self._fact_name == other.get_name()
