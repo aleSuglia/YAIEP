@@ -71,6 +71,9 @@ class SearchMethod:
     def get_solution(self):
         return self._solution, self._path_solution
 
+    # #
+    # Stampa a video tutte le soluzioni del problema trovate dall'algoritmo di ricerca
+    #
     def print_solution_path(self):
 
         continue_search_flag = True
@@ -105,6 +108,12 @@ class SearchMethod:
         if continue_search_flag and i == tot_num_solutions:
             print("No more solutions found")
 
+    # #
+    # Stampa a video il nodo corrente della soluzione che si stà analizzando nel caso in cui si
+    # stata definita una funzione di graphics altrimenti la regola utilizzata per la generazione del nodo
+    # @param curr_node: nodo appartenente alla soluzione di cui si vogliono visualizzare le informazioni
+    # @param path_index: indice rappresentante la soluzione che si sta analizzando
+    #
     def print_step_solution(self, curr_node, path_index):
         if curr_node and path_index < len(self._path_solution):
             path = self._path_solution[path_index]
@@ -125,8 +134,6 @@ class SearchMethod:
                     self._graphic_func(curr_node.wm)
 
                 return None
-
-
 
     ##
     # Permette al metodo di ricerca di verificare se lo stato corrente

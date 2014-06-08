@@ -15,7 +15,7 @@ class C5RuleParser:
     # di parsing delle regole
     #
     def __init__(self):
-        self._rule_list = {}
+        self._rule_list = []
         self._class_name = None
 
     # #
@@ -45,8 +45,8 @@ class C5RuleParser:
                     else:
                         curr_rule.conditions = curr_conditions[:]
                         curr_conditions.clear()
-                        #self._rule_list.append(curr_rule)
-                        self._rule_list[curr_rule] = curr_rule.actions
+                        self._rule_list.append(curr_rule)
+                        #self._rule_list[curr_rule] = curr_rule.actions
                         curr_rule = Rule()
 
                     curr_rule.conditions = curr_conditions

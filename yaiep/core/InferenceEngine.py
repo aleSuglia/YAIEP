@@ -134,7 +134,6 @@ def _make_retract(wm, actions, var_bind=None):
 ##
 # Classe che modella nella sua interezza la logica del motore d'inferenza
 #
-#
 class InferenceEngine:
     ## @var lista di comandi che può effettuare la working memory
     _command_list_wm = {
@@ -157,8 +156,6 @@ class InferenceEngine:
             self._heuristics = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._heuristics_module])
                                 if isinstance(x[1], types.FunctionType)}
 
-            self._graphic_functions = {x[0]: x[1] for x in inspect.getmembers(heur_module[InferenceEngine._graphic_module])
-                                if isinstance(x[1], types.FunctionType)}
         except ImportError:
             pass  # modulo per le funzioni euristiche non presente
 
@@ -196,6 +193,7 @@ class InferenceEngine:
     #
     # @param conf_filename nome del file di configurazione del motore
     # @param def_filename nome del file di definizione del problema
+    #
     def load_engine(self, problem_path):
         # Effettua il caricamento delle informazioni necessarie al motore di inferenza
         try:
@@ -235,6 +233,7 @@ class InferenceEngine:
     # ed è pronto per poter avviare la risoluzione del problema
     #
     # @return True se il motore inferenziale è stato inizializzato, False altrimenti
+    #
     def is_ready(self):
         return not self._agenda is None
 
@@ -243,6 +242,7 @@ class InferenceEngine:
     # dei fatti attualmente definiti nella working memory del motore inferenziale
     #
     # @return string-form della working memory del motore
+    #
     def fact_list(self):
         return str(self._wm)
 
@@ -251,6 +251,7 @@ class InferenceEngine:
     # delle regole attualmente definite del motore inferenziale
     #
     # @return string-form della lista delle regole
+    #
     def rule_list(self):
         string_form = ""
         i = 1
@@ -268,6 +269,7 @@ class InferenceEngine:
     # Operazioni come retract e modify sono in grado di alterare la working memory
     # @param rule regole da verificare
     # @return True se la regola è in grado di modificare la working memory, False altrimenti
+    #
     def modify_working_mem(self, rule):
         if isinstance(rule, tuple):
             for act in rule[0].actions.actions:
@@ -280,6 +282,11 @@ class InferenceEngine:
                     return True
             return False
 
+    # #
+    # Applica l'azione che la regola richiede dopo la sua attivazione
+    # @param wm: working memory sulla quale l'azzione sarà applicata
+    # @param rule: regola che definisce l'azione da applicare
+    #
     def apply_action(self, wm, rule):
         if isinstance(rule, tuple):  # regole aventi nella parte sinistra delle variabili
             var_dict = rule[1]
@@ -302,13 +309,16 @@ class InferenceEngine:
                 elif action[0] == 'retract':
                     InferenceEngine._command_list_wm['retract'](wm, action[1:])
 
-    ##
+    # #
     # Avvia la risoluzione del problema caricato a partire dallo stato attuale
     # della working memory e delle regole presenti
     #
     # Il metodo una volta invocato permette di ispezionare lo spazio di ricerca
     # secondo un metodo ben definito di ricerca (informata o non informata)
-    # dando la possibilità all'utente di ritrovare tutte le soluzioni o parte di esse
+    # dando la possibilità all'utente di ritrovare tutte le soluzioni
+    #
+    # @return lo stato della soluzione se è stata trovata altrimenti None
+    #
     def solve_problem(self):
         # Se sono disponibili tutte le informazioni per poter avviare la procedura
         # di risoluzione del problema
@@ -364,6 +374,18 @@ class InferenceEngine:
 
             return sol_state
 
+    # #
+    # Avvia la risoluzione del problema caricato a partire dallo stato attuale
+    # della working memory e delle regole presenti
+    #
+    # Il metodo una volta invocato permette di ispezionare lo spazio di ricerca
+    # secondo un metodo ben definito di ricerca (informata o non informata)
+    # dando la possibilità all'utente di ritrovare tutte le soluzioni
+    #
+    # @param new_solution: verifica se stiamo analizzando una nuova soluzione o se stiamo continuando l'analisi
+    # della soluzione corrente
+    # @return lo stato della soluzione se è stata trovata altrimenti None
+    #
     def solve_problem_step(self, new_solution):
         if new_solution:
             if not self._step_state and self._init_fact_list and self._conf_attributes:
@@ -420,12 +442,23 @@ class InferenceEngine:
                 self._step_state[4] = self._wm # inizia di nuovo dalla root nella ricerca
                 return self._step_state[3].step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
 
+    # #
+    # Ritorna lo stato di step in cui ci troviamo, ossia quale passo di quale soluzione
+    # @return lo sstato di step
+    #
     def get_step_state(self):
         return self._step_state
 
+    # #
+    # Pulisce lo stato di step azzerando la soluzione corrente e il passo corrente
+    #
     def clear_step(self):
         self._step_state.clear()
 
+    # #
+    # Visualizza lo step in cui ci troviamo e incrementa il contatore degli step a quello successivo
+    # @return True se esiste lo step successivo a quello in cui ci troviamo, altrimenti False
+    #
     def print_step_solution(self):
         if self._step_state:
             self._step_state[4] = self._step_state[3].print_step_solution(self._step_state[4], self._step_state[5])
@@ -437,6 +470,9 @@ class InferenceEngine:
 
         return False
 
+    # #
+    # Re-inizializza tutti i paramentri del motore di inferenza
+    #
     def reset(self):
         self._wm = WorkingMemory()  # lo stato iniziale della working memory
         self._list_rules = []
@@ -448,7 +484,16 @@ class InferenceEngine:
         self._conf_attributes = None
         self._graphic_functions = None
         self._init_fact_list.clear()
+        sys.path.pop(-1)
+        if InferenceEngine._heuristics_module in sys.modules:
+            del(sys.modules[InferenceEngine._heuristics_module])
+        if InferenceEngine._graphic_module in sys.modules:
+            del(sys.modules[InferenceEngine._graphic_module])
 
+    # #
+    # Carica la configurazione iniziale del sistema verificando che non ci siano variabili all'interno dello stato
+    # iniziale, nel caso provvede a richiedere i valori delle suddette variabili all'utente
+    #
     def _load_init_configuration(self):
         copy_init = copy.deepcopy(self._init_fact_list)
 
@@ -474,4 +519,4 @@ class InferenceEngine:
         try:
             KnowledgeAcquisition.knowledge_acquisition(self._list_rules, dataset_filename)
         except KAException as ex:
-            print("Unable to start machine learning process: " + ex.args)
+            print("Unable to start machine learning process: " + str(ex))

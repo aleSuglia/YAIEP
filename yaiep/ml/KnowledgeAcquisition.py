@@ -34,7 +34,7 @@ def knowledge_acquisition(list_rules, dataset_filename):
             import subprocess
             subprocess.call("cd knowledge; c5.0 -f " + filesystem_name + " -r", shell=True, stdout=DEVNULL)
             new_rules = C5RuleParser().get_rules(rules_file, names_file)
-            list_rules.update(new_rules)
+            list_rules.extend(new_rules)
     except Exception as ex:
         raise KAException('Unable to read load dataset')
 

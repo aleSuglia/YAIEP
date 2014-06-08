@@ -9,7 +9,6 @@ from yaiep.interpreter.UnknownCommand import UnknownCommand
 # Stampa a video l'elenco dei fatti presenti nel motore inferenziale
 # @param engine: motore inferenziale contenente i fatti
 #
-
 def _do_facts(engine):
     if not engine.is_ready():
         pass
@@ -20,7 +19,6 @@ def _do_facts(engine):
 # Stampa a video l'elenco delle regole presenti nel motore inferenziale
 # @param engine: motore inferenziale contenente le regole
 #
-
 def _do_rules(engine):
     if not engine.is_ready():
         pass
@@ -99,7 +97,6 @@ def _do_run(engine):
 # @param engine: motore inferenziale nella quale le regole saranno caricate
 # @param param: dataset dal quale prelevare le regole
 #
-
 def _do_learn(engine, param):
     if not engine.is_ready():
         pass
@@ -110,7 +107,6 @@ def _do_learn(engine, param):
 # Resetta tutti i campi del motore inferenziale
 # @param engine: motore inferenziale i cui campi verranno resettati
 #
-
 def _do_reset(engine):
     if engine.is_ready():
         engine.reset()
@@ -131,6 +127,7 @@ def _do_help():
         (facts) - displays the list of facts contained in the Working Memory
         (rules) - displays the available rules
         (run) - solves the loaded problem
+        (step) - solves the loaded problem step-by-step
         (load) - grants to the user to load a game which is saved in a specific
         folder whose name is 'games'. For each game, there is a dedicated folder
         with all the configuration file needed for the execution of the inference engine
@@ -170,7 +167,7 @@ _command_list_interpreter = {
 }
 
 _console_command = Literal('(').suppress() + valid_command + \
-                   Optional(Word(alphas + os.sep + '._')) + Literal(')').suppress()
+                   Optional(Word(alphas + os.sep + '._-')) + Literal(')').suppress()
 
 
 ##
@@ -218,7 +215,7 @@ class Interpreter:
                     exit_flag = self._execute_command(result)
                 except (ParseException, UnknownCommand):
                     print('Invalid command inserted...')
-                except (Exception, TypeError) as ex:
-                    print('Something goes wrong :(\n< {0} >'.format(str(ex)))
+                #except (Exception, TypeError) as ex:
+                #    print('Something goes wrong :(\n< {0} >'.format(str(ex)))
         except KeyboardInterrupt:
             pass

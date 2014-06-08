@@ -25,7 +25,7 @@ class OrderRulesMethod:
 
 
 # #
-# Classe che rappresenta che organizza in
+# Classe che organizza in
 # maniera casuale le regole all'interno del conflict set.
 #
 class RandomAdder(OrderRulesMethod):

@@ -2,11 +2,11 @@ from pyparsing import Word, Literal, OneOrMore, alphas, nums, Optional, Group, Z
     operatorPrecedence, opAssoc, oneOf, originalTextFor, Combine
 from yaiep.grammar.Grammar import Grammar
 
-
-# ##
+# #
 # Classe che presenta la definizione della grammatica attualmente adoperata
 # per poter scrivere il file di configurazione da dare in pasto al motore di inferenza
 # per poter avviare la risoluzione di un determinato problema
+#
 class YAIEPGrammar(Grammar):
     __keyword_list = ['globals', 'template', 'facts', 'rule', 'final_state']
 

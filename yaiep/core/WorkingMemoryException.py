@@ -1,6 +1,3 @@
-__author__ = 'asuglia'
-
-
 class WorkingMemoryException(Exception):
     def_msg = 'WM Exception'
 

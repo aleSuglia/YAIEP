@@ -1,10 +1,10 @@
 import networkx
 from yaiep.graph.Node import Node
 
-
 # #
 # Classe che rappresenta l'intero spazio di ricerca che viene
 # generato via via che il metodo di ricerca ispeziona nuovi nodi
+#
 class SearchGraph(networkx.DiGraph):
     ##
     # Crea il grafo di ricerca come un grafo direzionato
@@ -23,6 +23,7 @@ class SearchGraph(networkx.DiGraph):
     ##
     # Restituisce il riferimento allo stato iniziale dal
     # quale è iniziata la ricerca
+    #
     def get_init_state(self):
         return self._init_state
 

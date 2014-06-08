@@ -9,6 +9,10 @@ from yaiep.core.WorkingMemory import WorkingMemory
 # con il motore inferenziale
 #
 class UIManager:
+    # #
+    # Richiede dei parametri all'utente per poter configurare la working memory
+    # @param wm: working memory da settare con i parametri immessi
+    #
     @staticmethod
     def get_input_from_user(wm, *params):
         assert isinstance(wm, WorkingMemory)
@@ -44,6 +48,9 @@ class UIManager:
 
             return curr_value
 
+    # #
+    # Richiede all'utente se vuole proseguire la ricerca delle soluzione al problema preso in analisi
+    #
     @staticmethod
     def continue_search():
         value = input('Are you satisfied with this solution? (y/n): ')
@@ -52,6 +59,9 @@ class UIManager:
         else:
             return False
 
+    # #
+    # Richiede all'utente quale puzzle caricare in memoria
+    #
     @staticmethod
     def select_game():
         GAMES_DIR = 'games'
@@ -81,5 +91,5 @@ class UIManager:
                     print('An error occurs :(')
                 print("--------------------------------")
                 print()
-            except ValueError:
-                return None
+            except (ValueError, TypeError):
+                return None, None

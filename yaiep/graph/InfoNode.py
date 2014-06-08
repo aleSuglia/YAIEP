@@ -9,6 +9,7 @@ from yaiep.graph.Node import Node
 # il valore che rappresenta il numero di passi necessari per poter raggiungere
 # il nodo corrente dalla radice (gn) e il numero di passi (stimato) per poter
 # raggiungere il goal dal nodo corrente
+#
 class InfoNode(Node):
     def __init__(self, wm, parent):
         Node.__init__(self, wm, parent)

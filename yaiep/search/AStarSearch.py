@@ -1,15 +1,35 @@
+# # Modulo che implementa l'algoritmo di ricerca informata A*
+
 import bisect
-from yaiep.core.UIManager import UIManager
 from yaiep.graph.InfoNode import InfoNode
 from yaiep.search.SearchMethod import SearchMethod
 
-
-# TODO Documentare classe
+# #
+# Classe rappresentante l'algoritmo di ricerca informata A*
+#
 class AStarSearch(SearchMethod):
+
+    # #
+    # Costruttore della classe, genera il metodo di ricerca inizializzando i parametri in input
+    #
+    # @param graph: il grafo che verrà popolato dal metodo di ricerca
+    # @param agenda: adoperata dal metodo di ricerca per gestire le regole attivabili
+    # @param final_state: stato finale del processo solutivo
+    # @param graphic_func: funzione necessaria per poter formattare le fasi di risoluzione del problema
+    # @param heuristic: funzione euristica che verrà adottata per valutare la "bontà" di un nodo
+    #
     def __init__(self, graph, agenda, final_state, graph_function, heuristic):
         SearchMethod.__init__(self, graph, agenda, final_state, graph_function)
         self._heuristic = heuristic
 
+    # #
+    # Genera tutti i nodi "vicini" al nodo in input
+    # @param best_node: nodo di cui si vuole costruire la sua lista dei vicini
+    # @param engine: motore inferenziale nella quale sono presenti tutte le informazioni necessarie
+    # alla generazione dei vicini
+    #
+    #@return lista dei nodi vicini
+    #
     def neighbor_nodes(self, best_node, engine):
         neighbors = []
 
@@ -26,6 +46,11 @@ class AStarSearch(SearchMethod):
 
         return neighbors
 
+    # #
+    # Aggiorna il gn di ogni nodo, in questo caso rappresenta la profondità in cui il nodo si trova
+    # @param node: nodo nel quale si vuole aggiornare gn
+    # @param curr_gn: profondità raggiunta nella costruzione del grafo
+    #
     def update_gn_depth(self, node, curr_gn):
         sons = self._graph.neighbors(node)
         if not sons:
@@ -36,6 +61,14 @@ class AStarSearch(SearchMethod):
                     son.gn = curr_gn + 1
                     self.update_gn_depth(son, son.gn)
 
+    # #
+    # Esegue una A* search per poter ritrovare lo stato
+    # che rappresenta lo stato finale del problema da risolvere.
+    # La ricerca ha ugualmente fine nel momento in cui non vi sono più regole da attivare.
+    #
+    # @param engine: motore di inferenza che viene adoperato per poter condurre la ricerca
+    #
+    # @return True se è stata trovata almeno una soluzione, False altrimenti
     def execute(self, engine):
         opened_set = []
         closed_set = []
@@ -109,6 +142,17 @@ class AStarSearch(SearchMethod):
                     already_in_closed = already_in_open = False
         return len(self._solution) > 0
 
+    # #
+    # Esegue una A* search poter ritrovare lo stato
+    # che rappresenta lo stato finale del problema da risolvere.
+    # La ricerca ha fine nel momento in cui ha trovato la prima soluzione disponibile con i parametri in input
+    # oppure non vi sono più regole da attivare.
+    #
+    # @param engine: motore di inferenza che viene adoperato per poter condurre la ricerca
+    # @param opened_nodes: insieme dei nodi non ancora esplorati
+    # @param closed_nodes: insieme dei nodi esplorati
+    #
+    # @return True se è stata trovata almeno una soluzione, False altrimenti
     def step_execute(self, engine, opened_set, closed_set, curr_init_node):
         if not opened_set and not closed_set:
             root_node = InfoNode(self._graph.get_init_state().wm, None)

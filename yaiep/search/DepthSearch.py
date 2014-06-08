@@ -11,6 +11,7 @@ class DepthSearch(SearchMethod):
     #
     # @param engine: motore di inferenza che viene adoperato per poter condurre la ricerca
     #
+    # @return True se è stata trovata almeno una soluzione, False altrimenti
     def execute(self, engine):
         root_node = self._graph.get_init_state()
 
@@ -44,7 +45,19 @@ class DepthSearch(SearchMethod):
 
         return len(self._solution) > 0
 
-    def step_execute(self, engine, opened_nodes, closed_nodes, curr_init_node):
+    # #
+    # Esegue una depth-first search (visita in profondità) poter ritrovare lo stato
+    # che rappresenta lo stato finale del problema da risolvere.
+    # La ricerca ha fine nel momento in cui ha trovato la prima soluzione disponibile con i parametri in input
+    # oppure non vi sono più regole da attivare.
+    #
+    # @param engine: motore di inferenza che viene adoperato per poter condurre la ricerca
+    # @param opened_nodes: insieme dei nodi non ancora esplorati
+    # @param closed_nodes: insieme dei nodi esplorati
+    #
+    # @return True se è stata trovata almeno una soluzione, False altrimenti
+    #
+    def step_execute(self, engine, opened_nodes, closed_nodes):
 
         if not opened_nodes and not closed_nodes:
             opened_nodes.append(self._graph.get_init_state())
@@ -72,7 +85,7 @@ class DepthSearch(SearchMethod):
 
                     # ispezione solo NUOVI nodi
                     if not new_node in closed_nodes and not new_node in opened_nodes:
-                        self._graph.add_edge(curr_node, new_node, {'rule':rule[0] if isinstance(rule, tuple) else rule})
+                        self._graph.add_edge(curr_node, new_node, {'rule': rule[0] if isinstance(rule, tuple) else rule})
                         opened_nodes.append(new_node)
 
         return len(self._solution) > 0

@@ -2,7 +2,6 @@ from yaiep.core.Fact import Fact
 from yaiep.core.OrderMethod import OrderRulesMethod, SalienceAdder, DepthAdder, RandomAdder
 from yaiep.core.Utils import Utils
 
-
 # #
 # Verifica se un paramentro e' il nome di una funzione di bind
 # @param param: parametro da verificare

@@ -21,7 +21,8 @@ class GrammarParser:
     # @param list_rules: lista di regole
     # @param goal_state: oggetto istanza della classe Fact che rappresenta lo stato finale del problema
     # @param globals_vars: dizionario contenente le variabili globali definite nel file
-    # @param init_fact_list: lista di fatti che verranno adoperati per rappresentare una configurazione iniziale variabile
+    # @param init_fact_list: lista di fatti che verranno adoperati per
+    # rappresentare una configurazione iniziale variabile
     #
     @staticmethod
     def load_grammar(rules_filename, working_mem, list_rules, goal_state, globals_vars, init_fact_list):
@@ -101,8 +102,6 @@ class GrammarParser:
                 attribute_list.append(attr)
 
             init_fact_list.append(Fact(raw_fact[0], attribute_list=attribute_list))
-
-
 
     ###
     # Permette di interpretare le regole acquisite, trasformandole in istanze della classe Rule

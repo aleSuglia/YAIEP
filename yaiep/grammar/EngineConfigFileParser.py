@@ -1,7 +1,5 @@
 from pyparsing import alphas, Word, Literal, Keyword, OneOrMore, ParseException, Group
 
-
-
 # #
 # Classe specifica che permette di acquisire
 # tutte le informazioni presenti all'interno del
