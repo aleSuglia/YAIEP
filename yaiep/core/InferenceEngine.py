@@ -33,9 +33,11 @@ def _make_assert(wm, params, var_dict=None):
                 fact_attributes = fact[1:]
                 for i in range(len(fact_attributes)):
                     if isinstance(fact_attributes[i], list):
-                        fact_attributes[i][1] = str(eval(fact_attributes[i][1]))
+                        if Utils.verify_symbol(fact_attributes[i][1]):
+                            fact_attributes[i][1] = str(eval(fact_attributes[i][1]))
                     else:
-                        fact_attributes[i] = str(eval(fact_attributes[i]))
+                        if Utils.verify_symbol(fact_attributes[i][1]):
+                            fact_attributes[i] = str(eval(fact_attributes[i]))
 
                 wm.add_fact(Fact(fact[0], attribute_list=fact[1:]))
             except WorkingMemoryException as ex:
@@ -506,7 +508,7 @@ class InferenceEngine:
                         # raw_fact - fatto grezzo
                         attr[1] = UIManager.get_input_from_user(self._wm, attr[0], fact, True)
                 else:
-                    attr = UIManager.get_input_from_user(self._wm, attr, fact, False)
+                    fact.set_attributes(UIManager.get_input_from_user(self._wm, attr, fact, False))
             self._wm.add_fact(fact)
 
 
@@ -518,5 +520,6 @@ class InferenceEngine:
     def learn_rules_from_dataset(self, dataset_filename):
         try:
             KnowledgeAcquisition.knowledge_acquisition(self._list_rules, dataset_filename)
+            self._agenda.set_listrules(self._list_rules)
         except KAException as ex:
             print("Unable to start machine learning process: " + str(ex))

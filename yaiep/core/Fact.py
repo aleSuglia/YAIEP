@@ -41,6 +41,16 @@ class Fact:
     def get_attributes(self):
         return self._attribute_list
 
+    ##
+    # Rimpiazza la lista degli attributi corrente con quella specificata
+    # come parametro
+    #
+    # @param attributes: nuova lista di attributi per il fatto corrente
+    def set_attributes(self, attributes):
+        self._attribute_list.clear()
+        self._attribute_list.extend(attributes)
+
+
     # #
     # Aggiunge un nuovo fatto alla lista degli attributi
     # Se la lista dovesse essere vuota, il metodo provvede

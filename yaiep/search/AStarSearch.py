@@ -153,7 +153,7 @@ class AStarSearch(SearchMethod):
     # @param closed_nodes: insieme dei nodi esplorati
     #
     # @return True se è stata trovata almeno una soluzione, False altrimenti
-    def step_execute(self, engine, opened_set, closed_set, curr_init_node):
+    def step_execute(self, engine, opened_set, closed_set):
         if not opened_set and not closed_set:
             root_node = InfoNode(self._graph.get_init_state().wm, None)
 

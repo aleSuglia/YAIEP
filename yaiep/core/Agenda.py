@@ -30,6 +30,17 @@ class Agenda:
         self._order_method = None
         self._init_order(order_method)
 
+    ##
+    # Aggiorna la lista delle regole caricate per il problema corrente
+    #
+    # Le regole presenti in precedenza verranno scartate
+    # @param list_rules: la nuova lista di regole
+    #
+    def set_listrules(self, list_rules):
+        self._not_used_rules.clear()
+        self._not_used_rules.extend(list_rules)
+
+
     # #
     # Inizializza il metodo di ordinamento
     # @param order_method: metodo di ordinamento

@@ -2,43 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16f1221e-0607-4604-b84e-904232f9ee96" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/breast-cancer.data" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/breast-cancer.names" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/breast-cancer.rules" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/breast-cancer.tmp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/games/diabetologo_allegro/conf_file" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/diabetes.data" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/diabetes.names" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/diabetes.rules" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/diabetes.tmp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/games/diabetologo_allegro/settings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/tennis.data" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/tennis.names" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/tennis.rules" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yaiep/knowledge/tennis.tmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/AStarSearch.py" afterPath="$PROJECT_DIR$/yaiep/search/AStarSearch.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Agenda.py" afterPath="$PROJECT_DIR$/yaiep/core/Agenda.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/C5RuleParser.py" afterPath="$PROJECT_DIR$/yaiep/ml/C5RuleParser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/DepthSearch.py" afterPath="$PROJECT_DIR$/yaiep/search/DepthSearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/EngineConfigFileParser.py" afterPath="$PROJECT_DIR$/yaiep/grammar/EngineConfigFileParser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Fact.py" afterPath="$PROJECT_DIR$/yaiep/core/Fact.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/Grammar.py" afterPath="$PROJECT_DIR$/yaiep/grammar/Grammar.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/GrammarParser.py" afterPath="$PROJECT_DIR$/yaiep/grammar/GrammarParser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/InferenceEngine.py" afterPath="$PROJECT_DIR$/yaiep/core/InferenceEngine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/InfoNode.py" afterPath="$PROJECT_DIR$/yaiep/graph/InfoNode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/interpreter/Interpreter.py" afterPath="$PROJECT_DIR$/yaiep/interpreter/Interpreter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/KAException.py" afterPath="$PROJECT_DIR$/yaiep/ml/KAException.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py" afterPath="$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/Node.py" afterPath="$PROJECT_DIR$/yaiep/graph/Node.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/OrderMethod.py" afterPath="$PROJECT_DIR$/yaiep/core/OrderMethod.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Rule.py" afterPath="$PROJECT_DIR$/yaiep/core/Rule.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/SearchGraph.py" afterPath="$PROJECT_DIR$/yaiep/graph/SearchGraph.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/SearchMethod.py" afterPath="$PROJECT_DIR$/yaiep/search/SearchMethod.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/SearchMethodFactory.py" afterPath="$PROJECT_DIR$/yaiep/search/SearchMethodFactory.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Slot.py" afterPath="$PROJECT_DIR$/yaiep/core/Slot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Template.py" afterPath="$PROJECT_DIR$/yaiep/core/Template.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/UIManager.py" afterPath="$PROJECT_DIR$/yaiep/core/UIManager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/interpreter/UnknownCommand.py" afterPath="$PROJECT_DIR$/yaiep/interpreter/UnknownCommand.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/WorkingMemoryException.py" afterPath="$PROJECT_DIR$/yaiep/core/WorkingMemoryException.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/YAIEPGrammar.py" afterPath="$PROJECT_DIR$/yaiep/grammar/YAIEPGrammar.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/__init__.py" afterPath="$PROJECT_DIR$/yaiep/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/__init__.py" afterPath="$PROJECT_DIR$/yaiep/core/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/__init__.py" afterPath="$PROJECT_DIR$/yaiep/grammar/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/__init__.py" afterPath="$PROJECT_DIR$/yaiep/graph/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/interpreter/__init__.py" afterPath="$PROJECT_DIR$/yaiep/interpreter/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/__init__.py" afterPath="$PROJECT_DIR$/yaiep/ml/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/__init__.py" afterPath="$PROJECT_DIR$/yaiep/search/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/knowledge/diabetes.arff" afterPath="$PROJECT_DIR$/yaiep/knowledge/diabetes.arff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/grammar.txt" afterPath="$PROJECT_DIR$/yaiep/grammar/grammar.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/main.py" afterPath="$PROJECT_DIR$/yaiep/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/games/lupo/settings" afterPath="$PROJECT_DIR$/yaiep/games/lupo/settings" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/knowledge/tennis.arff" afterPath="$PROJECT_DIR$/yaiep/knowledge/tennis.arff" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="YAIEP.iws" />
@@ -62,21 +47,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaiep/main.py">
+      <file leaf-file-name="KnowledgeAcquisition.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="1656">
+              <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="C5RuleParser.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yaiep/ml/C5RuleParser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="862" max-vertical-offset="1440">
+              <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DepthSearch.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yaiep/search/DepthSearch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1710">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Interpreter.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaiep/interpreter/Interpreter.py">
+      <file leaf-file-name="conf_file" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/yaiep/games/diabetologo_allegro/conf_file">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3051" max-vertical-offset="3996">
-              <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423">
+              <caret line="0" column="67" selection-start-line="0" selection-start-column="67" selection-end-line="0" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -85,58 +94,28 @@
       <file leaf-file-name="InferenceEngine.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yaiep/core/InferenceEngine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4319" max-vertical-offset="9216">
-              <caret line="521" column="72" selection-start-line="521" selection-start-column="72" selection-end-line="521" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="6237" max-vertical-offset="9270">
+              <caret line="371" column="0" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UIManager.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaiep/core/UIManager.py">
+      <file leaf-file-name="diabetes.rules" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yaiep/knowledge/diabetes.rules">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1295" max-vertical-offset="1764">
-              <caret line="94" column="33" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="774">
+              <caret line="3" column="68" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="68" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KnowledgeAcquisition.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py">
+      <file leaf-file-name="SearchMethod.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yaiep/search/SearchMethod.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="243" max-vertical-offset="1368">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="breast-cancer.arff" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaiep/knowledge/breast-cancer.arff">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1728" max-vertical-offset="7146">
-              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tennis.arff" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/yaiep/knowledge/tennis.arff">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.50869566" vertical-offset="0" max-vertical-offset="522">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="C5RuleParser.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yaiep/ml/C5RuleParser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="466" max-vertical-offset="1170">
-              <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2475" max-vertical-offset="3564">
+              <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -169,13 +148,9 @@
         <option value="$PROJECT_DIR$/yaiep/games/secchi/conf_file" />
         <option value="$PROJECT_DIR$/yaiep/core/WorkingMemory.py" />
         <option value="$PROJECT_DIR$/yaiep/games/secchi/settings" />
-        <option value="$PROJECT_DIR$/yaiep/core/Fact.py" />
         <option value="$PROJECT_DIR$/yaiep/games/lupo/conf_file" />
         <option value="$PROJECT_DIR$/yaiep/games/lupo/Graphics.py" />
-        <option value="$PROJECT_DIR$/yaiep/search/SearchMethod.py" />
-        <option value="$PROJECT_DIR$/yaiep/core/Agenda.py" />
         <option value="$PROJECT_DIR$/yaiep/search/DepthSearch.py" />
-        <option value="$PROJECT_DIR$/yaiep/search/AStarSearch.py" />
         <option value="$PROJECT_DIR$/yaiep/core/OrderMethod.py" />
         <option value="$PROJECT_DIR$/yaiep/core/WorkingMemoryException.py" />
         <option value="$PROJECT_DIR$/yaiep/grammar/EngineConfigFileParser.py" />
@@ -185,11 +160,20 @@
         <option value="$PROJECT_DIR$/yaiep/graph/SearchGraph.py" />
         <option value="$PROJECT_DIR$/yaiep/main.py" />
         <option value="$PROJECT_DIR$/yaiep/games/lupo/settings" />
-        <option value="$PROJECT_DIR$/yaiep/core/UIManager.py" />
-        <option value="$PROJECT_DIR$/yaiep/ml/C5RuleParser.py" />
-        <option value="$PROJECT_DIR$/yaiep/core/InferenceEngine.py" />
+        <option value="$PROJECT_DIR$/yaiep/knowledge/breast-cancer.data" />
+        <option value="$PROJECT_DIR$/yaiep/knowledge/tennis.names" />
         <option value="$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py" />
+        <option value="$PROJECT_DIR$/yaiep/games/diabetologo_allegro/settings" />
         <option value="$PROJECT_DIR$/yaiep/interpreter/Interpreter.py" />
+        <option value="$PROJECT_DIR$/yaiep/core/Fact.py" />
+        <option value="$PROJECT_DIR$/yaiep/core/UIManager.py" />
+        <option value="$PROJECT_DIR$/yaiep/core/Agenda.py" />
+        <option value="$PROJECT_DIR$/yaiep/core/InferenceEngine.py" />
+        <option value="$PROJECT_DIR$/yaiep/search/AStarSearch.py" />
+        <option value="$PROJECT_DIR$/yaiep/search/SearchMethod.py" />
+        <option value="$PROJECT_DIR$/yaiep/games/diabetologo_allegro/conf_file" />
+        <option value="$PROJECT_DIR$/yaiep/knowledge/diabetes.rules" />
+        <option value="$PROJECT_DIR$/yaiep/ml/C5RuleParser.py" />
       </list>
     </option>
   </component>
@@ -272,24 +256,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ml" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YAIEP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YAIEP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yaiep" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="knowledge" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -308,7 +274,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
+              <option name="myItemId" value="games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YAIEP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YAIEP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="yaiep" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="diabetologo_allegro" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -318,7 +306,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/Alex-Daniele/ICSE/icse-ps-master" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -589,28 +577,32 @@
       <created>1402138177540</created>
       <updated>1402138177540</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Code documentation completed (DanielsJD)&#10;import external function error (fixed)&#10;">
+      <created>1402258314916</created>
+      <updated>1402258314916</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="16" width="1602" height="886" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1709943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36671" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32594523" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24952501" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1709943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36636245" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34478202" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41329858" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32724902" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285528" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -646,112 +638,30 @@
     <MESSAGE value="complex" />
     <MESSAGE value="farmer's dilemma" />
     <MESSAGE value="Code documentation complete by DanielsJD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code documentation complete by DanielsJD" />
+    <MESSAGE value="Code documentation completed (DanielsJD)&#10;import external function error (fixed)&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code documentation completed (DanielsJD)&#10;import external function error (fixed)&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/yaiep/search/DepthSearch.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="79" />
+          <line>66</line>
+          <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py</url>
-          <line>26</line>
-          <option name="timeStamp" value="85" />
+          <url>file://$PROJECT_DIR$/yaiep/search/DepthSearch.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="114" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="88" />
+      <option name="time" value="115" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/yaiep/games/secchi/Heuristics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="468">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/interpreter/Interpreter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2269" max-vertical-offset="2952">
-          <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/InferenceEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6643" max-vertical-offset="7308">
-          <caret line="377" column="29" selection-start-line="377" selection-start-column="29" selection-end-line="377" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/UIManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1638">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/games/secchi/conf_file">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="324">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/SearchMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2898">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/AStarSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2070">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#63#76#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/SearchMethodFactory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="576">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/InferenceEngine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6930">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/games/secchi/conf_file">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/games/secchi/Graphics.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
@@ -794,13 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/SearchMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7044334" vertical-offset="3140" max-vertical-offset="3546">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/core/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="406">
@@ -808,39 +711,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/Agenda.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5822" max-vertical-offset="6228">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/Fact.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2955666" vertical-offset="2240" max-vertical-offset="2646">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/DepthSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.78625953" vertical-offset="1317" max-vertical-offset="1710">
-          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/core/OrderMethod.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2610837" vertical-offset="998" max-vertical-offset="1404">
           <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/Rule.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9704434" vertical-offset="800" max-vertical-offset="2124">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -893,13 +767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/grammar/YAIEPGrammar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.098522" vertical-offset="1808" max-vertical-offset="2214">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/graph/InfoNode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6403941" vertical-offset="458" max-vertical-offset="864">
@@ -928,18 +795,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/diabetes.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15642">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/games/secchi/settings">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="742">
           <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,15 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41246292" vertical-offset="41" max-vertical-offset="378">
           <caret line="10" column="209" selection-start-line="10" selection-start-column="209" selection-end-line="10" selection-end-column="209" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/games/lupo/settings">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="144">
-          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,17 +820,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9123288" vertical-offset="162" max-vertical-offset="990">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/AStarSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.7972603" vertical-offset="0" max-vertical-offset="4194">
-          <caret line="154" column="76" selection-start-line="154" selection-start-column="76" selection-end-line="154" selection-end-column="76" />
-          <folding>
-            <element signature="e#63#76#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -989,62 +827,224 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="406">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/tennis.arff">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49159664" vertical-offset="0" max-vertical-offset="522">
+          <caret line="13" column="10" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.4/site-packages/scipy/io/arff/arffread.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="8505" max-vertical-offset="12222">
+          <caret line="489" column="0" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/ml/C5RuleParser.py">
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/breast-cancer.names">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="466" max-vertical-offset="1170">
-          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/UIManager.py">
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/breast-cancer.data">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1295" max-vertical-offset="1764">
-          <caret line="94" column="33" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.22689076" vertical-offset="0" max-vertical-offset="5256">
+          <caret line="6" column="53" selection-start-line="0" selection-start-column="84" selection-end-line="6" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/core/InferenceEngine.py">
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/tennis.data">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8768" max-vertical-offset="9216">
-          <caret line="521" column="72" selection-start-line="521" selection-start-column="72" selection-end-line="521" selection-end-column="72" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/interpreter/Interpreter.py">
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/tennis.names">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3051" max-vertical-offset="3996">
-          <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py">
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/breast-cancer.rules">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="243" max-vertical-offset="1368">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.32951945" vertical-offset="0" max-vertical-offset="437">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/knowledge/breast-cancer.arff">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1728" max-vertical-offset="7146">
-          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="7146">
+          <caret line="116" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/tennis.arff">
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/tennis.rules">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50869566" vertical-offset="0" max-vertical-offset="522">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/diabetes.arff">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1458" max-vertical-offset="15642">
+          <caret line="93" column="54" selection-start-line="85" selection-start-column="11" selection-end-line="93" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/games/lupo/settings">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="144">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/games/diabetologo_allegro/settings">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="401">
+          <caret line="0" column="19" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/grammar/YAIEPGrammar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="2178">
+          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/interpreter/Interpreter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.4444447" vertical-offset="1419" max-vertical-offset="3996">
+          <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/core/Fact.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="575" max-vertical-offset="2826">
+          <caret line="47" column="71" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/core/UIManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="623" max-vertical-offset="1836">
+          <caret line="45" column="3" selection-start-line="45" selection-start-column="3" selection-end-line="45" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/core/Rule.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="152" max-vertical-offset="2124">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/core/Agenda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5989" max-vertical-offset="6426">
+          <caret line="348" column="0" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/diabetes.names">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="401">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/search/AStarSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="211" max-vertical-offset="4158">
+          <caret line="155" column="57" selection-start-line="155" selection-start-column="57" selection-end-line="155" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/search/SearchMethod.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1773" max-vertical-offset="3564">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/search/DepthSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1710">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/knowledge/diabetes.rules">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="774">
+          <caret line="3" column="68" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/core/InferenceEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6237" max-vertical-offset="9270">
+          <caret line="371" column="0" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="1656">
+          <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/ml/C5RuleParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="862" max-vertical-offset="1440">
+          <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/games/diabetologo_allegro/conf_file">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423">
+          <caret line="0" column="67" selection-start-line="0" selection-start-column="67" selection-end-line="0" selection-end-column="67" />
           <folding />
         </state>
       </provider>

@@ -1,5 +1,6 @@
+import string
 from pyparsing import Literal, Word, OneOrMore, alphas, Group, QuotedString
-from yaiep.core.Rule import Rule
+from yaiep.core.Rule import Rule, LeftSideRule, RightSideRule
 
 
 # #
@@ -33,6 +34,8 @@ class C5RuleParser:
     def get_rules(self, rule_filename, names_file):
         curr_rule = None
         curr_conditions = []
+        value_condition = []
+        variables_index = 0
         self._read_class_name(names_file)
 
         with open(rule_filename) as rule_file:
@@ -43,17 +46,28 @@ class C5RuleParser:
                     if curr_rule is None: # first rule found
                         curr_rule = Rule()
                     else:
-                        curr_rule.conditions = curr_conditions[:]
+                        curr_conditions.extend(value_condition)
+                        curr_rule.conditions = LeftSideRule(curr_conditions[:])
+                        value_condition.clear()
                         curr_conditions.clear()
+                        variables_index = 0
                         self._rule_list.append(curr_rule)
                         #self._rule_list[curr_rule] = curr_rule.actions
                         curr_rule = Rule()
 
-                    curr_rule.conditions = curr_conditions
-                    curr_rule.actions = ['assert', [self._class_name, parsed_line[4][1]]]
+                    curr_rule.conditions = LeftSideRule(curr_conditions)
+                    curr_rule.actions = RightSideRule([['assert', [self._class_name, parsed_line[4][1]]]])
 
                 elif 'type' in parsed_line[0]:
-                    curr_conditions.append([parsed_line[1][1], parsed_line[2][1]])
+                    value_type = parsed_line[2][0]
+                    if value_type != 'cut':
+                        curr_conditions.append([parsed_line[1][1], parsed_line[2][1]])
+                    else:
+                        variable = '?' + parsed_line[1][1]
+                        variables_index += 1
+                        curr_conditions.append([parsed_line[1][1], variable])
+                        value_condition.append('({0} {1} {2})'.format(variable, parsed_line[3][1], parsed_line[2][1]))
+
 
         return self._rule_list
 

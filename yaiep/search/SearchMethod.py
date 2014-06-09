@@ -35,7 +35,7 @@ class SearchMethod:
     def execute(self, engine):
         pass
 
-    def step_execute(self, engine, opened_nodes, closed_nodes, curr_init_node):
+    def step_execute(self, engine, opened_nodes, closed_nodes):
         pass
 
     # #
@@ -184,7 +184,8 @@ class SearchMethod:
                                             break
                                     i += 1
                                 matched_fact = True if i == len_final_state_attributes else False
-                    all_matched = all_matched and matched_fact
+
+                all_matched = all_matched and matched_fact
             else:
                 # effettua un match canonico con lo stato finale
                 all_matched = all_matched and curr_state.wm.match_fact(final_state)

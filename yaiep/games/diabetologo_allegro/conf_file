@@ -1,0 +1,2 @@
+(facts (plas ?a) (pres ?b) (skin ?c) (mass ?d) (age ?e) (pedi ?pedi))
+(final_state (class ?x))

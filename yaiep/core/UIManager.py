@@ -17,6 +17,7 @@ class UIManager:
     def get_input_from_user(wm, *params):
         assert isinstance(wm, WorkingMemory)
         is_template = params[2]
+        curr_value = None
 
         if is_template:
             slot_name = params[0]
@@ -40,13 +41,16 @@ class UIManager:
                                    format(slot_name, fact,
                                           curr_slot.type if curr_slot.type else None,
                                           curr_slot.range if curr_slot.range else None))
-            else:
-                attr_id = params[0]
-                fact = params[1]
-                curr_value = input('Insert value for \'{0}\' in {1}'.format(slot_name, fact))
+        else:
+            attr_id = params[0]
+            fact = params[1]
+            fact_attributes = fact.get_attributes()
+            len_attr = len(fact_attributes)
+            curr_value = []
+            for i in range(len_attr):
+                curr_value.append(input('Insert value for \'{0}\' in {1}->{2}: '.format(fact_attributes[i], fact.get_name(), fact.get_attributes())))
 
-
-            return curr_value
+        return curr_value
 
     # #
     # Richiede all'utente se vuole proseguire la ricerca delle soluzione al problema preso in analisi
