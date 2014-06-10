@@ -2,33 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16f1221e-0607-4604-b84e-904232f9ee96" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/AStarSearch.py" afterPath="$PROJECT_DIR$/yaiep/search/AStarSearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Agenda.py" afterPath="$PROJECT_DIR$/yaiep/core/Agenda.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/C5RuleParser.py" afterPath="$PROJECT_DIR$/yaiep/ml/C5RuleParser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/DepthSearch.py" afterPath="$PROJECT_DIR$/yaiep/search/DepthSearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/EngineConfigFileParser.py" afterPath="$PROJECT_DIR$/yaiep/grammar/EngineConfigFileParser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Fact.py" afterPath="$PROJECT_DIR$/yaiep/core/Fact.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/Grammar.py" afterPath="$PROJECT_DIR$/yaiep/grammar/Grammar.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/GrammarParser.py" afterPath="$PROJECT_DIR$/yaiep/grammar/GrammarParser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/InferenceEngine.py" afterPath="$PROJECT_DIR$/yaiep/core/InferenceEngine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/InfoNode.py" afterPath="$PROJECT_DIR$/yaiep/graph/InfoNode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/interpreter/Interpreter.py" afterPath="$PROJECT_DIR$/yaiep/interpreter/Interpreter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/KAException.py" afterPath="$PROJECT_DIR$/yaiep/ml/KAException.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py" afterPath="$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/Node.py" afterPath="$PROJECT_DIR$/yaiep/graph/Node.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/OrderMethod.py" afterPath="$PROJECT_DIR$/yaiep/core/OrderMethod.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Rule.py" afterPath="$PROJECT_DIR$/yaiep/core/Rule.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/graph/SearchGraph.py" afterPath="$PROJECT_DIR$/yaiep/graph/SearchGraph.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/SearchMethod.py" afterPath="$PROJECT_DIR$/yaiep/search/SearchMethod.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/search/SearchMethodFactory.py" afterPath="$PROJECT_DIR$/yaiep/search/SearchMethodFactory.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Slot.py" afterPath="$PROJECT_DIR$/yaiep/core/Slot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Template.py" afterPath="$PROJECT_DIR$/yaiep/core/Template.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/UIManager.py" afterPath="$PROJECT_DIR$/yaiep/core/UIManager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/interpreter/UnknownCommand.py" afterPath="$PROJECT_DIR$/yaiep/interpreter/UnknownCommand.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/Utils.py" afterPath="$PROJECT_DIR$/yaiep/core/Utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/WorkingMemory.py" afterPath="$PROJECT_DIR$/yaiep/core/WorkingMemory.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/core/WorkingMemoryException.py" afterPath="$PROJECT_DIR$/yaiep/core/WorkingMemoryException.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yaiep/grammar/YAIEPGrammar.py" afterPath="$PROJECT_DIR$/yaiep/grammar/YAIEPGrammar.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="YAIEP.iws" />
@@ -76,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DepthSearch.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DepthSearch.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/yaiep/search/DepthSearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1728">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.072972976" vertical-offset="0" max-vertical-offset="1782">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -132,10 +106,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yaiep/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="742">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -199,9 +173,9 @@
         <option value="$PROJECT_DIR$/yaiep/ml/KAException.py" />
         <option value="$PROJECT_DIR$/yaiep/ml/KnowledgeAcquisition.py" />
         <option value="$PROJECT_DIR$/yaiep/search/AStarSearch.py" />
-        <option value="$PROJECT_DIR$/yaiep/search/DepthSearch.py" />
         <option value="$PROJECT_DIR$/yaiep/search/SearchMethod.py" />
         <option value="$PROJECT_DIR$/yaiep/search/SearchMethodFactory.py" />
+        <option value="$PROJECT_DIR$/yaiep/search/DepthSearch.py" />
       </list>
     </option>
   </component>
@@ -555,13 +529,18 @@
       <created>1402343630781</created>
       <updated>1402343630781</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Fixed code documentation">
+      <created>1402387180834</created>
+      <updated>1402387180834</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="16" width="1602" height="886" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285528" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -576,7 +555,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285528" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -614,19 +592,20 @@
     <MESSAGE value="Code documentation complete by DanielsJD" />
     <MESSAGE value="Code documentation completed (DanielsJD)&#10;import external function error (fixed)&#10;" />
     <MESSAGE value="Knowledge acquisition module fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Knowledge acquisition module fixed" />
+    <MESSAGE value="Fixed code documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed code documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/yaiep/search/DepthSearch.py</url>
-          <line>65</line>
+          <line>68</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/yaiep/search/DepthSearch.py</url>
-          <line>27</line>
+          <line>30</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
       </breakpoints>
@@ -988,26 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/AStarSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4212">
-          <caret line="145" column="5" selection-start-line="145" selection-start-column="5" selection-end-line="145" selection-end-column="5" />
-          <folding>
-            <element signature="e#81#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yaiep/search/DepthSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1728">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yaiep/search/SearchMethod.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3510">
@@ -1031,6 +990,26 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="742">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/search/AStarSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4212">
+          <caret line="145" column="5" selection-start-line="145" selection-start-column="5" selection-end-line="145" selection-end-column="5" />
+          <folding>
+            <element signature="e#81#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yaiep/search/DepthSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.072972976" vertical-offset="0" max-vertical-offset="1782">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

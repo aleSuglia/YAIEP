@@ -2,6 +2,9 @@ from yaiep.graph.Node import Node
 from yaiep.search.SearchMethod import SearchMethod
 
 
+##
+# Classe che rappresenta l'algoritmo di ricerca in profondità (Depth-Search)
+#
 class DepthSearch(SearchMethod):
     ##
     # Esegue una depth-first search (visita in profondità) per poter ritrovare lo stato
