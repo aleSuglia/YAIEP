@@ -1,4 +1,6 @@
-# #
+
+
+##
 # Rappresenta una classe astratta che definisce le struttura portante
 # di una grammatica supportata dal motore di inferenza
 #

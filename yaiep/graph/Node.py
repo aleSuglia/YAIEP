@@ -1,4 +1,6 @@
-# #
+
+
+##
 # Rappresenta la classe che contiene le informazioni di un nodo del
 # che costituisce il grafo che compone lo spazio di ricerca.
 #

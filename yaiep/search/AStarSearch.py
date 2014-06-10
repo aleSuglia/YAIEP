@@ -1,15 +1,16 @@
-# # Modulo che implementa l'algoritmo di ricerca informata A*
+## Modulo che presenta l'implementazione dell'algoritmo di ricerca informata A*
 
 import bisect
 from yaiep.graph.InfoNode import InfoNode
 from yaiep.search.SearchMethod import SearchMethod
 
-# #
+
+##
 # Classe rappresentante l'algoritmo di ricerca informata A*
 #
 class AStarSearch(SearchMethod):
 
-    # #
+    ##
     # Costruttore della classe, genera il metodo di ricerca inizializzando i parametri in input
     #
     # @param graph: il grafo che verrà popolato dal metodo di ricerca
@@ -22,7 +23,7 @@ class AStarSearch(SearchMethod):
         SearchMethod.__init__(self, graph, agenda, final_state, graph_function)
         self._heuristic = heuristic
 
-    # #
+    ##
     # Genera tutti i nodi "vicini" al nodo in input
     # @param best_node: nodo di cui si vuole costruire la sua lista dei vicini
     # @param engine: motore inferenziale nella quale sono presenti tutte le informazioni necessarie
@@ -46,7 +47,7 @@ class AStarSearch(SearchMethod):
 
         return neighbors
 
-    # #
+    ##
     # Aggiorna il gn di ogni nodo, in questo caso rappresenta la profondità in cui il nodo si trova
     # @param node: nodo nel quale si vuole aggiornare gn
     # @param curr_gn: profondità raggiunta nella costruzione del grafo
@@ -61,7 +62,7 @@ class AStarSearch(SearchMethod):
                     son.gn = curr_gn + 1
                     self.update_gn_depth(son, son.gn)
 
-    # #
+    ##
     # Esegue una A* search per poter ritrovare lo stato
     # che rappresenta lo stato finale del problema da risolvere.
     # La ricerca ha ugualmente fine nel momento in cui non vi sono più regole da attivare.
@@ -142,7 +143,7 @@ class AStarSearch(SearchMethod):
                     already_in_closed = already_in_open = False
         return len(self._solution) > 0
 
-    # #
+    ##
     # Esegue una A* search poter ritrovare lo stato
     # che rappresenta lo stato finale del problema da risolvere.
     # La ricerca ha fine nel momento in cui ha trovato la prima soluzione disponibile con i parametri in input

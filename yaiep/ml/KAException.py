@@ -1,4 +1,6 @@
-# #
+
+
+##
 # Classe che definisce uno stato eccezionale che si può verificare
 # nel caso in cui il metodo di acquisizione della conoscenza dovesse fallire
 class KAException(Exception):

@@ -1,4 +1,6 @@
-# #
+
+
+##
 # Classe che rappresenta la parte sinistra di una regola
 # nella quale vi sono le condizioni (sotto forma di fatti
 # della WM o sotto forma di condizioni booleane semplici)
@@ -6,7 +8,7 @@
 # associata alla regola
 #
 class LeftSideRule:
-    # #
+    ##
     # Inizializza la parte sinistra adoperando
     # la lista di condizioni specificata in input
     #
@@ -34,14 +36,14 @@ class LeftSideRule:
         return self._string_form == str(other)
 
 
-# #
+##
 # Classe che rappresenta la parte destra della regola
 # nella quale vi sono le azioni che il motore deve eseguire
 # in seguito al verificarsi delle condizioni presenti nella parte
 # sinistra
 #
 class RightSideRule:
-    # #
+    ##
     # Provvede ad inizializzare la lista delle azioni
     # che dovranno essere innescate a seguito dell'attivazione
     # della regola prelevandole dalla lista di azioni specificata
@@ -63,7 +65,7 @@ class RightSideRule:
         return self.string_form
 
 
-# #
+##
 # Classe composita che permette di rappresenta nella sua interezza
 # una regola
 #

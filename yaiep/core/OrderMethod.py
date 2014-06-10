@@ -1,6 +1,6 @@
 
 
-# #
+##
 # Classe che rappresenta il criterio di ordinamento adottato
 # per poter inserire le regole all'interno del conflict set.
 # Ogni criterio d'ordinamento che si vorrà implementare dovrà
@@ -14,7 +14,7 @@ class OrderRulesMethod:
     def __init__(self):
         pass
 
-    # #
+    ##
     # Aggiunge al conflict set la regola specificata
     # secondo un preciso criterio di ordinamento
     #
@@ -24,7 +24,7 @@ class OrderRulesMethod:
         pass
 
 
-# #
+##
 # Classe che organizza in
 # maniera casuale le regole all'interno del conflict set.
 #
@@ -44,7 +44,7 @@ class DepthAdder(OrderRulesMethod):
         pass
 
 
-# #
+##
 # Classe che rappresenta un criterio di ordinamento
 # secondo il quale ogni regola viene inserita all'interno del
 # conflict set facendo uso della priorità ad essa associata

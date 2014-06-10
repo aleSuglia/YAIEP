@@ -1,7 +1,7 @@
 from pyparsing import alphas, Word, nums, ParseException
 
 
-# #
+##
 # Classe che rappresenta uno slot di un fatto non ordinato (template)
 # Tale slot prevede un nome ed un preciso valore. Tale valore potrebbe essere
 # soggetto a delle restrizioni che possono essere imposte specificando il tipo
@@ -12,7 +12,7 @@ from pyparsing import alphas, Word, nums, ParseException
 # della definizione del template
 #
 class Slot:
-    # #
+    ##
     # Provvede ad inizializzare lo slot corrente
     # con le informazioni specificate in input effettuando
     # opportuni controlli di consistenza dei tipi e di definizione
@@ -52,7 +52,7 @@ class Slot:
         else:
             self.name = params
 
-    # #
+    ##
     # Effettua un controllo di consistenza sul valore specificato
     # in input rispetto alle restrizioni fissate per lo slot corrente
     #

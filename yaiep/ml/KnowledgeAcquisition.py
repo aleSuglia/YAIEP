@@ -1,4 +1,3 @@
-import csv
 import os
 from subprocess import DEVNULL
 import numpy
@@ -9,7 +8,7 @@ from yaiep.ml.KAException import KAException
 knowledge_path = "knowledge" + os.sep
 
 
-# #
+##
 # Funzione che provvede ad avviare il processo di apprendimento automatico
 # delle regole a partire da un dataset in formato .arff (http://www.cs.waikato.ac.nz/ml/weka/arff.html)
 # mediante il tool di creazione di alberi di decisione C5 (http://www.rulequest.com/see5-info.html).
@@ -40,7 +39,7 @@ def knowledge_acquisition(list_rules, dataset_filename):
         raise KAException('Unable to read load dataset')
 
 
-# #
+##
 # Genera il file che conterrà i nomi degli attributi presenti all'interno del dataset specificato
 # secondo il formato specificato richiesto dal tool di generazione degli alberi di decisione.
 #
@@ -67,7 +66,7 @@ def _print_names_file(meta_information, names_filename):
                 names_file.write('continuous.\n')
 
 
-# #
+##
 # Genera il file che conterrà i dati del dataset che verranno adoperato per poter
 # generare l'albero di decisione
 # @param data: tuple del dataset

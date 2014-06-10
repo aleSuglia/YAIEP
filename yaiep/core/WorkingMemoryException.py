@@ -1,3 +1,9 @@
+
+
+##
+# Classe che rappresenta una condizionale eccezionale
+# che può verificarsi all'interno della Working Memory
+#
 class WorkingMemoryException(Exception):
     def_msg = 'WM Exception'
 

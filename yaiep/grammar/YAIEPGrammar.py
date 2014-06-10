@@ -2,7 +2,8 @@ from pyparsing import Word, Literal, OneOrMore, alphas, nums, Optional, Group, Z
     operatorPrecedence, opAssoc, oneOf, originalTextFor, Combine
 from yaiep.grammar.Grammar import Grammar
 
-# #
+
+##
 # Classe che presenta la definizione della grammatica attualmente adoperata
 # per poter scrivere il file di configurazione da dare in pasto al motore di inferenza
 # per poter avviare la risoluzione di un determinato problema
@@ -51,9 +52,6 @@ class YAIEPGrammar(Grammar):
         facts = lpar + Literal('facts').suppress() + OneOrMore(fact) + rpar
         facts_list = OneOrMore(facts)
 
-        #func_param = parameters | fact
-        #function = Group(lpar + op + func_param + func_param + rpar)
-
         function = Group(lpar + op + variable + fact + rpar)
 
         cond_attr = fact | function
@@ -64,25 +62,8 @@ class YAIEPGrammar(Grammar):
 
         newAction = assertNew | modifyNew
 
-        # VECCHIA DEFINIZIONE DI ACTION
-        # assertAction = Forward()
-        # atomAssertAction = Keyword("assert") + OneOrMore(fact) | Group(lpar + assertAction + rpar)
-        # assertAction << atomAssertAction + ZeroOrMore(assertAction)
-        #
-        # modifyAction = Forward()
-        # atomModifyAction = Keyword("modify") + (Word(nums) | variable) + Group(OneOrMore(single_slot)) | \
-        # Group(lpar + modifyAction + rpar)
-        # modifyAction << atomModifyAction + ZeroOrMore(modifyAction)
-        #
-        # action = assertAction | modifyAction
-
         salience_param = Group(lpar + Keyword('salience') + Word(nums) + rpar)
 
-        # rule = Group(
-        # Group(lpar + Keyword('rule').suppress() + Optional(salience_param) + condition_attributes + ZeroOrMore(
-        #         logicalExpr))
-        #     + Keyword("then").suppress() + Group(OneOrMore(action)) + rpar)
-        #
         rule = Group(
             lpar + Keyword('rule').suppress() + Optional(salience_param) + Group(condition_attributes + ZeroOrMore(
                 logicalExpr))

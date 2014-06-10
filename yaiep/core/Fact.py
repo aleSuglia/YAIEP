@@ -1,11 +1,11 @@
-# #
+##
 # Classe che rappresenta un fatto che verrà memorizzato all'interno
 # della Working Memory
 # Mediante la medesima struttura il sistema è in grado di gestire sia un
 # fatto semplice e sia un template (fatto non ordinato)
 #
 class Fact:
-    # #
+    ##
     # Inizializza il fatto corrente impostando un nome ed
     # eventualmente un identificativo e una lista di attributi
     #
@@ -18,7 +18,7 @@ class Fact:
         self._fact_name = name
         self._id = id
 
-    # #
+    ##
     # Controlla se il fatto corrente presenta
     # fra i suoi attributi delle variabili
     #
@@ -35,7 +35,7 @@ class Fact:
 
         return has_variable
 
-    # #
+    ##
     # Restituisce la lista degli attributi del fatto corrente
     #
     def get_attributes(self):
@@ -50,8 +50,7 @@ class Fact:
         self._attribute_list.clear()
         self._attribute_list.extend(attributes)
 
-
-    # #
+    ##
     # Aggiunge un nuovo fatto alla lista degli attributi
     # Se la lista dovesse essere vuota, il metodo provvede
     # ad inizializzarla correttamente
@@ -62,7 +61,7 @@ class Fact:
             self._attribute_list = []
         self._attribute_list.append(attribute)
 
-    # #
+    ##
     # Rimuove dalla lista degli attributi del fatto corrente
     # l'attributo specificato in input come parametro
     #
@@ -70,14 +69,14 @@ class Fact:
     def remove_attribute(self, attribute):
         self._attribute_list.remove(attribute)
 
-    # #
+    ##
     # Restituisce il nome del fatto corrente
     #
     # @return nome del fatto corrente
     def get_name(self):
         return self._fact_name
 
-    # #
+    ##
     # Inizializza il nome del fatto corrente
     # con quello specificato in input
     #
@@ -85,7 +84,7 @@ class Fact:
     def set_name(self, name):
         self._fact_name = name
 
-    # #
+    ##
     # Imposta l'identificativo del fatto corrente con quello
     # specificato in input
     #
@@ -93,7 +92,7 @@ class Fact:
     def set_id(self, id):
         self._id = id
 
-    # #
+    ##
     # Restituisce l'identificativo associato dalla working memory
     # al fatto corrente
     #
@@ -101,18 +100,17 @@ class Fact:
     def get_id(self):
         return self._id
 
-    # #
+    ##
     # Controlla se il fatto corrente è un fatto ordinato o non ordinato
     #
     #@return: True se il fatto è non-ordinato(template), False altrimenti
-
     def is_template(self):
         for attr in self._attribute_list:
             if isinstance(attr, list):
                 return True # almeno un attributo di tipo lista di elementi
         return False
 
-    # #
+    ##
     # Restituisce il valore associato ad un determinato attributo
     # del fatto corrente avente come nome quello specificato in input
     #

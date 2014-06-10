@@ -1,10 +1,12 @@
-# #
+
+
+##
 # Classe che rappresenta un modulo generico nel quale sono presenti
 # delle funzioni di servizio che vengono invocate per poter portare a
 # termine dei compiti comuni.
 #
 class Utils:
-    # #
+    ##
     # Controlla se la rappresentazione sotto forma di lista degli attributi un fatto, presenta
     # delle variabili
     # @param fact: lista di attributi di un fatto
@@ -21,7 +23,7 @@ class Utils:
 
         return False
 
-    # #
+    ##
     # Verifica se il valore passato in input
     # rappresenti un'operazione aritmetica
     #

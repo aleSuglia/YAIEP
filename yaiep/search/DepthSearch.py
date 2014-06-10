@@ -1,10 +1,9 @@
-from yaiep.core.UIManager import UIManager
 from yaiep.graph.Node import Node
 from yaiep.search.SearchMethod import SearchMethod
 
 
 class DepthSearch(SearchMethod):
-    # #
+    ##
     # Esegue una depth-first search (visita in profondità) per poter ritrovare lo stato
     # che rappresenta lo stato finale del problema da risolvere.
     # La ricerca ha ugualmente fine nel momento in cui non vi sono più regole da attivare.
@@ -45,7 +44,7 @@ class DepthSearch(SearchMethod):
 
         return len(self._solution) > 0
 
-    # #
+    ##
     # Esegue una depth-first search (visita in profondità) poter ritrovare lo stato
     # che rappresenta lo stato finale del problema da risolvere.
     # La ricerca ha fine nel momento in cui ha trovato la prima soluzione disponibile con i parametri in input

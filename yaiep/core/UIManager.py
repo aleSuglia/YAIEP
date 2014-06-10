@@ -4,12 +4,12 @@ from os.path import isdir
 from yaiep.core.WorkingMemory import WorkingMemory
 
 
-# #
+##
 # Fornisce un modo per poter garantire all'utente un'interazione più amichevole
 # con il motore inferenziale
 #
 class UIManager:
-    # #
+    ##
     # Richiede dei parametri all'utente per poter configurare la working memory
     # @param wm: working memory da settare con i parametri immessi
     #
@@ -52,7 +52,7 @@ class UIManager:
 
         return curr_value
 
-    # #
+    ##
     # Richiede all'utente se vuole proseguire la ricerca delle soluzione al problema preso in analisi
     #
     @staticmethod
@@ -63,7 +63,7 @@ class UIManager:
         else:
             return False
 
-    # #
+    ##
     # Richiede all'utente quale puzzle caricare in memoria
     #
     @staticmethod

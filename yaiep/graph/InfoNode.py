@@ -1,7 +1,7 @@
 from yaiep.graph.Node import Node
 
 
-# #
+##
 # Classe che rappresenta un nodo adoperato da un metodo
 # di ricerca informato
 # Rappresenta una sotto classe della classe Nodo, la quale

@@ -4,7 +4,7 @@ from yaiep.core.WorkingMemoryException import WorkingMemoryException
 import copy
 
 
-# #
+##
 # Classe che rappresenta l'intera struttura di una Working Memory
 # che viene adoperata per poter rappresentare uno stato dello spazio di ricerca
 #
@@ -13,7 +13,7 @@ import copy
 class WorkingMemory:
     fact_id_counter = 0
 
-    # #
+    ##
     # Inizializza la lista dei fatti e i riferimenti
     # alla struttura dei template
     #
@@ -21,7 +21,7 @@ class WorkingMemory:
         self._fact_list = {}
         self._templates = {}
 
-    # #
+    ##
     # Aggiunge il template specificato in input
     # alla lista dei template definiti
     #
@@ -39,7 +39,7 @@ class WorkingMemory:
         if len(self._fact_list) != 0:
             self._fact_list.clear()
 
-    # #
+    ##
     # Restituisce la lista dei fatti attualmente definiti
     # sotto forma di dizionario.
     # Il dizionario restituito avrà come chiave l'id internamente
@@ -49,14 +49,14 @@ class WorkingMemory:
     def get_fact_list(self):
         return self._fact_list
 
-    # #
+    ##
     # Restituisce la lista contenente una struttura specifica per
     # ogni fatto non ordinato presente nella Working Memory
     #
     def get_templates(self):
         return self._templates
 
-    # #
+    ##
     # Verifica se il fatto specificato in input risulta
     #  essere presente nella Working Memory
     #
@@ -81,8 +81,7 @@ class WorkingMemory:
 
         return True if fact.get_name() in self._templates else False
 
-
-    # #
+    ##
     # Modifica il fatto corrente rimpiazzando con i parametri specificati
     # in input, i valori specifici del fatto corrente
     #
@@ -128,7 +127,7 @@ class WorkingMemory:
         except WorkingMemoryException as wme:
             raise wme
 
-    # #
+    ##
     # Aggiunge il fatto specificato in input alla Working memory corrente
     #
     # Nel caso in cui vi sia un qualche tipo di anomalia nell'inserimento
@@ -159,7 +158,7 @@ class WorkingMemory:
         WorkingMemory.fact_id_counter += 1
         self._fact_list[fact.get_id()] = fact
 
-    # #
+    ##
     # Verifica se il fatto specificato in input
     # corrisponde ad uno dei fatti presente nella Working Memory corrente
     #
@@ -191,7 +190,7 @@ class WorkingMemory:
         else:
             return len([elem for elem in sec if elem in first]) == len(first)
 
-    # #
+    ##
     # Rimuove il fatto specificato dalla Working memory
     # @param fact istanza della classe Fact o intero che rappresenta l'id del fatto
     #
@@ -222,13 +221,12 @@ class WorkingMemory:
         curr_facts = sorted(self._fact_list.values(), key=lambda fact : fact.get_name())
         other_facts = sorted(other.get_fact_list().values(), key=lambda fact : fact.get_name())
 
-
         return curr_facts == other_facts
 
     def __hash__(self):
         return hash(str(self._fact_list) + str(self._templates))
 
-    # #
+    ##
     # Permette di effettuare una copia completa della working memory
     # corrente
     #

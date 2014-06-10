@@ -1,9 +1,8 @@
-import string
 from pyparsing import Literal, Word, OneOrMore, alphas, Group, QuotedString
 from yaiep.core.Rule import Rule, LeftSideRule, RightSideRule
 
 
-# #
+##
 # Classe che rappresenta un parser per il file che contiene le regole che verrà adoperato
 # dal tool di generazione degli alberi di decisione
 #
@@ -11,7 +10,7 @@ class C5RuleParser:
     _rule_line = OneOrMore(Group(Word(alphas) + Literal('=').suppress() + QuotedString('"')))
     _rule_file = OneOrMore(_rule_line)
 
-    # #
+    ##
     # Inizializza gli elementi che la classe adopererà per poter avviare il processo
     # di parsing delle regole
     #
@@ -19,7 +18,7 @@ class C5RuleParser:
         self._rule_list = []
         self._class_name = None
 
-    # #
+    ##
     # Acquisisce il nome dell'attributo di classe del dataset corrente
     # @param filename: nome del file contenente i nomi degli attributi del dataset
     def _read_class_name(self, filename):
@@ -27,7 +26,9 @@ class C5RuleParser:
             first_line = names_file.readline()
             self._class_name = first_line[:first_line.index(".")]
 
-    # #
+    ##
+    # Acquisisce le regole generate dal tool di machine learning e formattate secondo una specifica
+    # sintassi
     # @param rule_filename file contenente le regole
     # @param names_file file contenente il nome dell'attributo di classe (prima linea)
     #

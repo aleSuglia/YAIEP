@@ -1,4 +1,4 @@
-# # Modulo che gestisce il motore di inferenza
+## Modulo che gestisce il motore di inferenza
 import copy
 import inspect
 import sys
@@ -18,7 +18,7 @@ from yaiep.ml.KAException import KAException
 from yaiep.search.SearchMethodFactory import SearchMethodFactory
 
 
-# #
+##
 # Asserisce un nuovo fatto aggiungendolo alla working memory
 # @param wm working memory alla quale aggiungere il fatto
 # @param params fatti da aggiungere alla working memory
@@ -58,7 +58,7 @@ def _make_assert(wm, params, var_dict=None):
                     pass
 
 
-# #
+##
 # Dalla documentazione Clips:
 # The modify action allows the user to modify template facts on the fact-list. Only one fact may be
 # modified with a single modify statement. The modification of a fact is equivalent to retracting
@@ -284,7 +284,7 @@ class InferenceEngine:
                     return True
             return False
 
-    # #
+    ##
     # Applica l'azione che la regola richiede dopo la sua attivazione
     # @param wm: working memory sulla quale l'azzione sarà applicata
     # @param rule: regola che definisce l'azione da applicare
@@ -311,7 +311,7 @@ class InferenceEngine:
                 elif action[0] == 'retract':
                     InferenceEngine._command_list_wm['retract'](wm, action[1:])
 
-    # #
+    ##
     # Avvia la risoluzione del problema caricato a partire dallo stato attuale
     # della working memory e delle regole presenti
     #
@@ -376,7 +376,7 @@ class InferenceEngine:
 
             return sol_state
 
-    # #
+    ##
     # Avvia la risoluzione del problema caricato a partire dallo stato attuale
     # della working memory e delle regole presenti
     #
@@ -444,20 +444,20 @@ class InferenceEngine:
                 self._step_state[4] = self._wm # inizia di nuovo dalla root nella ricerca
                 return self._step_state[3].step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
 
-    # #
+    ##
     # Ritorna lo stato di step in cui ci troviamo, ossia quale passo di quale soluzione
     # @return lo sstato di step
     #
     def get_step_state(self):
         return self._step_state
 
-    # #
+    ##
     # Pulisce lo stato di step azzerando la soluzione corrente e il passo corrente
     #
     def clear_step(self):
         self._step_state.clear()
 
-    # #
+    ##
     # Visualizza lo step in cui ci troviamo e incrementa il contatore degli step a quello successivo
     # @return True se esiste lo step successivo a quello in cui ci troviamo, altrimenti False
     #
@@ -472,7 +472,7 @@ class InferenceEngine:
 
         return False
 
-    # #
+    ##
     # Re-inizializza tutti i paramentri del motore di inferenza
     #
     def reset(self):
@@ -492,7 +492,7 @@ class InferenceEngine:
         if InferenceEngine._graphic_module in sys.modules:
             del(sys.modules[InferenceEngine._graphic_module])
 
-    # #
+    ##
     # Carica la configurazione iniziale del sistema verificando che non ci siano variabili all'interno dello stato
     # iniziale, nel caso provvede a richiedere i valori delle suddette variabili all'utente
     #
@@ -510,7 +510,6 @@ class InferenceEngine:
                 else:
                     fact.set_attributes(UIManager.get_input_from_user(self._wm, attr, fact, False))
             self._wm.add_fact(fact)
-
 
     ##
     # Invoca il tool di apprendimento automatico (C.5) per poter acquisire da un dataset

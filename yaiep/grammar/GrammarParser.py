@@ -8,7 +8,8 @@ from yaiep.core.Utils import Utils
 from yaiep.core.WorkingMemoryException import WorkingMemoryException
 from yaiep.grammar.YAIEPGrammar import YAIEPGrammar
 
-# #
+
+##
 # Classe che provvede al caricamento dal file di configurazione degli elementi necessari al motore
 # di inferenza, tra le quali vi sono le regole, i fatti e i template.
 #
@@ -103,7 +104,7 @@ class GrammarParser:
 
             init_fact_list.append(Fact(raw_fact[0], attribute_list=attribute_list))
 
-    ###
+    ##
     # Permette di interpretare le regole acquisite, trasformandole in istanze della classe Rule
     # a partire dalla loro rappresentazione in stringa.
     #

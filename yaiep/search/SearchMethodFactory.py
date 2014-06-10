@@ -2,18 +2,23 @@ from yaiep.search.AStarSearch import AStarSearch
 from yaiep.search.DepthSearch import DepthSearch
 
 
-def make_depth(factory_data):
+def _make_depth(factory_data):
     return DepthSearch(factory_data[0], factory_data[1], factory_data[2], factory_data[3])
 
 
-def make_astar(factory_data):
+def _make_astar(factory_data):
     return AStarSearch(factory_data[0], factory_data[1], factory_data[2], factory_data[3], factory_data[4])
 
 
+##
+# Classe che permette di creare una nuova istanza di uno specifico
+# metodo di ricerca senza essere direttamente a conoscenza di come
+# il metodo di ricerca è stato implementato
+#
 class SearchMethodFactory:
     factory_function = {
-        'depth' : make_depth,
-        'astar' : make_astar
+        'depth' : _make_depth,
+        'astar' : _make_astar
     }
 
     @staticmethod

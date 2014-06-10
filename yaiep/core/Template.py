@@ -1,7 +1,7 @@
 from yaiep.core.Slot import Slot
 
 
-# #
+##
 # Classe che rappresenta un fatto non ordinato nella
 # sua interezza. Ogni fatto ordinato è paragonabile
 # ad una struttura del C, il quale può prevedere
@@ -18,7 +18,7 @@ class Template:
         self._slots = {}
         self.name = name
 
-    # #
+    ##
     # Aggiunge un nuovo slot al template corrente.
     # Affinchè esso possa essere aggiunto è necessario che il valore
     # specificato in input sia un'istanza della classe Slot.
@@ -29,8 +29,7 @@ class Template:
 
         self._slots[slot.name] = slot
 
-
-    # #
+    ##
     # Restituisce l'intera lista di slot
     # presenti all'interno del template corrente
     #
@@ -39,7 +38,7 @@ class Template:
     def get_slot_list(self):
         return self._slots
 
-    # #
+    ##
     # Restituisce lo slot avente come nome
     # quello specificato in input al metodo
     #
@@ -48,7 +47,7 @@ class Template:
     def get_slot(self, name):
         return self._slots[name]
 
-    # #
+    ##
     # Provvede a modificare la lista di valori
     # che rappresentano la struttura di base per quello che sarà
     # un nuovo fatto non ordinato, effettuando opportuni controlli
