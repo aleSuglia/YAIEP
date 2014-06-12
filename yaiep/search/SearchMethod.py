@@ -112,7 +112,9 @@ class SearchMethod:
     # @param path_index: indice rappresentante la soluzione che si sta analizzando
     #
     def print_step_solution(self, curr_node, path_index):
-        if curr_node and path_index < len(self._path_solution):
+        if not self._solution:
+            print("No solution found!")
+        elif curr_node and path_index < len(self._path_solution):
             path = self._path_solution[path_index]
             root_node = self._graph.get_init_state()
             is_root = curr_node == root_node.wm
@@ -185,6 +187,6 @@ class SearchMethod:
                 all_matched = all_matched and matched_fact
             else:
                 # effettua un match canonico con lo stato finale
-                all_matched = all_matched and curr_state.wm.match_fact(final_state)
+                all_matched = all_matched and not curr_state.wm.match_fact(final_state) is None
 
         return all_matched

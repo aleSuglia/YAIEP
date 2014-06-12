@@ -1,2 +1,2 @@
-(facts (plas ?a) (pres ?b) (skin ?c) (mass ?d) (age ?e) (pedi ?pedi))
+(facts (plas ?plas) (pres ?pres) (skin ?skin) (mass ?mass) (age ?age) (pedi ?pedi))
 (final_state (class ?x))

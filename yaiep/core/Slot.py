@@ -47,7 +47,7 @@ class Slot:
                         spec_range = '{0} >= {1} and {0} <= {2}'.format(self.default_value, self.range[0], self.range[1])
                         if not eval(spec_range):
                             raise ValueError('Default value doesn\'t satisfy range constraints')
-                except ParseException:
+                except (ParseException, SyntaxError):
                     raise ValueError('Incorrect default value for slot')
         else:
             self.name = params
@@ -66,7 +66,7 @@ class Slot:
                 if not eval(spec_range):
                     return False
             return True
-        except ParseException:
+        except (ParseException, SyntaxError):
             return False
 
     def __repr__(self):

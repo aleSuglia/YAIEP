@@ -14,7 +14,7 @@ def miglior_secchio(wm):
 
     value = int(secchio_quattro.get_attribute_value('quantita'))
 
-    return abs(2-value) if value != 2 else 99
+    return 2-value
 
 
 

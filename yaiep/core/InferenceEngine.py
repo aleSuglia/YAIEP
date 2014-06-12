@@ -246,7 +246,11 @@ class InferenceEngine:
     # @return string-form della working memory del motore
     #
     def fact_list(self):
-        return str(self._wm)
+        #return str(self._wm) if not self._step_state else str(self._step_state[2])
+        if len(self._step_state) != 0:
+            return str(self._step_state[2])
+        else:
+            return str(self._wm)
 
     ##
     # Restituisce la rappresentazione in forma di stringa
@@ -439,10 +443,10 @@ class InferenceEngine:
                 # 5 - path index
                 self._step_state = [[], [], self._wm, search_method, self._wm, 0]
 
-                return search_method.step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
+                return search_method.step_execute(self, self._step_state[0], self._step_state[1])
             else:
                 self._step_state[4] = self._wm # inizia di nuovo dalla root nella ricerca
-                return self._step_state[3].step_execute(self, self._step_state[0], self._step_state[1], self._step_state[2])
+                return self._step_state[3].step_execute(self, self._step_state[0], self._step_state[1])
 
     ##
     # Ritorna lo stato di step in cui ci troviamo, ossia quale passo di quale soluzione
@@ -462,7 +466,8 @@ class InferenceEngine:
     # @return True se esiste lo step successivo a quello in cui ci troviamo, altrimenti False
     #
     def print_step_solution(self):
-        if self._step_state:
+        if self._step_state and self._step_state[4]:
+            self._step_state[2] = self._step_state[4] if isinstance(self._step_state[4], WorkingMemory) else self._step_state[4].wm
             self._step_state[4] = self._step_state[3].print_step_solution(self._step_state[4], self._step_state[5])
             if not self._step_state[4] is None:
                   return True
@@ -486,6 +491,7 @@ class InferenceEngine:
         self._conf_attributes = None
         self._graphic_functions = None
         self._init_fact_list.clear()
+        self._step_state = []
         sys.path.pop(-1)
         if InferenceEngine._heuristics_module in sys.modules:
             del(sys.modules[InferenceEngine._heuristics_module])

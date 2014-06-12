@@ -43,7 +43,7 @@ def _do_load(engine):
         try:
             print('### LOAD ENGINE STATUS ###')
             engine.load_engine(chosen_game_path)
-            print('### Insert \'(run)\' if you want to start the game ###')
+            print('### Insert \'(run)\' or \'(step)\' if you want to start the game ###')
         except Exception:
             print('### Please fix the problems found and load again the engine using (load) command ###')
 
@@ -56,38 +56,52 @@ def _do_load(engine):
 #
 def _do_step(engine):
     assert isinstance(engine, InferenceEngine)
-    step_state = engine.get_step_state()
 
-    if not step_state:
-        is_solution = engine.solve_problem_step(True)
-        if is_solution:
-            engine.print_step_solution()
-            answer = input('Do you want to insert another initial configuration? (y/n): ')
-            if answer == 'y':
-                engine.clear_step()
-                engine.solve_problem_step(True)
-                engine.print_step_solution()
-
+    if not engine.is_ready():
+        print('No data are present...')
     else:
-        if not engine.print_step_solution():
+
+        step_state = engine.get_step_state()
+
+        if not step_state:
             is_solution = engine.solve_problem_step(True)
-            if is_solution:
-                print('-----------------------------------------------------------------------------------------------')
-                if step_state[5] != len(step_state[3].get_path_to_solution()):
-                    engine.print_step_solution()
-                    answer = input('Do you want to insert another initial configuration? (y/n): ')
-                    if answer == 'y':
-                        engine.clear_step()
-                        engine.solve_problem_step(True)
-                        engine.print_step_solution()
-                else:
-                    print('No more solutions')
-                    engine.clear_step()
-        else:
-            answer = input('Do you want to insert another initial configuration? (y/n): ')
-            if answer == 'y':
+            if not engine.get_step_state()[3].get_solution()[0]:
+                print('The specified configuration is useless!')
                 engine.clear_step()
-                engine.solve_problem_step(True)
+                return
+
+            if is_solution:
+                engine.print_step_solution()
+                answer = input('Do you want to insert another initial configuration? (y/n): ')
+                if answer == 'y':
+                    engine.clear_step()
+                    engine.solve_problem_step(True)
+                    engine.print_step_solution()
+
+        else:
+            if not engine.print_step_solution():
+                is_solution = engine.solve_problem_step(True)
+                if not engine.get_step_state()[3].get_solution()[0]:
+                    print('The specified configuration is useless!')
+                    engine.clear_step()
+                    return
+                if is_solution:
+                    print('-----------------------------------------------------------------------------------------------')
+                    if step_state[5] != len(step_state[3].get_path_to_solution()):
+                        engine.print_step_solution()
+                        answer = input('Do you want to insert another initial configuration? (y/n): ')
+                        if answer == 'y':
+                            engine.clear_step()
+                            engine.solve_problem_step(True)
+                            engine.print_step_solution()
+                    else:
+                        print('No more solutions')
+                        engine.clear_step()
+            else:
+                answer = input('Do you want to insert another initial configuration? (y/n): ')
+                if answer == 'y':
+                    engine.clear_step()
+                    engine.solve_problem_step(True)
 
 
 ##
@@ -227,7 +241,7 @@ class Interpreter:
                     exit_flag = self._execute_command(result)
                 except (ParseException, UnknownCommand):
                     print('Invalid command inserted...')
-                #except (Exception, TypeError) as ex:
-                #    print('Something goes wrong :(\n< {0} >'.format(str(ex)))
+                except (Exception, TypeError) as ex:
+                    print('Something goes wrong :(\n< {0} >'.format(str(ex)))
         except KeyboardInterrupt:
             pass

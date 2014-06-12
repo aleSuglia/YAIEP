@@ -60,12 +60,12 @@ class SalienceAdder(OrderRulesMethod):
         while lo < hi:
             mid = (lo+hi)//2
             if isinstance(rules[mid], tuple):
-                if rules[mid][0] > x:
+                if rules[mid][0] < x:
                     lo = mid+1
                 else:
                     hi = mid
             else:
-                if rules[mid] > x:
+                if rules[mid] < x:
                     lo = mid+1
                 else:
                     hi = mid
